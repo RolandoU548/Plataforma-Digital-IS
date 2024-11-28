@@ -1,0 +1,101 @@
+@startuml proyectoClase
+
+class "Calendario de Eventos" as Calendario {
+    año: int
+    mes: int 
+    dia: int 
+}
+
+Usuario "1" ---> "many" Evento : crea/modifica
+Usuario "1" ---> "many" Comentario : publica
+Usuario "1" ---> "many" Notificacion : recibe
+
+Profesor --|> Usuario
+Estudiante --|> Usuario
+PersonalApoyo --|> Usuario
+
+GrupoDeExtension <-- Estudiante : pertenece
+
+Publicacion -- Evento
+Publicacion <-- Usuario : crea/modifica
+Publicacion "1" -- "many" Comentario : tiene
+
+Publicacion <|-- Proyecto
+Publicacion <|-- Investigacion
+Publicacion <|-- Experiencia
+
+Evento "1" ---> "many" Comentario : tiene
+Calendario *-- Evento
+
+class Usuario {
+    idUsuario: int
+    nombre: String
+    apellido: String
+    correo: String
+    contraseña: String
+    administrador: boolean
+}
+
+class Profesor {
+    especialidad : String
+  }
+
+class Estudiante {
+    carrera : String
+    semestre : int
+  }
+
+class GrupoDeExtension {
+    idGrupo: int
+    tipo: String
+}
+
+class PersonalApoyo {
+    cargo: String 
+}
+
+class Proyecto {
+
+}
+class Investigacion {
+
+}
+class Experiencia {
+
+}
+
+class Evento {
+    idEvento: int
+    titulo: String
+    descripcion: String
+    fechaInicio: Date
+    fechaFin: Date
+    lugar: String
+    usuarioCreador: Usuario
+    estado: String
+  }
+
+class Publicacion {
+    idPublicacion: int
+    autor: Usuario
+    tipo: String
+}
+
+class Comentario {
+    idComentario: int
+    idPublicacion: int
+    texto: String
+    fecha: Date
+    usuario: Usuario
+    evento: Evento
+  }
+
+class Notificacion {
+    idNotificacion: int
+    mensaje: String
+    fecha: Date
+    usuario: Usuario
+    leido: boolean
+  }
+
+@enduml

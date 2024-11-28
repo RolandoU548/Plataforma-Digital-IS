@@ -1,0 +1,67 @@
+@startuml proyectoEstado
+state choice1 <<choice>>
+
+[*] --> choice1
+choice1 --> RegistroUsuario : No esta registrado
+choice1 --> IniciarSesion : Esta registrado
+
+
+state RegistroUsuario {
+    [*] --> LlenandoRegistro
+    LlenandoRegistro --> VerificandoDatos : Enviar datos
+}
+
+state IniciarSesion {
+    [*] --> LlenandoDatos
+    LlenandoDatos --> VerificandoLogin : Enviar datos
+    VerificandoLogin --> choice2
+    choice2 --> PerfilUsuario : Datos correctos
+    choice2 --> LlenandoDatos : Datos incorrectos
+    state choice2 <<choice>>
+}
+
+state PerfilUsuario {
+    [*] --> ViendoPerfil
+    ViendoPerfil --> EditandoPerfil : Editar
+    EditandoPerfil --> ViendoPerfil : Guardar cambios
+}
+
+state Eventos {
+    [*] --> CreandoEvento
+    CreandoEvento --> PublicandoEvento : Guardar
+    PublicandoEvento --> EditandoEvento : Editar
+    EditandoEvento --> PublicandoEvento : Guardar cambios
+}
+
+state Calendario {
+    [*] --> ViendoCalendario
+    ViendoCalendario --> ViendoEvento : Seleccionar evento
+}
+
+state Notificaciones {
+    [*] --> ViendoNotificaciones
+    ViendoNotificaciones --> LeyendoNotificacion : Seleccionar notificación
+}
+
+state Comentarios {
+    [*] --> ViendoPublicacion
+    ViendoPublicacion --> Comentando : Añadir comentario
+    Comentando --> ViendoPublicacion : Guardar comentario
+}
+
+state Moderacion {
+    [*] --> RevisandoPublicacion
+    RevisandoPublicacion --> AprobandoPublicacion : Aprobar
+    RevisandoPublicacion --> RechazandoPublicacion : Rechazar
+}
+
+RegistroUsuario --> IniciarSesion : Registro completado
+PerfilUsuario --> Eventos : Crear evento
+Eventos --> Calendario : Publicar evento
+Eventos --> Notificaciones : Notificar publicación
+Comentarios --> Moderacion : Reportar comentario
+Moderacion --> Notificaciones : Notificar moderación
+
+PerfilUsuario --> [*] : Cerrar sesion
+
+@enduml
