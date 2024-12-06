@@ -23,6 +23,24 @@
       <img src="docs/scenariosView/Diagrama Estado.png" alt="Diagrama-Estado" style="border-radius:5px;">
     </div>
   </div>
+  <div align="center">
+      <span style="text-decoration:underline">
+      Esquema de Pantallas
+      </span>
+      <img src="docs/scenariosView/esquema-de-pantallas/UC2 - Login.png" alt="pantalla" style="border-radius:5px;">
+      <img src="docs/scenariosView/esquema-de-pantallas/UC3 - Edit Profile.png" alt="pantalla" style="border-radius:5px;">
+      <img src="docs/scenariosView/esquema-de-pantallas/UC4 - Visualizar Calendario.png" alt="pantalla" style="border-radius:5px;">
+      <img src="docs/scenariosView/esquema-de-pantallas/UC1 - Register.png" alt="pantalla" style="border-radius:5px;">
+      <img src="docs/scenariosView/esquema-de-pantallas/UC5 - Visualizar Publicación.png" alt="pantalla" style="border-radius:5px;">
+      <img src="docs/scenariosView/esquema-de-pantallas/UC6 - Visualizar Evento.png" alt="pantalla" style="border-radius:5px;">
+      <img src="docs/scenariosView/esquema-de-pantallas/UC7 - Crear Publicacion.png" alt="pantalla" style="border-radius:5px;">
+      <img src="docs/scenariosView/esquema-de-pantallas/UC8 - Editar Publicacion.png" alt="pantalla" style="border-radius:5px;">
+      <img src="docs/scenariosView/esquema-de-pantallas/UC9 - Eliminar Publicacion.png" alt="pantalla" style="border-radius:5px;">
+      <img src="docs/scenariosView/esquema-de-pantallas/UC10 - Crear Evento.png" alt="pantalla" style="border-radius:5px;">
+      <img src="docs/scenariosView/esquema-de-pantallas/UC11 - Editar Evento.png" alt="pantalla" style="border-radius:5px;">
+      <img src="docs/scenariosView/esquema-de-pantallas/UC12 - Eliminar Evento.png" alt="pantalla" style="border-radius:5px;">
+      <img src="docs/scenariosView/esquema-de-pantallas/UC14 - Moderacion.png" alt="pantalla" style="border-radius:5px;">
+  </div>
 </section>
 
 <section>
