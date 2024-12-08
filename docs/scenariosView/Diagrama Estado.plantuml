@@ -1,10 +1,38 @@
-@startuml proyectoEstado
+@startuml n7
+/'
+Lea el enunciado del proyecto y cree un diagrama de estado que nos ayude a entender el proceso del negocio que se quiere automatizar. Use como base el diagrama de clases del modelo de dominio hecho en el reto 07.
+
+Cree un repositorio para el proyecto en GitHub al que tengan acceso todos los integrantes del grupo.
+
+Cree también la siguiente estructura de directorios:
+
+docs/ -> directorio para guardar la documentación
+docs/scenariosView - > diagramas de requisitos
+docs/logicalView -> diagramas de la vista lógica
+docs/developmentView -> diagramas de la vista de desarrollo
+docs/processView -> diagramas de la vista de proceso
+docs/physicalView -> diagramas de la vista física
+src -> directorio para guardar el código de la aplicación
+src/main -> directorio para el código fuente
+src/test -> directorio para las pruebas unitarias
+README.md -> archivo readme del proyecto
+Coloque en el directorio “docs/scenariosView” los archivos “.plantuml” del diagrama de clases y de estado del modelo de dominio del proyecto.
+
+También edite el archivo “README.md”, coloque como título el nombre del proyecto, liste los integrantes del equipo y coloque una sección llamada “Modelo del Dominio”, dentro de esa sección inserte las imágenes del diagrama de clases y de estado correspondiente.
+
+Suba todo a GitHUb.
+
+Al terminar, coloque el URL del repositorio del proyecto.
+'/
+
 state choice1 <<choice>>
+state join_state <<join>>
 
 [*] --> choice1
 choice1 --> RegistroUsuario : No esta registrado
-choice1 --> IniciarSesion : Esta registrado
-
+choice1 --> join_state : Esta registrado
+join_state --> IniciarSesion 
+join_state2 --> Moderacion
 
 state RegistroUsuario {
     [*] --> LlenandoRegistro
@@ -15,10 +43,14 @@ state IniciarSesion {
     [*] --> LlenandoDatos
     LlenandoDatos --> VerificandoLogin : Enviar datos
     VerificandoLogin --> choice2
-    choice2 --> PerfilUsuario : Datos correctos
+    choice2 --> Publicaciones : Datos correctos
     choice2 --> LlenandoDatos : Datos incorrectos
     state choice2 <<choice>>
 }
+
+state PlataformaDigital_App {
+state join_state2 <<join>>
+state join_state3 <<join>>
 
 state PerfilUsuario {
     [*] --> ViendoPerfil
@@ -26,16 +58,26 @@ state PerfilUsuario {
     EditandoPerfil --> ViendoPerfil : Guardar cambios
 }
 
-state Eventos {
-    [*] --> CreandoEvento
-    CreandoEvento --> PublicandoEvento : Guardar
-    PublicandoEvento --> EditandoEvento : Editar
-    EditandoEvento --> PublicandoEvento : Guardar cambios
+state Publicaciones {
+    [*] --> ViendoPublicaciones
+    ViendoPublicaciones --> CreandoPublicacion
+    CreandoPublicacion --> join_state2 
+    Publicando --> EditandoPublicacion : Editar
+    EditandoPublicacion --> join_state2
 }
+
+
 
 state Calendario {
     [*] --> ViendoCalendario
-    ViendoCalendario --> ViendoEvento : Seleccionar evento
+    ViendoCalendario --> Eventos : Seleccionar evento
+    state Eventos {
+        [*] --> ViendoEvento
+        ViendoEvento --> CreandoEvento
+        CreandoEvento --> join_state2
+        PublicandoEvento --> EditandoEvento : Editar
+        EditandoEvento --> join_state2
+    }
 }
 
 state Notificaciones {
@@ -53,15 +95,20 @@ state Moderacion {
     [*] --> RevisandoPublicacion
     RevisandoPublicacion --> AprobandoPublicacion : Aprobar
     RevisandoPublicacion --> RechazandoPublicacion : Rechazar
+    AprobandoPublicacion --> Publicando
+    AprobandoPublicacion --> PublicandoEvento
 }
-
-RegistroUsuario --> IniciarSesion : Registro completado
-PerfilUsuario --> Eventos : Crear evento
-Eventos --> Calendario : Publicar evento
+}
+RegistroUsuario --> join_state : Registro completado
 Eventos --> Notificaciones : Notificar publicación
 Comentarios --> Moderacion : Reportar comentario
 Moderacion --> Notificaciones : Notificar moderación
 
-PerfilUsuario --> [*] : Cerrar sesion
+Publicaciones --> join_state3
+join_state3 --> Comentarios
+join_state3 --> PerfilUsuario
+join_state3 --> Calendario
+
+App --> [*] : Cerrar sesion
 
 @enduml

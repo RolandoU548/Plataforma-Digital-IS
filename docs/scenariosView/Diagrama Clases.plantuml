@@ -1,4 +1,19 @@
-@startuml proyectoClase
+@startuml proyecto
+
+/'
+Crear el diagrama de clases del modelo del dominio del proyecto. Para lograr esto puede seguir los siguientes pasos:
+
+1.Listar las clases conceptuales candidatas
+2.Representarlas en un diagrama de clases
+3.Añadir las asociaciones necesarias para registrar las relaciones importantes
+4.Añadir los atributos necesarios para satisfacer los requisitos de información
+ 
+Para identificar las clases conceptuales puede utilizar alguna de las siguientes técnicas:
+ 
+1.Descripción Informal
+2.Análisis clásico
+3.Análisis del Dominio
+'/
 
 class "Calendario de Eventos" as Calendario {
     año: int
@@ -13,8 +28,16 @@ Usuario "1" ---> "many" Notificacion : recibe
 Profesor --|> Usuario
 Estudiante --|> Usuario
 PersonalApoyo --|> Usuario
+Administrador --|> Usuario
+Moderador --|> Usuario
+Administrador --> Publicacion : modera
+Moderador --> Publicacion : modera
 
 GrupoDeExtension <-- Estudiante : pertenece
+
+GrupoDeExtension <|-- GE_Cultural
+GrupoDeExtension <|-- GE_Deportivo
+GrupoDeExtension <|-- GE_Estudio
 
 Publicacion -- Evento
 Publicacion <-- Usuario : crea/modifica
@@ -24,8 +47,14 @@ Publicacion <|-- Proyecto
 Publicacion <|-- Investigacion
 Publicacion <|-- Experiencia
 
+Evento <|-- Seminario
+Evento <|-- Taller
+
 Evento "1" ---> "many" Comentario : tiene
 Calendario *-- Evento
+
+Notificacion -- Evento
+Notificacion -- Publicacion 
 
 class Usuario {
     idUsuario: int
@@ -33,36 +62,35 @@ class Usuario {
     apellido: String
     correo: String
     contraseña: String
-    administrador: boolean
 }
 
 class Profesor {
     especialidad : String
   }
-
 class Estudiante {
     carrera : String
     semestre : int
-  }
-
-class GrupoDeExtension {
-    idGrupo: int
-    tipo: String
 }
-
 class PersonalApoyo {
     cargo: String 
 }
+class Administrador
+class Moderador 
 
-class Proyecto {
-
+class GrupoDeExtension {
+    idGrupo: int
 }
-class Investigacion {
+class GE_Deportivo
+class GE_Cultural
+class GE_Estudio
 
+class Publicacion {
+    idPublicacion: int
+    autor: Usuario
 }
-class Experiencia {
-
-}
+class Proyecto
+class Investigacion
+class Experiencia
 
 class Evento {
     idEvento: int
@@ -74,12 +102,8 @@ class Evento {
     usuarioCreador: Usuario
     estado: String
   }
-
-class Publicacion {
-    idPublicacion: int
-    autor: Usuario
-    tipo: String
-}
+class Seminario 
+class Taller
 
 class Comentario {
     idComentario: int
