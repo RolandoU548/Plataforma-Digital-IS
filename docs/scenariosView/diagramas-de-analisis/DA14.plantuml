@@ -1,0 +1,30 @@
+@startuml r11
+/'
+    Crear el diagrama de clases de análisis y de colaboración de los casos de uso prioritarios del proyecto.
+
+    Para conseguir el diagrama de clases seguir los siguientes pasos:
+
+    1. Identificar las clases Entidad (Modelo)
+    2. Identificar las clases Interfaz (Vista)
+    3. Identificar las clases Control (Controlador)
+    4. Identificar las relaciones entre estas clases
+    
+    Este diagrama debe ser específico de un caso de uso y las clases deben ser representadas con sus estereotipos.
+    
+    Para conseguir el diagrama de colaboración, identifique las relaciones (enlaces) entre los objetos y los requerimientos (mensajes) sobre cada objeto involucrado en la descripción del caso de uso.
+'/
+left to right direction
+
+rectangle "UC14 ModerarContenido"{
+    actor Moderador 
+    entity Publicacion as e1
+    entity Evento as e2
+    boundary "IU Moderacion" as i1
+    control "Gestor contenido" as c1
+}
+Moderador -- i1
+i1 -- c1
+c1 -- e1
+c1 -- e2
+
+@enduml
