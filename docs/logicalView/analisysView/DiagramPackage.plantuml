@@ -1,0 +1,81 @@
+@startuml r12
+/'
+Crear el diagrama de clases y de paquete del modelo de análisis del proyecto.
+
+Revisar todas las clases involucradas en las distintas realizaciones de los casos de uso hechas en el reto 11, y buscar sus atributos y métodos, luego crear un diagrama único donde se vean las clases, sus atributos, métodos y relaciones, revise que la guía de estilo de los nombres y las métricas de tamaño se cumplan.
+
+Luego, estudie cuál es la mejor manera de empaquetar estas clases, estudie si esos paquetes son altamente cohesivos, luego cree un diagrama de paquetes y analice si la arquitectura generada esta poco acoplada y no hay presencia de ciclos, de encontrar un problema estudie como mejorarlo y cambie sus paquetes.
+
+Entregar el diagrama de clases y el diagrama de paquete del proyecto.
+'/
+
+package "Usuarios y Roles" as ur {
+    class Usuario
+    class Profesor
+    class Estudiante
+    class PersonalApoyo
+    class Administrador
+    class Moderador
+
+    Profesor --|> Usuario
+    Estudiante --|> Usuario
+    PersonalApoyo --|> Usuario
+    Administrador --|> Usuario
+    Moderador --|> Usuario
+}
+
+package "Eventos y Calendario" as ec {
+    class Evento
+    class Seminario
+    class Taller
+    class Calendario
+
+    Evento <|-- Seminario
+    Evento <|-- Taller
+    Calendario *-- Evento
+}
+
+package "Publicaciones y Comentarios" as pc {
+    class Publicacion
+    class Proyecto
+    class Investigacion
+    class Experiencia
+    class Comentario
+
+    Publicacion <|-- Proyecto
+    Publicacion <|-- Investigacion
+    Publicacion <|-- Experiencia
+    Publicacion "1" -- "many" Comentario : tiene
+}
+
+package "Notificaciones" as n {
+    class Notificacion
+}
+
+package "Grupos de Extensión" as ge {
+    class GrupoDeExtension
+    class GE_Cultural
+    class GE_Deportivo
+    class GE_Estudio
+
+    GrupoDeExtension <|-- GE_Cultural
+    GrupoDeExtension <|-- GE_Deportivo
+    GrupoDeExtension <|-- GE_Estudio
+}
+
+Usuario "1" ---> "many" Comentario : publica
+Usuario "1" ---> "many" Notificacion : recibe
+Administrador --> Publicacion : modera
+Moderador --> Publicacion : modera
+Estudiante --> GrupoDeExtension : pertenece
+
+'' Relaciones entre paquetes
+ur -.-> ge 
+ur -.-> pc
+ur -.-> ec
+n <-.- ec
+n <-.- pc
+ge -.-> ec
+
+
+@enduml

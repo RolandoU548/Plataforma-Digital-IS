@@ -1,0 +1,165 @@
+@startuml r12
+/'
+Crear el diagrama de clases y de paquete del modelo de análisis del proyecto.
+
+Revisar todas las clases involucradas en las distintas realizaciones de los casos de uso hechas en el reto 11, y buscar sus atributos y métodos, luego crear un diagrama único donde se vean las clases, sus atributos, métodos y relaciones, revise que la guía de estilo de los nombres y las métricas de tamaño se cumplan.
+
+Luego, estudie cuál es la mejor manera de empaquetar estas clases, estudie si esos paquetes son altamente cohesivos, luego cree un diagrama de paquetes y analice si la arquitectura generada esta poco acoplada y no hay presencia de ciclos, de encontrar un problema estudie como mejorarlo y cambie sus paquetes.
+
+Entregar el diagrama de clases y el diagrama de paquete del proyecto.
+'/
+
+Usuario "1" ---> "many" Evento : crea/modifica
+Usuario "1" ---> "many" Comentario : publica
+Usuario "1" ---> "many" Notificacion : recibe
+
+Profesor --|> Usuario
+Estudiante --|> Usuario
+PersonalApoyo --|> Usuario
+Administrador --|> Usuario
+Moderador --|> Usuario
+Administrador --> Publicacion : modera
+Moderador --> Publicacion : modera
+
+GrupoDeExtension <-- Estudiante : pertenece
+
+GrupoDeExtension <|-- GE_Cultural
+GrupoDeExtension <|-- GE_Deportivo
+GrupoDeExtension <|-- GE_Estudio
+
+Publicacion -- Evento
+Publicacion <-- Usuario : crea/modifica
+Publicacion "1" -- "many" Comentario : tiene
+
+Publicacion <|-- Proyecto
+Publicacion <|-- Investigacion
+Publicacion <|-- Experiencia
+
+Evento <|-- Seminario
+Evento <|-- Taller
+
+Evento "1" ---> "many" Comentario : tiene
+Calendario *-- Evento
+
+Notificacion -- Evento
+Notificacion -- Publicacion 
+
+class Usuario {
+    idUsuario: int
+    nombre: String
+    apellido: String
+    correo: String
+    contraseña: String
+
+    registrar(): void
+    iniciarSecion(): void
+    editarPerfil(): void  
+}
+
+class Profesor {
+    especialidad : String
+  }
+class Estudiante {
+    carrera : String
+    semestre : int
+
+    ingresarGrupoDeExtension(): void
+    salirGrupoDeExtension(): void
+    organizarEvento(): void
+}
+class PersonalApoyo {
+    cargo: String 
+}
+class Administrador{
+    aceptarPublicacion(): void
+    rechazarPublicacion(): void
+    aceptarEvento(): void
+    rechazarEvento(): void
+    aceptarReporte(): void
+    rechazarReporte(): void
+    escogerModerador(): void
+}
+class Moderador {
+    aceptarPublicacion(): void
+    rechazarPublicacion(): void
+    aceptarEvento(): void
+    rechazarEvento(): void
+    aceptarReporte(): void
+    rechazarReporte(): void
+}
+
+class GrupoDeExtension {
+    idGrupo: int
+
+    aceptarMiembro(): void
+    rechazarMiembro(): void
+    organizarEvento(): void
+}
+class GE_Deportivo
+class GE_Cultural
+class GE_Estudio
+
+class Publicacion {
+    idPublicacion: int
+    autor: Usuario
+
+    mostrarPublicacion(): void
+    crearPublicacion(): void
+    editarPublicacion(): void
+    eliminarPublicacion(): void
+}
+class Proyecto
+class Investigacion
+class Experiencia
+
+class "Calendario de Eventos" as Calendario {
+    año: int
+    mes: int 
+    dia: int 
+
+    mostrarCalendario(): void
+    mostrarEvento(): void
+}
+
+class Evento {
+    idEvento: int
+    titulo: String
+    descripcion: String
+    fechaInicio: Date
+    fechaFin: Date
+    lugar: String
+    usuarioCreador: Usuario
+    estado: String
+
+    mostrarEvento(): void
+    crearEvento(): void
+    editarEvento(): void
+    eliminarEvento(): void
+  }
+class Seminario 
+class Taller
+
+class Comentario {
+    idComentario: int
+    idPublicacion: int
+    texto: String
+    fecha: Date
+    usuario: Usuario
+    evento: Evento
+
+    comentar(): void 
+    enviarReporte(): void
+  }
+
+class Notificacion {
+    idNotificacion: int
+    mensaje: String
+    fecha: Date
+    usuario: Usuario
+    leido: bool
+
+    enviarNotificacion(): void 
+    mostrarNotificaciones(): void
+  }
+
+@enduml

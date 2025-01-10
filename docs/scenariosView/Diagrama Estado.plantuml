@@ -27,6 +27,7 @@ Al terminar, coloque el URL del repositorio del proyecto.
 
 state choice1 <<choice>>
 state join_state <<join>>
+state join_state2 <<join>>
 
 [*] --> choice1
 choice1 --> RegistroUsuario : No esta registrado
@@ -42,14 +43,13 @@ state RegistroUsuario {
 state IniciarSesion {
     [*] --> LlenandoDatos
     LlenandoDatos --> VerificandoLogin : Enviar datos
+    state choice2 <<choice>>
     VerificandoLogin --> choice2
     choice2 --> Publicaciones : Datos correctos
     choice2 --> LlenandoDatos : Datos incorrectos
-    state choice2 <<choice>>
 }
 
 state PlataformaDigital_App {
-state join_state2 <<join>>
 state join_state3 <<join>>
 
 state PerfilUsuario {

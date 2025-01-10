@@ -52,3 +52,30 @@ El **Equipo de Trabajo** está conformado por:
       <img src="docs/scenariosView/esquema-de-pantallas/UC14 - Moderacion.png" alt="pantalla" style="border-radius:5px;">
   </div>
 </section>
+<section>
+  <h2 align="center" style="text-">Modelo de Análisis</h2>
+ <div align="center">
+      <span style="text-decoration:underline">
+      Diagrama de Clases
+      </span>
+      <img src="docs/logicalView/analisysView/DiagramClass.png" alt="pantalla" style="border-radius:5px">
+  </div>
+   <div align="center">
+      <span style="text-decoration:underline">
+      Diagramas de Colaboración de los casos de uso
+      </span>
+      <img src="docs/scenariosView/diagramas-de-colaboracion/DC1.png" alt="pantalla" style="border-radius:5px;">
+      <img src="docs/scenariosView/diagramas-de-colaboracion/DC2.png" alt="pantalla" style="border-radius:5px">
+      <img src="docs/scenariosView/diagramas-de-colaboracion/DC7.png" alt="pantalla" style="border-radius:5px">
+      <img src="docs/scenariosView/diagramas-de-colaboracion/DC9.png" alt="pantalla" style="border-radius:5px">
+      <img src="docs/scenariosView/diagramas-de-colaboracion/DC10.png" alt="pantalla" style="border-radius:5px">
+      <img src="docs/scenariosView/diagramas-de-colaboracion/DC12.png" alt="pantalla" style="border-radius:5px">
+      <img src="docs/scenariosView/diagramas-de-colaboracion/DC14.png" alt="pantalla" style="border-radius:5px">
+  </div>
+  <div align="center">
+    <span style="text-decoration:underline">
+    Diagrama de Paquete de Análisis Final
+    </span>
+    <img src="docs/logicalView/analisysView/DiagramPackage.png" alt="pantalla" style="border-radius:5px">
+  </div>
+</section>
