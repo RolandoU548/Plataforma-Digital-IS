@@ -58,36 +58,36 @@ El **Equipo de Trabajo** está conformado por:
       <span style="text-decoration:underline">
       Diagrama de Clases
       </span>
-      <img src="docs/logicalView/analisysView/DiagramClass.png" alt="pantalla" style="border-radius:5px">
+      <img src="docs/logicalView/analisysView/DiagramClass.png" alt="Diagrama-Clases" style="border-radius:5px">
   </div>
    <div align="center">
       <span style="text-decoration:underline">
       Diagramas de Colaboración de los Casos de Uso
       </span>
-      <img src="docs/scenariosView/diagramas-de-colaboracion/DC1.png" alt="pantalla" style="border-radius:5px;">
-      <img src="docs/scenariosView/diagramas-de-colaboracion/DC2.png" alt="pantalla" style="border-radius:5px">
-      <img src="docs/scenariosView/diagramas-de-colaboracion/DC7.png" alt="pantalla" style="border-radius:5px">
-      <img src="docs/scenariosView/diagramas-de-colaboracion/DC9.png" alt="pantalla" style="border-radius:5px">
-      <img src="docs/scenariosView/diagramas-de-colaboracion/DC10.png" alt="pantalla" style="border-radius:5px">
-      <img src="docs/scenariosView/diagramas-de-colaboracion/DC12.png" alt="pantalla" style="border-radius:5px">
-      <img src="docs/scenariosView/diagramas-de-colaboracion/DC14.png" alt="pantalla" style="border-radius:5px">
+      <img src="docs/scenariosView/diagramas-de-colaboracion/DC1.png" alt="Diagrama-Colaboracion" style="border-radius:5px;">
+      <img src="docs/scenariosView/diagramas-de-colaboracion/DC2.png" alt="Diagrama-Colaboracion" style="border-radius:5px">
+      <img src="docs/scenariosView/diagramas-de-colaboracion/DC7.png" alt="Diagrama-Colaboracion" style="border-radius:5px">
+      <img src="docs/scenariosView/diagramas-de-colaboracion/DC9.png" alt="Diagrama-Colaboracion" style="border-radius:5px">
+      <img src="docs/scenariosView/diagramas-de-colaboracion/DC10.png" alt="Diagrama-Colaboracion" style="border-radius:5px">
+      <img src="docs/scenariosView/diagramas-de-colaboracion/DC12.png" alt="Diagrama-Colaboracion" style="border-radius:5px">
+      <img src="docs/scenariosView/diagramas-de-colaboracion/DC14.png" alt="Diagrama-Colaboracion" style="border-radius:5px">
   </div>
    <div align="center">
       <span style="text-decoration:underline">
       Diagramas de Analisis de los Casos de Uso
       </span>
-      <img src="docs/scenariosView/diagramas-de-analisis/DA1.png" alt="pantalla" style="border-radius:5px;">
-      <img src="docs/scenariosView/diagramas-de-analisis/DC2.png" alt="pantalla" style="border-radius:5px">
-      <img src="docs/scenariosView/diagramas-de-analisis/DC7.png" alt="pantalla" style="border-radius:5px">
-      <img src="docs/scenariosView/diagramas-de-analisis/DC9.png" alt="pantalla" style="border-radius:5px">
-      <img src="docs/scenariosView/diagramas-de-analisis/DC10.png" alt="pantalla" style="border-radius:5px">
-      <img src="docs/scenariosView/diagramas-de-analisis/DC12.png" alt="pantalla" style="border-radius:5px">
-      <img src="docs/scenariosView/diagramas-de-analisis/DC14.png" alt="pantalla" style="border-radius:5px">
+      <img src="docs/scenariosView/diagramas-de-analisis/DA1.png" alt="Diagrama-Analisis" style="border-radius:5px;">
+      <img src="docs/scenariosView/diagramas-de-analisis/DA2.png" alt="Diagrama-Analisis" style="border-radius:5px">
+      <img src="docs/scenariosView/diagramas-de-analisis/DA7.png" alt="Diagrama-Analisis" style="border-radius:5px">
+      <img src="docs/scenariosView/diagramas-de-analisis/DA9.png" alt="Diagrama-Analisis" style="border-radius:5px">
+      <img src="docs/scenariosView/diagramas-de-analisis/DA10.png" alt="Diagrama-Analisis" style="border-radius:5px">
+      <img src="docs/scenariosView/diagramas-de-analisis/DA12.png" alt="Diagrama-Analisis" style="border-radius:5px">
+      <img src="docs/scenariosView/diagramas-de-analisis/DA14.png" alt="Diagrama-Analisis" style="border-radius:5px">
   </div>
   <div align="center">
     <span style="text-decoration:underline">
     Diagrama de Paquete de Análisis Final
     </span>
-    <img src="docs/logicalView/analisysView/DiagramPackage.png" alt="pantalla" style="border-radius:5px">
+    <img src="docs/logicalView/analisysView/DiagramPackage.png" alt="Diagrama-Paquetes" style="border-radius:5px">
   </div>
 </section>
