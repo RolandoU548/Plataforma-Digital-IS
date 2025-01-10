@@ -62,7 +62,7 @@ El **Equipo de Trabajo** está conformado por:
   </div>
    <div align="center">
       <span style="text-decoration:underline">
-      Diagramas de Colaboración de los casos de uso
+      Diagramas de Colaboración de los Casos de Uso
       </span>
       <img src="docs/scenariosView/diagramas-de-colaboracion/DC1.png" alt="pantalla" style="border-radius:5px;">
       <img src="docs/scenariosView/diagramas-de-colaboracion/DC2.png" alt="pantalla" style="border-radius:5px">
@@ -71,6 +71,18 @@ El **Equipo de Trabajo** está conformado por:
       <img src="docs/scenariosView/diagramas-de-colaboracion/DC10.png" alt="pantalla" style="border-radius:5px">
       <img src="docs/scenariosView/diagramas-de-colaboracion/DC12.png" alt="pantalla" style="border-radius:5px">
       <img src="docs/scenariosView/diagramas-de-colaboracion/DC14.png" alt="pantalla" style="border-radius:5px">
+  </div>
+   <div align="center">
+      <span style="text-decoration:underline">
+      Diagramas de Analisis de los Casos de Uso
+      </span>
+      <img src="docs/scenariosView/diagramas-de-analisis/DA1.png" alt="pantalla" style="border-radius:5px;">
+      <img src="docs/scenariosView/diagramas-de-analisis/DC2.png" alt="pantalla" style="border-radius:5px">
+      <img src="docs/scenariosView/diagramas-de-analisis/DC7.png" alt="pantalla" style="border-radius:5px">
+      <img src="docs/scenariosView/diagramas-de-analisis/DC9.png" alt="pantalla" style="border-radius:5px">
+      <img src="docs/scenariosView/diagramas-de-analisis/DC10.png" alt="pantalla" style="border-radius:5px">
+      <img src="docs/scenariosView/diagramas-de-analisis/DC12.png" alt="pantalla" style="border-radius:5px">
+      <img src="docs/scenariosView/diagramas-de-analisis/DC14.png" alt="pantalla" style="border-radius:5px">
   </div>
   <div align="center">
     <span style="text-decoration:underline">
