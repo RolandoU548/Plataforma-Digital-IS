@@ -54,15 +54,9 @@ El **Equipo de Trabajo** está conformado por:
   </div>
   <div align="center">
     <h4 style="text-decoration:underline">
-      Diagramas de Colaboración de los Casos de Uso
+      Diagrama de Colaboración de los Casos de Uso
     </h4>
-    <img src="docs/scenariosView/diagramas-de-colaboracion/DC1.png" alt="Diagrama-Colaboracion" style="border-radius:5px;">
-    <img src="docs/scenariosView/diagramas-de-colaboracion/DC2.png" alt="Diagrama-Colaboracion" style="border-radius:5px">
-    <img src="docs/scenariosView/diagramas-de-colaboracion/DC7.png" alt="Diagrama-Colaboracion" style="border-radius:5px">
-    <img src="docs/scenariosView/diagramas-de-colaboracion/DC9.png" alt="Diagrama-Colaboracion" style="border-radius:5px">
-    <img src="docs/scenariosView/diagramas-de-colaboracion/DC10.png" alt="Diagrama-Colaboracion" style="border-radius:5px">
-    <img src="docs/scenariosView/diagramas-de-colaboracion/DC12.png" alt="Diagrama-Colaboracion" style="border-radius:5px">
-    <img src="docs/scenariosView/diagramas-de-colaboracion/DC14.png" alt="Diagrama-Colaboracion" style="border-radius:5px">
+    <img src="docs/scenariosView/Diagrama Colaboracion.png" alt="Diagrama-Colaboracion" style="border-radius:5px;">
   </div>
   <div align="center">
     <h4 style="text-decoration:underline">
