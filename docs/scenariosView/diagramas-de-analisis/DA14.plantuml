@@ -1,4 +1,4 @@
-@startuml r11
+@startuml DA14
 /'
     Crear el diagrama de clases de análisis y de colaboración de los casos de uso prioritarios del proyecto.
 
@@ -19,8 +19,8 @@ rectangle "UC14 ModerarContenido"{
     actor Moderador 
     entity Publicacion as e1
     entity Evento as e2
-    boundary "IU Moderacion" as i1
-    control "Gestor contenido" as c1
+    boundary " InterfazModerarContenido" as i1
+    control "ControladorModerarContenido" as c1
 }
 Moderador -- i1
 i1 -- c1

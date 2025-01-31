@@ -66,15 +66,9 @@ El **Equipo de Trabajo** está conformado por:
   </div>
   <div align="center">
     <h4 style="text-decoration:underline">
-    Diagramas de Análisis de los Casos de Uso
+    Diagrama de Análisis de los Casos de Uso
     </h4>
-    <img src="docs/scenariosView/diagramas-de-analisis/DA1.png" alt="Diagrama-Analisis" style="border-radius:5px;">
-    <img src="docs/scenariosView/diagramas-de-analisis/DA2.png" alt="Diagrama-Analisis" style="border-radius:5px">
-    <img src="docs/scenariosView/diagramas-de-analisis/DA7.png" alt="Diagrama-Analisis" style="border-radius:5px">
-    <img src="docs/scenariosView/diagramas-de-analisis/DA9.png" alt="Diagrama-Analisis" style="border-radius:5px">
-    <img src="docs/scenariosView/diagramas-de-analisis/DA10.png" alt="Diagrama-Analisis" style="border-radius:5px">
-    <img src="docs/scenariosView/diagramas-de-analisis/DA12.png" alt="Diagrama-Analisis" style="border-radius:5px">
-    <img src="docs/scenariosView/diagramas-de-analisis/DA14.png" alt="Diagrama-Analisis" style="border-radius:5px">
+    <img src="docs/scenariosView/Diagrama Analisis.png" alt="Diagrama-Analisis" style="border-radius:5px;">
   </div>
   <div align="center">
     <h4 style="text-decoration:underline">
