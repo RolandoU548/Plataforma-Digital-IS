@@ -71,3 +71,27 @@ El **Equipo de Trabajo** está conformado por:
     <img src="docs/logicalView/analisysView/DiagramPackage.png" alt="Diagrama-Paquetes" style="border-radius:5px">
   </div>
 </section>
+<section>
+  <h2 align="center" style="text-">Modelo de Diseño</h2>
+  <div align="center">
+    <h4 style="text-decoration:underline">
+    Diagrama de Clases UC7
+    </h4>
+    <img src="docs/logicalView/designView/DiagramClass.jpg" alt="Diagrama-Clases" style="border-radius:5px">
+  </div>
+  <div align="center">
+    <h4 style="text-decoration:underline">
+      Diagrama de Secuencia UC7
+    </h4>
+    <img src="docs/logicalView/designView/DiagramSequence.jpg" alt="Diagrama-Secuencia" style="border-radius:5px;">
+  </div>
+</section>
+<section>
+  <h2 align="center" style="text-">Modelo de Despliegue</h2>
+  <div align="center">
+    <h4 style="text-decoration:underline">
+    Diagrama de Despliegue
+    </h4>
+    <img src="docs/physicalView/DiagramDeployment.jpg" alt="Diagrama-Clases" style="border-radius:5px">
+  </div>
+</section>

@@ -1,0 +1,55 @@
+@startuml r14
+
+/'
+Crear el diagrama de despliegue del modelo de diseño del proyecto. Crear también el diagrama de clases y secuencia de un caso de uso representativo de la arquitectura, así como el diagrama que muestre la traza de las clases de diseño del modelo de diseño hacia clases del modelo de análisis.
+
+Entregar los diagramas de despliegue, clases, secuencia y de traza del proyecto.
+'/
+title Diagrama de Clases - Plataforma Digital UCV
+
+Usuario --> InterfazCrearPublicación : ingreasar datos
+
+InterfazCrearPublicación --> BaseDeDatos : guardar datos
+InterfazCrearPublicación --> ControladorCrearPublicación : enviar datos publicación 
+InterfazCrearPublicación --> Usuario : mostrar mensaje 
+
+ControladorCrearPublicación --> ControladorCrearPublicación : validar datos
+ControladorCrearPublicación --> Moderador : enviar datos publicacion
+
+Moderador --> Moderador : revisar publicacion
+Moderador --> ControladorCrearPublicación : aceptar/rechazar publicación
+
+
+class Usuario {
+    idUsuario: int
+    nombre: String
+    apellido: String
+    correo: String
+    contraseña: String
+
+    ingresarDatosPublicacion(): void
+}
+
+class InterfazCrearPublicación
+{
+    enviarDatosPublicacion(): void
+    mostrarMensaje(String): void
+}
+
+class ControladorCrearPublicación
+{
+    validarDatos(): void 
+    enviarDatosParaRevision(): void
+    guardarDatosPublicacion
+}
+
+class Moderador 
+{
+    revisarPublicacion(): void
+    aceptarPublicacion(): void
+    rechazarPublicacion(): void
+}
+
+class BaseDeDatos
+
+@enduml

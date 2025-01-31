@@ -1,0 +1,53 @@
+@startuml r14
+
+/'
+Crear el diagrama de despliegue del modelo de diseño del proyecto. Crear también el diagrama de clases y secuencia de un caso de uso representativo de la arquitectura, así como el diagrama que muestre la traza de las clases de diseño del modelo de diseño hacia clases del modelo de análisis.
+
+Entregar los diagramas de despliegue, clases, secuencia y de traza del proyecto.
+'/
+title Diagrama de Secuencia - Plataforma Digital UCV
+
+actor Usuario
+
+boundary InterfazCrearPublicación
+control ControladorCrearPublicación
+
+actor Moderador
+
+entity BaseDeDatos
+
+Usuario -> InterfazCrearPublicación: Ingresar datos de publicación
+activate InterfazCrearPublicación
+InterfazCrearPublicación -> ControladorCrearPublicación: Enviar datos de publicación
+activate ControladorCrearPublicación
+ControladorCrearPublicación -> ControladorCrearPublicación: Validar datos
+ControladorCrearPublicación -> ControladorCrearPublicación: ¿Datos válidos?
+alt Si los datos son válidos
+    ControladorCrearPublicación -> Moderador: Enviar datos para revisión
+    activate Moderador
+    Moderador -> Moderador: Revisar publicación
+    Moderador -> Moderador: ¿Publicación adecuada?
+    alt Si la publicación es adecuada
+        Moderador -> ControladorCrearPublicación: Publicación aprobada
+        ControladorCrearPublicación -> BaseDeDatos: Guardar datos de publicación
+        activate BaseDeDatos
+        BaseDeDatos --> ControladorCrearPublicación: Confirmación de guardado
+        deactivate BaseDeDatos
+        ControladorCrearPublicación --> InterfazCrearPublicación: Confirmación de publicación creada
+        InterfazCrearPublicación --> Usuario: Confirmación de publicación creada
+    else Si la publicación no es adecuada
+        Moderador -> ControladorCrearPublicación: Publicación rechazada
+        deactivate Moderador
+        ControladorCrearPublicación --> InterfazCrearPublicación: Publicación rechazada
+        InterfazCrearPublicación --> Usuario: Mostrar mensaje de rechazo
+    end
+else Si los datos no son válidos
+    ControladorCrearPublicación --> InterfazCrearPublicación: Error en los datos
+    deactivate ControladorCrearPublicación
+    InterfazCrearPublicación --> Usuario: Mostrar mensaje de error
+    deactivate InterfazCrearPublicación
+end
+
+
+
+@enduml
