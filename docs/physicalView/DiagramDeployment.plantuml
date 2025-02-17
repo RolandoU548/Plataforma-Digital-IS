@@ -11,13 +11,11 @@ node "Usuarios" {
 node "Dispositivos de Usuario" {
     node "Aplicación de Escritorio" {
         artifact "PlataformaVirtual.jar"
+        database "Base de Datos"
     }
-    database "Base de Datos"
 }
 
-"Estudiantes" -- "Aplicación de Escritorio"
-"Profesores" -- "Aplicación de Escritorio"
-"Personal Administrativo" -- "Aplicación de Escritorio"
+"Usuarios" -- "Aplicación de Escritorio"
 
-"Aplicación de Escritorio" -- "Base de Datos"
+"PlataformaVirtual.jar" -- "Base de Datos"
 @enduml

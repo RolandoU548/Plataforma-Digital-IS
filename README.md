@@ -85,6 +85,12 @@ El **Equipo de Trabajo** está conformado por:
     </h4>
     <img src="docs/logicalView/designView/DiagramSequence.jpg" alt="Diagrama-Secuencia" style="border-radius:5px;">
   </div>
+    <div align="center">
+    <h4 style="text-decoration:underline">
+      Diagrama de Trazas UC7
+    </h4>
+    <img src="docs/logicalView/designView/DiagramTrace.jpg" alt="Diagrama-Secuencia" style="border-radius:5px;">
+  </div>
 </section>
 <section>
   <h2 align="center" style="text-">Modelo de Despliegue</h2>

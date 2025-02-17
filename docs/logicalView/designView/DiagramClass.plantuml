@@ -5,7 +5,6 @@ Crear el diagrama de despliegue del modelo de diseño del proyecto. Crear tambi�
 
 Entregar los diagramas de despliegue, clases, secuencia y de traza del proyecto.
 '/
-title Diagrama de Clases - Plataforma Digital UCV
 
 Usuario --> InterfazCrearPublicación : ingreasar datos
 
@@ -21,33 +20,33 @@ Moderador --> ControladorCrearPublicación : aceptar/rechazar publicación
 
 
 class Usuario {
-    idUsuario: int
-    nombre: String
-    apellido: String
-    correo: String
-    contraseña: String
+    -idUsuario: int
+    -nombre: String
+    -apellido: String
+    -correo: String
+    -contraseña: String
 
-    ingresarDatosPublicacion(): void
+    +ingresarDatosPublicacion(): void
 }
 
 class InterfazCrearPublicación
 {
-    enviarDatosPublicacion(): void
-    mostrarMensaje(String): void
+    +enviarDatosPublicacion(): void
+    +mostrarMensaje(String): void
 }
 
 class ControladorCrearPublicación
 {
-    validarDatos(): void 
-    enviarDatosParaRevision(): void
-    guardarDatosPublicacion
+    +validarDatos(): void 
+    +enviarDatosParaRevision(): void
+    +guardarDatosPublicacion(): void
 }
 
 class Moderador 
 {
-    revisarPublicacion(): void
-    aceptarPublicacion(): void
-    rechazarPublicacion(): void
+    +revisarPublicacion(): void
+    +aceptarPublicacion(): void
+    +rechazarPublicacion(): void
 }
 
 class BaseDeDatos
