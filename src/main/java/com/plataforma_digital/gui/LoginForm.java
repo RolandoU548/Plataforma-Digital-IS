@@ -1,5 +1,7 @@
 package com.plataforma_digital.gui;
 
+import java.awt.Color;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -46,13 +48,13 @@ public class LoginForm extends JPanel {
                 passwordLabel.setFont(new java.awt.Font("Segoe UI", 1, 14));
                 passwordLabel.setText("Contraseña");
 
-                emailTextField.setForeground(new java.awt.Color(102, 102, 102));
+                emailTextField.setForeground(new Color(102, 102, 102));
 
-                passwordTextField.setForeground(new java.awt.Color(102, 102, 102));
+                passwordTextField.setForeground(new Color(102, 102, 102));
 
-                loginButton.setBackground(new java.awt.Color(51, 51, 51));
+                loginButton.setBackground(Color.BLACK);
                 loginButton.setFont(new java.awt.Font("Segoe UI", 1, 14));
-                loginButton.setForeground(new java.awt.Color(255, 255, 255));
+                loginButton.setForeground(new Color(255, 255, 255));
                 loginButton.setText("Iniciar sesión");
                 loginButton.setBorderPainted(false);
                 loginButton.addActionListener(e -> {
@@ -62,12 +64,12 @@ public class LoginForm extends JPanel {
                         }
                 });
 
-                forgottenPasswordButton.setBackground(new java.awt.Color(242, 242, 242));
+                forgottenPasswordButton.setBackground(new Color(242, 242, 242));
                 forgottenPasswordButton.setFont(new java.awt.Font("Segoe UI", 2, 14));
                 forgottenPasswordButton.setText("¿Olvidaste tu contraseña?");
                 forgottenPasswordButton.setBorderPainted(false);
 
-                registerButton.setBackground(new java.awt.Color(242, 242, 242));
+                registerButton.setBackground(new Color(242, 242, 242));
                 registerButton.setFont(new java.awt.Font("Segoe UI", 2, 14));
                 registerButton.setText("¿No estás registrado? Regístrate");
                 registerButton.setBorderPainted(false);

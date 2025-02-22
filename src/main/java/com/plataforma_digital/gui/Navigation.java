@@ -1,5 +1,7 @@
 package com.plataforma_digital.gui;
 
+import java.awt.Color;
+
 import javax.swing.JPanel;
 
 public class Navigation extends JPanel {
@@ -12,11 +14,11 @@ public class Navigation extends JPanel {
         private javax.swing.JPanel jPanel1;
 
         public Navigation(Home home) {
+                this.home = home;
                 initComponents();
         }
 
         private void initComponents() {
-
                 jPanel1 = new javax.swing.JPanel();
                 ButtonHome = new javax.swing.JButton();
                 ButtonBell = new javax.swing.JButton();
@@ -24,34 +26,59 @@ public class Navigation extends JPanel {
                 ButtonEye = new javax.swing.JButton();
                 ButtonAdd = new javax.swing.JButton();
 
-                jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+                jPanel1.setBackground(Color.BLACK);
 
-                ButtonHome.setBackground(new java.awt.Color(0, 0, 0));
+                ButtonHome.setBackground(Color.BLACK);
                 ButtonHome.setIcon(new javax.swing.ImageIcon(
                                 getClass().getResource("/Home.png")));
                 ButtonHome.setBorderPainted(false);
+                ButtonHome.addActionListener(e -> {
+                        EditProfile editProfile = new EditProfile(home);
+                        home.editProfile = editProfile;
+                        home.addAndShowPanel(editProfile, "editProfile");
+                });
 
-                ButtonBell.setBackground(new java.awt.Color(0, 0, 0));
+                ButtonBell.setBackground(Color.BLACK);
                 ButtonBell.setIcon(new javax.swing.ImageIcon(
                                 getClass().getResource("/Bell1.png")));
                 ButtonBell.setBorderPainted(false);
+                ButtonBell.addActionListener(e -> {
+                        Moderation moderation = new Moderation(home);
+                        home.moderation = moderation;
+                        home.addAndShowPanel(moderation, "moderation");
+                });
 
-                ButtonCalendar.setBackground(new java.awt.Color(0, 0, 0));
+                ButtonCalendar.setBackground(Color.BLACK);
                 ButtonCalendar.setIcon(new javax.swing.ImageIcon(
                                 getClass().getResource("/Calendar.png")));
                 ButtonCalendar.setBorderPainted(false);
+                ButtonCalendar.addActionListener(e -> {
+                        PublicationsCalendar calendar = new PublicationsCalendar(home);
+                        home.calendar = calendar;
+                        home.addAndShowPanel(calendar, "calendar");
+                });
 
-                ButtonEye.setBackground(new java.awt.Color(0, 0, 0));
+                ButtonEye.setBackground(Color.BLACK);
                 ButtonEye.setIcon(
                                 new javax.swing.ImageIcon(
                                                 getClass().getResource("/Eye.png")));
                 ButtonEye.setBorderPainted(false);
+                ButtonEye.addActionListener(e -> {
+                        ViewAllPublications viewAllPublications = new ViewAllPublications(home);
+                        home.viewAllPublications = viewAllPublications;
+                        home.addAndShowPanel(viewAllPublications, "viewAllPublications");
+                });
 
-                ButtonAdd.setBackground(new java.awt.Color(0, 0, 0));
+                ButtonAdd.setBackground(Color.BLACK);
                 ButtonAdd.setIcon(
                                 new javax.swing.ImageIcon(
                                                 getClass().getResource("/Add.png")));
                 ButtonAdd.setBorderPainted(false);
+                ButtonAdd.addActionListener(e -> {
+                        CreatePublication createPublication = new CreatePublication(home);
+                        home.createPublication = createPublication;
+                        home.addAndShowPanel(createPublication, "createPublication");
+                });
 
                 javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
                 jPanel1.setLayout(jPanel1Layout);

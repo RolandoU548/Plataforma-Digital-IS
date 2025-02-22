@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.plataforma_digital.entities.*;
 
@@ -49,7 +51,11 @@ public class DatabaseConnection {
     // Crear Tablas
     public void createTables() {
         executeStatement(
-                "CREATE TABLE IF NOT EXISTS users (id integer PRIMARY KEY AUTOINCREMENT, email text UNIQUE NOT NULL, first_name text NOT NULL, last_name text NOT NULL, role text CHECK (role IN('Student','Professor','Administrative Staff')) NOT NULL, password text NOT NULL);");
+                "CREATE TABLE IF NOT EXISTS users (id integer PRIMARY KEY AUTOINCREMENT, username text UNIQUE NOT NULL, first_name text NOT NULL, last_name text NOT NULL, role text CHECK (role IN('Student','Professor','Support Personal')) NOT NULL, password text NOT NULL);");
+        executeStatement(
+                "CREATE TABLE IF NOT EXISTS publications (id integer PRIMARY KEY AUTOINCREMENT, user_id integer NOT NULL references users (id), title text NOT NULL, description text, state text CHECK(state IN ('approved', 'rejected', 'in moderation')) NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);");
+        executeStatement(
+                "CREATE TABLE IF NOT EXISTS comments (id integer PRIMARY KEY AUTOINCREMENT, user_id integer NOT NULL references users (id), publication_id integer NOT NULL references publications (id),text text NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);");
     }
 
     // Ejecutar Consultas a la base de datos
@@ -204,5 +210,137 @@ public class DatabaseConnection {
             System.out.println(e.getMessage());
         }
         return user;
+    }
+
+    // Métodos CRUD para la tabla publications
+    public void createPublication(Publication publication) {
+        String sql = "INSERT INTO publications (user_id, title, description, state) VALUES (?, ?, ?, ?)";
+        int generatedId = executePreparedStatementWithGeneratedKeys(sql, String.valueOf(publication.getUserId()),
+                publication.getTitle(),
+                publication.getDescription(), publication.getState());
+        if (generatedId != -1) {
+            publication.setId(generatedId);
+        }
+    }
+
+    public Publication getPublicationById(int id) {
+        String sql = "SELECT * FROM publications WHERE id = ?";
+        Publication publication = null;
+        try (ResultSet rs = executePreparedSelectStatement(sql, String.valueOf(id))) {
+            if (rs != null && rs.next()) {
+                publication = new Publication(rs.getInt("id"), rs.getInt("user_id"), rs.getString("title"),
+                        rs.getString("description"), rs.getString("state"), rs.getString("created_at"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return publication;
+    }
+
+    public List<Publication> getAllPublications() {
+        String sql = "SELECT * FROM publications";
+        List<Publication> publications = new ArrayList<>();
+        try (ResultSet rs = executeSelectStatement(sql)) {
+            while (rs != null && rs.next()) {
+                Publication publication = new Publication(rs.getInt("id"), rs.getInt("user_id"), rs.getString("title"),
+                        rs.getString("description"), rs.getString("state"), rs.getString("created_at"));
+                publications.add(publication);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return publications;
+    }
+
+    public List<Publication> getAllPublicationsByState(String state) {
+        String sql = "SELECT * FROM publications WHERE state = ?";
+        List<Publication> publications = new ArrayList<>();
+        try (ResultSet rs = executePreparedSelectStatement(sql, state)) {
+            while (rs != null && rs.next()) {
+                Publication publication = new Publication(rs.getInt("id"), rs.getInt("user_id"), rs.getString("title"),
+                        rs.getString("description"), rs.getString("state"), rs.getString("created_at"));
+                publications.add(publication);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return publications;
+    }
+
+    public List<Publication> getAllPublicationsByUserId(int userId) {
+        String sql = "SELECT * FROM publications WHERE user_id = ?";
+        List<Publication> publications = new ArrayList<>();
+        try (ResultSet rs = executePreparedSelectStatement(sql, String.valueOf(userId))) {
+            while (rs != null && rs.next()) {
+                Publication publication = new Publication(rs.getInt("id"), rs.getInt("user_id"), rs.getString("title"),
+                        rs.getString("description"), rs.getString("state"), rs.getString("created_at"));
+                publications.add(publication);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return publications;
+    }
+
+    public void updatePublication(Publication publication) {
+        String sql = "UPDATE publications SET title = ?, description = ?, state = ? WHERE id = ?";
+        executePreparedStatement(sql, publication.getTitle(), publication.getDescription(), publication.getState(),
+                String.valueOf(publication.getId()));
+    }
+
+    public void deletePublicationById(int id) {
+        String sql = "DELETE FROM publications WHERE id = ?";
+        executePreparedStatement(sql, String.valueOf(id));
+    }
+
+    // Métodos CRUD para la tabla comments
+    public void createComment(Comment comment) {
+        String sql = "INSERT INTO comments (user_id, publication_id, text) VALUES (?, ?, ?)";
+        int generatedId = executePreparedStatementWithGeneratedKeys(sql, String.valueOf(comment.getUserId()),
+                String.valueOf(comment.getPublicationId()), comment.getText());
+        if (generatedId != -1) {
+            comment.setId(generatedId);
+        }
+    }
+
+    public Comment getCommentById(int id) {
+        String sql = "SELECT * FROM comments WHERE id = ?";
+        Comment comment = null;
+        try (ResultSet rs = executePreparedSelectStatement(sql, String.valueOf(id))) {
+            if (rs != null && rs.next()) {
+                comment = new Comment(rs.getInt("id"), rs.getInt("user_id"), rs.getInt("publication_id"),
+                        rs.getString("text"), rs.getString("created_at"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return comment;
+    }
+
+    public List<Comment> getAllCommentsByPublicationId(int publicationId) {
+        String sql = "SELECT * FROM comments WHERE publication_id = ?";
+        List<Comment> comments = new ArrayList<>();
+        try (ResultSet rs = executePreparedSelectStatement(sql, String.valueOf(publicationId))) {
+            while (rs != null && rs.next()) {
+                Comment comment = new Comment(rs.getInt("id"), rs.getInt("user_id"), rs.getInt("publication_id"),
+                        rs.getString("text"),
+                        rs.getString("created_at"));
+                comments.add(comment);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return comments;
+    }
+
+    public void updateComment(Comment comment) {
+        String sql = "UPDATE comments SET text = ? WHERE id = ?";
+        executePreparedStatement(sql, comment.getText(),
+                String.valueOf(comment.getId()));
+    }
+
+    public void deleteCommentById(int id) {
+        String sql = "DELETE FROM comments WHERE id = ?";
+        executePreparedStatement(sql, String.valueOf(id));
     }
 }

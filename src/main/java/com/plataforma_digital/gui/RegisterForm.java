@@ -3,6 +3,8 @@ package com.plataforma_digital.gui;
 import com.plataforma_digital.database.DatabaseConnection;
 import com.plataforma_digital.entities.User;
 
+import java.awt.Color;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -67,25 +69,25 @@ public class RegisterForm extends JPanel {
                 passwordLabel.setFont(new java.awt.Font("Segoe UI", 1, 14));
                 passwordLabel.setText("Contraseña");
 
-                firstNameTextField.setForeground(new java.awt.Color(102, 102, 102));
+                firstNameTextField.setForeground(new Color(102, 102, 102));
 
-                lastNameTextField.setForeground(new java.awt.Color(102, 102, 102));
+                lastNameTextField.setForeground(new Color(102, 102, 102));
                 lastNameTextField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
-                roleTextField.setForeground(new java.awt.Color(102, 102, 102));
+                roleTextField.setForeground(new Color(102, 102, 102));
                 roleTextField.setModel(new javax.swing.DefaultComboBoxModel<>(
                                 new String[] { "Estudiante", "Profesor", "Personal administrativo" }));
 
-                emailTextField.setForeground(new java.awt.Color(102, 102, 102));
+                emailTextField.setForeground(new Color(102, 102, 102));
 
-                passwordTextField.setForeground(new java.awt.Color(102, 102, 102));
+                passwordTextField.setForeground(new Color(102, 102, 102));
 
                 CheckBoxAcceptTerms.setFont(new java.awt.Font("Segoe UI", 0, 14));
                 CheckBoxAcceptTerms.setText("Aceptar términos y condiciones");
 
-                registerButton.setBackground(new java.awt.Color(51, 51, 51));
+                registerButton.setBackground(Color.BLACK);
                 registerButton.setFont(new java.awt.Font("Segoe UI", 1, 14));
-                registerButton.setForeground(new java.awt.Color(255, 255, 255));
+                registerButton.setForeground(new Color(255, 255, 255));
                 registerButton.setText("Registrarase");
                 registerButton.setBorderPainted(false);
                 registerButton.addActionListener(e -> {
@@ -95,7 +97,7 @@ public class RegisterForm extends JPanel {
                         }
                 });
 
-                loginButton.setBackground(new java.awt.Color(242, 242, 242));
+                loginButton.setBackground(new Color(242, 242, 242));
                 loginButton.setFont(new java.awt.Font("Segoe UI", 2, 14));
                 loginButton.setText("¿Estás registrado? Iniciar sesión");
                 loginButton.setBorderPainted(false);
@@ -201,6 +203,7 @@ public class RegisterForm extends JPanel {
                 lastNameTextField.setText("");
                 roleTextField.setSelectedIndex(0);
                 passwordTextField.setText("");
+                CheckBoxAcceptTerms.setSelected(false);
         }
 
         private boolean validateFields() {
@@ -245,7 +248,7 @@ public class RegisterForm extends JPanel {
                 DatabaseConnection.getInstance().createUser(user);
                 System.out.println("User registered with ID: " + user.getId());
                 JOptionPane.showMessageDialog(null,
-                                "Usuario '" + email + "' registrado exitosamente, por favor inicia sesión",
+                                "Usuario '" + email + "' registrado exitosamente. Por favor inicia sesión",
                                 "Usuario registrado",
                                 JOptionPane.INFORMATION_MESSAGE);
                 appUI.showPanel("loginForm");
