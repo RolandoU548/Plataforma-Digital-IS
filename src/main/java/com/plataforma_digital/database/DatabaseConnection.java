@@ -56,6 +56,8 @@ public class DatabaseConnection {
                 "CREATE TABLE IF NOT EXISTS publications (id integer PRIMARY KEY AUTOINCREMENT, user_id integer NOT NULL references users (id), title text NOT NULL, description text, state text CHECK(state IN ('approved', 'rejected', 'in moderation')) NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);");
         executeStatement(
                 "CREATE TABLE IF NOT EXISTS comments (id integer PRIMARY KEY AUTOINCREMENT, user_id integer NOT NULL references users (id), publication_id integer NOT NULL references publications (id),text text NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);");
+        executeStatement(
+                "CREATE TABLE IF NOT EXISTS events (id integer PRIMARY KEY AUTOINCREMENT, user_id integer NOT NULL references users (id), title text NOT NULL, description text, state text CHECK(state IN ('approved', 'rejected', 'in moderation')) NOT NULL, start_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP), end_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP), location text NOT NULL ;");
     }
 
     // Ejecutar Consultas a la base de datos
@@ -290,6 +292,97 @@ public class DatabaseConnection {
 
     public void deletePublicationById(int id) {
         String sql = "DELETE FROM publications WHERE id = ?";
+        executePreparedStatement(sql, String.valueOf(id));
+    }
+
+    // Métodos CRUD para la tabla events
+    public void createEvent(Event event) {
+        String sql = "INSERT INTO events (user_id, title, description, state, start_date, end_date, location) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        int generatedId = executePreparedStatementWithGeneratedKeys(sql, String.valueOf(event.getUserId()),
+                event.getTitle(),
+                event.getDescription(), event.getState(), event.getStartDate(), event.getEndDate(),
+                event.getLocation());
+        if (generatedId != -1) {
+            event.setId(generatedId);
+        }
+    }
+
+    public Event getEventById(int id) {
+        String sql = "SELECT * FROM events WHERE id = ?";
+        Event event = null;
+        try (ResultSet rs = executePreparedSelectStatement(sql, String.valueOf(id))) {
+            if (rs != null && rs.next()) {
+                event = new Event(rs.getInt("id"), rs.getInt("user_id"), rs.getString("title"),
+                        rs.getString("description"), rs.getString("state"), rs.getString("created_at"),
+                        rs.getString("start_date"),
+                        rs.getString("end_date"), rs.getString("location"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return event;
+    }
+
+    public List<Event> getAllEvents() {
+        String sql = "SELECT * FROM events";
+        List<Event> events = new ArrayList<>();
+        try (ResultSet rs = executeSelectStatement(sql)) {
+            while (rs != null && rs.next()) {
+                Event event = new Event(rs.getInt("id"), rs.getInt("user_id"), rs.getString("title"),
+                        rs.getString("description"), rs.getString("state"), rs.getString("created_at"),
+                        rs.getString("start_date"),
+                        rs.getString("end_date"), rs.getString("location"));
+                events.add(event);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return events;
+    }
+
+    public List<Event> getAllEventsByState(String state) {
+        String sql = "SELECT * FROM events WHERE state = ?";
+        List<Event> events = new ArrayList<>();
+        try (ResultSet rs = executePreparedSelectStatement(sql, state)) {
+            while (rs != null && rs.next()) {
+                Event event = new Event(rs.getInt("id"), rs.getInt("user_id"), rs.getString("title"),
+                        rs.getString("description"), rs.getString("state"), rs.getString("created_at"),
+                        rs.getString("start_date"),
+                        rs.getString("end_date"), rs.getString("location"));
+                events.add(event);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return events;
+    }
+
+    public List<Event> getAllEventsByUserId(int userId) {
+        String sql = "SELECT * FROM events WHERE user_id = ?";
+        List<Event> events = new ArrayList<>();
+        try (ResultSet rs = executePreparedSelectStatement(sql, String.valueOf(userId))) {
+            while (rs != null && rs.next()) {
+                Event event = new Event(rs.getInt("id"), rs.getInt("user_id"), rs.getString("title"),
+                        rs.getString("description"), rs.getString("state"), rs.getString("created_at"),
+                        rs.getString("start_date"),
+                        rs.getString("end_date"), rs.getString("location"));
+                events.add(event);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return events;
+    }
+
+    public void updateEvent(Event event) {
+        String sql = "UPDATE events SET title = ?, description = ?, state = ?, start_date = ?, end_date = ?, location = ? WHERE id = ?";
+        executePreparedStatement(sql, event.getTitle(), event.getDescription(), event.getState(), event.getStartDate(),
+                event.getEndDate(), event.getLocation(),
+                String.valueOf(event.getId()));
+    }
+
+    public void deleteEventById(int id) {
+        String sql = "DELETE FROM events WHERE id = ?";
         executePreparedStatement(sql, String.valueOf(id));
     }
 
