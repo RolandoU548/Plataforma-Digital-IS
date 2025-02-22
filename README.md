@@ -77,7 +77,7 @@ El **Equipo de Trabajo** está conformado por:
     <h4 style="text-decoration:underline">
     Diagrama de Clases UC7
     </h4>
-    <img src="docs/logicalView/designView/DiagramClass.jpg" alt="Diagrama-Clases" style="border-radius:5px">
+    <img src="docs/logicalView/designView/DiagramClass.png" alt="Diagrama-Clases" style="border-radius:5px">
   </div>
   <div align="center">
     <h4 style="text-decoration:underline">
@@ -98,6 +98,6 @@ El **Equipo de Trabajo** está conformado por:
     <h4 style="text-decoration:underline">
     Diagrama de Despliegue
     </h4>
-    <img src="docs/physicalView/DiagramDeployment.jpg" alt="Diagrama-Clases" style="border-radius:5px">
+    <img src="docs/physicalView/DiagramDeployment.png" alt="Diagrama-Clases" style="border-radius:5px">
   </div>
 </section>
