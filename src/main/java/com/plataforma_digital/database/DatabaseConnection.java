@@ -51,13 +51,13 @@ public class DatabaseConnection {
     // Crear Tablas
     public void createTables() {
         executeStatement(
-                "CREATE TABLE IF NOT EXISTS users (id integer PRIMARY KEY AUTOINCREMENT, username text UNIQUE NOT NULL, first_name text NOT NULL, last_name text NOT NULL, role text CHECK (role IN('Student','Professor','Support Personal')) NOT NULL, password text NOT NULL);");
+                "CREATE TABLE IF NOT EXISTS users (id integer PRIMARY KEY AUTOINCREMENT, email text UNIQUE NOT NULL, first_name text NOT NULL, last_name text NOT NULL, role text CHECK (role IN('Student','Professor','Support Personal')) NOT NULL, password text NOT NULL);");
         executeStatement(
                 "CREATE TABLE IF NOT EXISTS publications (id integer PRIMARY KEY AUTOINCREMENT, user_id integer NOT NULL references users (id), title text NOT NULL, description text, state text CHECK(state IN ('approved', 'rejected', 'in moderation')) NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);");
         executeStatement(
                 "CREATE TABLE IF NOT EXISTS comments (id integer PRIMARY KEY AUTOINCREMENT, user_id integer NOT NULL references users (id), publication_id integer NOT NULL references publications (id),text text NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);");
         executeStatement(
-                "CREATE TABLE IF NOT EXISTS events (id integer PRIMARY KEY AUTOINCREMENT, user_id integer NOT NULL references users (id), title text NOT NULL, description text, state text CHECK(state IN ('approved', 'rejected', 'in moderation')) NOT NULL, start_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP), end_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP), location text NOT NULL ;");
+                "CREATE TABLE IF NOT EXISTS events (id integer PRIMARY KEY AUTOINCREMENT, user_id integer NOT NULL references users (id), title text NOT NULL, description text, state text CHECK(state IN ('approved', 'rejected', 'in moderation')) NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, start_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, end_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, location text NOT NULL);");
     }
 
     // Ejecutar Consultas a la base de datos

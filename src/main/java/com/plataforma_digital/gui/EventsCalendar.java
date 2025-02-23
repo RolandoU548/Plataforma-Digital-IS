@@ -15,31 +15,36 @@ import java.awt.Color;
 import java.awt.BorderLayout;
 import java.util.Date;
 import com.plataforma_digital.database.DatabaseConnection;
-import com.plataforma_digital.entities.Publication;
+import com.plataforma_digital.entities.Event;
 
-public class PublicationsCalendar extends JPanel {
+public class EventsCalendar extends JPanel {
     public Home home;
     private JLabel monthLabel;
     private JPanel daysPanel;
     private Calendar calendar;
     private List<Date> highlightedDates;
 
-    public PublicationsCalendar(Home home) {
+    public EventsCalendar(Home home) {
         this.home = home;
+        highlightedDates = getHighlightedDates();
+        initComponents();
+    }
+
+    public List<Date> getHighlightedDates() {
         highlightedDates = new ArrayList<>();
-        List<Publication> publications = DatabaseConnection.getInstance().getAllPublicationsByState("approved");
-        SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        List<Event> events = DatabaseConnection.getInstance().getAllEventsByState("approved");
+        SimpleDateFormat originalFormat = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat targetFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            for (Publication publication : publications) {
-                Date date = originalFormat.parse(publication.getCreatedAt());
+            for (Event event : events) {
+                Date date = originalFormat.parse(event.getStartDate());
                 String formattedDate = targetFormat.format(date);
                 highlightedDates.add(targetFormat.parse(formattedDate));
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        initComponents();
+        return highlightedDates;
     }
 
     private void updateCalendar() {

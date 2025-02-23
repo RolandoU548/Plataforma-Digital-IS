@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import com.plataforma_digital.config.Colors;
 import com.plataforma_digital.database.DatabaseConnection;
 import com.plataforma_digital.entities.User;
 import com.plataforma_digital.entities.CurrentUser;
@@ -54,7 +55,7 @@ public class LoginForm extends JPanel {
 
                 loginButton.setBackground(Color.BLACK);
                 loginButton.setFont(new java.awt.Font("Segoe UI", 1, 14));
-                loginButton.setForeground(new Color(255, 255, 255));
+                loginButton.setForeground(Color.WHITE);
                 loginButton.setText("Iniciar sesión");
                 loginButton.setBorderPainted(false);
                 loginButton.addActionListener(e -> {
@@ -64,12 +65,12 @@ public class LoginForm extends JPanel {
                         }
                 });
 
-                forgottenPasswordButton.setBackground(new Color(242, 242, 242));
+                forgottenPasswordButton.setBackground(Colors.BACKGROUND_COLOR);
                 forgottenPasswordButton.setFont(new java.awt.Font("Segoe UI", 2, 14));
                 forgottenPasswordButton.setText("¿Olvidaste tu contraseña?");
                 forgottenPasswordButton.setBorderPainted(false);
 
-                registerButton.setBackground(new Color(242, 242, 242));
+                registerButton.setBackground(Colors.BACKGROUND_COLOR);
                 registerButton.setFont(new java.awt.Font("Segoe UI", 2, 14));
                 registerButton.setText("¿No estás registrado? Regístrate");
                 registerButton.setBorderPainted(false);
@@ -178,7 +179,7 @@ public class LoginForm extends JPanel {
                 CurrentUser.setCurrentUser(user);
                 appUI.home.editProfile.updateCurrentUserInfo();
                 appUI.showPanel("home");
-                System.out.println("User " + email + " logged in");
+                System.out.println("User \"" + email + "\" logged in");
                 JOptionPane.showMessageDialog(null, "Bienvenido, " + email + "!", "Bienvenido",
                                 JOptionPane.INFORMATION_MESSAGE);
         }

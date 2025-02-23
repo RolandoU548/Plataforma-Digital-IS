@@ -11,7 +11,7 @@ public class Event extends Publication {
         super(id, userId, title, description, state, createdAt);
         this.startDate = startDate;
         this.endDate = endDate;
-        this.endDate = location;
+        this.location = location;
     }
 
     // Getters

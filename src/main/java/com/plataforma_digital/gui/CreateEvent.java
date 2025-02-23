@@ -1,0 +1,423 @@
+package com.plataforma_digital.gui;
+
+import java.awt.Color;
+
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import com.plataforma_digital.config.Colors;
+import com.plataforma_digital.database.DatabaseConnection;
+import com.plataforma_digital.entities.CurrentUser;
+import com.plataforma_digital.entities.Event;
+import com.plataforma_digital.utils.DateUtils;
+
+public class CreateEvent extends JPanel {
+        Home home;
+        private javax.swing.JButton BottonFlechaeventos;
+        private javax.swing.JButton jButtonAGGimg;
+        private javax.swing.JButton jButtonCancelar;
+        private javax.swing.JButton jButtonCrearEvento;
+        private javax.swing.JButton jButtonMiseventos;
+        private javax.swing.JButton jButtonPublicarEvento;
+        private javax.swing.JButton jButtonbell;
+        private javax.swing.JButton jButtonseccion;
+        private javax.swing.JLabel jLabelCrearevento;
+        private javax.swing.JLabel jLabelDescripcion;
+        private javax.swing.JLabel jLabelEstado;
+        private javax.swing.JLabel jLabelFechaFin;
+        private javax.swing.JLabel jLabelFechainicio;
+        private javax.swing.JLabel jLabelLugar;
+        private javax.swing.JLabel jLabelTitulodelevento;
+        private javax.swing.JPanel jPanel1;
+        private javax.swing.JTextField jTextFieldDescripcion;
+        private javax.swing.JTextField jTextFieldFechaFin;
+        private javax.swing.JTextField jTextFieldFechainicio;
+        private javax.swing.JTextField jTextFieldLugar;
+        private javax.swing.JTextField jTextFieldTitulo;
+        private javax.swing.JComboBox<String> listadeEstados;
+
+        public CreateEvent(Home home) {
+                this.home = home;
+                initComponents();
+        }
+
+        private void initComponents() {
+                jPanel1 = new javax.swing.JPanel();
+                BottonFlechaeventos = new javax.swing.JButton();
+                jButtonCrearEvento = new javax.swing.JButton();
+                jButtonMiseventos = new javax.swing.JButton();
+                jLabelCrearevento = new javax.swing.JLabel();
+                jLabelTitulodelevento = new javax.swing.JLabel();
+                jLabelDescripcion = new javax.swing.JLabel();
+                jLabelLugar = new javax.swing.JLabel();
+                jLabelEstado = new javax.swing.JLabel();
+                jLabelFechainicio = new javax.swing.JLabel();
+                jLabelFechaFin = new javax.swing.JLabel();
+                jTextFieldTitulo = new javax.swing.JTextField();
+                jTextFieldDescripcion = new javax.swing.JTextField();
+                jTextFieldLugar = new javax.swing.JTextField();
+                jButtonCancelar = new javax.swing.JButton();
+                jButtonPublicarEvento = new javax.swing.JButton();
+                listadeEstados = new javax.swing.JComboBox<>();
+                jTextFieldFechainicio = new javax.swing.JTextField();
+                jTextFieldFechaFin = new javax.swing.JTextField();
+                jButtonbell = new javax.swing.JButton();
+                jButtonseccion = new javax.swing.JButton();
+                jButtonAGGimg = new javax.swing.JButton();
+
+                setFont(new java.awt.Font("Arial", 1, 18));
+                setPreferredSize(new java.awt.Dimension(740, 500));
+
+                jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+                BottonFlechaeventos.setBackground(Colors.BACKGROUND_COLOR);
+                BottonFlechaeventos.setFont(new java.awt.Font("Segoe UI", 1, 14));
+                BottonFlechaeventos.setIcon(new javax.swing.ImageIcon(
+                                getClass().getResource("/Arrow.png")));
+                BottonFlechaeventos.setText("  Evento");
+                BottonFlechaeventos.setBorderPainted(false);
+
+                jButtonCrearEvento.setBackground(Colors.BACKGROUND_COLOR);
+                jButtonCrearEvento.setFont(new java.awt.Font("Segoe UI", 1, 14));
+                jButtonCrearEvento.setIcon(new javax.swing.ImageIcon(
+                                getClass().getResource("/plain.png")));
+                jButtonCrearEvento.setText("Crear Evento");
+                jButtonCrearEvento.setBorderPainted(false);
+
+                jButtonMiseventos.setBackground(Colors.BACKGROUND_COLOR);
+                jButtonMiseventos.setFont(new java.awt.Font("Segoe UI", 1, 14));
+                jButtonMiseventos.setIcon(new javax.swing.ImageIcon(
+                                getClass().getResource("/folder.png")));
+                jButtonMiseventos.setText("Mis Eventos");
+                jButtonMiseventos.setBorderPainted(false);
+
+                javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+                jPanel1.setLayout(jPanel1Layout);
+                jPanel1Layout.setHorizontalGroup(
+                                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                                .addComponent(BottonFlechaeventos)
+                                                                .addGap(0, 0, Short.MAX_VALUE))
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                                .addContainerGap()
+                                                                .addGroup(jPanel1Layout.createParallelGroup(
+                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                .addComponent(jButtonCrearEvento)
+                                                                                .addComponent(jButtonMiseventos,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                173,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addContainerGap(15, Short.MAX_VALUE)));
+                jPanel1Layout.setVerticalGroup(
+                                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                                .addComponent(BottonFlechaeventos)
+                                                                .addPreferredGap(
+                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(jButtonCrearEvento,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                60,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(
+                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(jButtonMiseventos)
+                                                                .addGap(0, 0, Short.MAX_VALUE)));
+
+                jLabelCrearevento.setFont(new java.awt.Font("Segoe UI", 1, 30));
+                jLabelCrearevento.setText("Crear Evento");
+
+                jLabelTitulodelevento.setFont(new java.awt.Font("Segoe UI", 1, 14));
+                jLabelTitulodelevento.setText("Título del Evento");
+
+                jLabelDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 14));
+                jLabelDescripcion.setText("Descripción");
+
+                jLabelLugar.setFont(new java.awt.Font("Segoe UI", 1, 14));
+                jLabelLugar.setText("Lugar");
+
+                jLabelEstado.setFont(new java.awt.Font("Segoe UI", 1, 14));
+                jLabelEstado.setText("Estado");
+
+                jLabelFechainicio.setFont(new java.awt.Font("Segoe UI", 1, 14));
+                jLabelFechainicio.setText("Fecha de Inicio");
+
+                jLabelFechaFin.setFont(new java.awt.Font("Segoe UI", 1, 14));
+                jLabelFechaFin.setText("Fecha de Fin");
+
+                jTextFieldTitulo.setForeground(new Color(153, 153, 153));
+                jTextFieldTitulo.setText("Plecopteras");
+
+                jTextFieldDescripcion.setForeground(new Color(153, 153, 153));
+                jTextFieldDescripcion.setText("Cuerpo Lotidos de Plecopteras ");
+
+                jTextFieldLugar.setForeground(new Color(153, 153, 153));
+                jTextFieldLugar.setText("Plaza Langosta");
+
+                jButtonCancelar.setFont(new java.awt.Font("Segoe UI", 1, 14));
+                jButtonCancelar.setText("Cancelar");
+
+                jButtonPublicarEvento.setBackground(new Color(51, 51, 51));
+                jButtonPublicarEvento.setFont(new java.awt.Font("Segoe UI", 1, 14));
+                jButtonPublicarEvento.setForeground(new Color(255, 255, 255));
+                jButtonPublicarEvento.setText("Publicar Evento");
+                jButtonPublicarEvento.addActionListener(e -> {
+                        if (!validateFields()) {
+                                JOptionPane.showMessageDialog(null, "Todos los campos son requeridos",
+                                                "Campos requeridos",
+                                                JOptionPane.INFORMATION_MESSAGE);
+                                return;
+                        }
+                        if (!validateDates()) {
+                                JOptionPane.showMessageDialog(null,
+                                                "Formato de fechas incorrecto. Formato correcto: DD/MM/AAAA",
+                                                "Fechas incorrectas",
+                                                JOptionPane.ERROR_MESSAGE);
+                                return;
+                        }
+                        createEvent();
+                        clearFields();
+                });
+
+                listadeEstados.setForeground(new Color(153, 153, 153));
+                listadeEstados.setModel(new javax.swing.DefaultComboBoxModel<>(
+                                new String[] { "Proximamente", "Empezado", "Terminado." }));
+
+                jTextFieldFechainicio.setForeground(new Color(153, 153, 153));
+                jTextFieldFechainicio.setText("DD/MM/AAAA");
+
+                jTextFieldFechaFin.setForeground(new Color(153, 153, 153));
+                jTextFieldFechaFin.setText("DD/MM/AAAA");
+
+                jButtonbell.setBackground(Colors.BACKGROUND_COLOR);
+                jButtonbell.setIcon(new javax.swing.ImageIcon(
+                                getClass().getResource("/Bell3.png")));
+                jButtonbell.setBorderPainted(false);
+
+                jButtonseccion.setBackground(Colors.BACKGROUND_COLOR);
+                jButtonseccion.setIcon(new javax.swing.ImageIcon(
+                                getClass().getResource("/user2.png")));
+                jButtonseccion.setBorderPainted(false);
+
+                jButtonAGGimg.setBackground(Colors.BACKGROUND_COLOR);
+                jButtonAGGimg.setIcon(new javax.swing.ImageIcon(getClass()
+                                .getResource("/Agregarimagen (1).png")));
+                jButtonAGGimg.setText("Agregar Imagen");
+                jButtonAGGimg.setBorderPainted(false);
+
+                javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+                this.setLayout(layout);
+                layout.setHorizontalGroup(
+                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jPanel1,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                .addGroup(layout.createSequentialGroup()
+                                                                                                .addGap(8, 8, 8)
+                                                                                                .addGroup(layout.createParallelGroup(
+                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                                                .addGroup(layout.createSequentialGroup()
+                                                                                                                                .addGroup(layout.createParallelGroup(
+                                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                                                                                .addComponent(listadeEstados,
+                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                                                403,
+                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                .addGroup(layout.createSequentialGroup()
+                                                                                                                                                                .addGroup(layout.createParallelGroup(
+                                                                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                                                                                                                .addComponent(jTextFieldFechainicio,
+                                                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                                                                                135,
+                                                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                                .addComponent(jLabelFechainicio))
+                                                                                                                                                                .addGap(80, 80, 80)
+                                                                                                                                                                .addGroup(layout.createParallelGroup(
+                                                                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                                                                                                                .addComponent(jLabelFechaFin)
+                                                                                                                                                                                .addComponent(jTextFieldFechaFin,
+                                                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                                                                                135,
+                                                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                                                                                                .addGap(0, 0, Short.MAX_VALUE))
+                                                                                                                .addGroup(layout.createSequentialGroup()
+                                                                                                                                .addGroup(layout.createParallelGroup(
+                                                                                                                                                javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                                                                                                .addGroup(layout.createSequentialGroup()
+                                                                                                                                                                .addGroup(layout.createParallelGroup(
+                                                                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                                                                                                                .addComponent(jLabelCrearevento)
+                                                                                                                                                                                .addComponent(jLabelTitulodelevento))
+                                                                                                                                                                .addGap(29, 29, 29)
+                                                                                                                                                                .addComponent(jButtonAGGimg))
+                                                                                                                                                .addGroup(layout.createParallelGroup(
+                                                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                                                                                                .addComponent(jTextFieldTitulo,
+                                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                                                                403,
+                                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                                .addComponent(jLabelDescripcion)
+                                                                                                                                                                .addComponent(jLabelLugar)
+                                                                                                                                                                .addComponent(jLabelEstado)
+                                                                                                                                                                .addGroup(layout.createParallelGroup(
+                                                                                                                                                                                javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                                                                                                                                false)
+                                                                                                                                                                                .addComponent(jTextFieldDescripcion,
+                                                                                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                                                                                                                .addComponent(jTextFieldLugar,
+                                                                                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING,
+                                                                                                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                                                                                                403,
+                                                                                                                                                                                                Short.MAX_VALUE))))
+                                                                                                                                .addPreferredGap(
+                                                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                                                                                                                37,
+                                                                                                                                                Short.MAX_VALUE)
+                                                                                                                                .addComponent(jButtonbell)
+                                                                                                                                .addPreferredGap(
+                                                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                                                                                .addComponent(jButtonseccion)
+                                                                                                                                .addContainerGap())))
+                                                                                .addGroup(layout.createSequentialGroup()
+                                                                                                .addGap(73, 73, 73)
+                                                                                                .addComponent(jButtonCancelar)
+                                                                                                .addGap(101, 101, 101)
+                                                                                                .addComponent(jButtonPublicarEvento)
+                                                                                                .addGap(0, 0, Short.MAX_VALUE)))));
+                layout.setVerticalGroup(
+                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGroup(layout.createSequentialGroup()
+                                                                .addGroup(layout.createParallelGroup(
+                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                .addGroup(layout.createSequentialGroup()
+                                                                                                .addContainerGap(
+                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                Short.MAX_VALUE)
+                                                                                                .addGroup(layout.createParallelGroup(
+                                                                                                                javax.swing.GroupLayout.Alignment.LEADING,
+                                                                                                                false)
+                                                                                                                .addGroup(layout.createSequentialGroup()
+                                                                                                                                .addComponent(jButtonAGGimg)
+                                                                                                                                .addGap(12, 12, 12))
+                                                                                                                .addGroup(layout.createSequentialGroup()
+                                                                                                                                .addComponent(jLabelCrearevento)
+                                                                                                                                .addPreferredGap(
+                                                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                                                Short.MAX_VALUE)
+                                                                                                                                .addComponent(jLabelTitulodelevento)
+                                                                                                                                .addPreferredGap(
+                                                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                                                                                .addComponent(jTextFieldTitulo,
+                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                28,
+                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                .addPreferredGap(
+                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                                                                .addGroup(layout.createSequentialGroup()
+                                                                                                .addContainerGap()
+                                                                                                .addGroup(layout.createParallelGroup(
+                                                                                                                javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                                                                .addComponent(jButtonseccion,
+                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                32,
+                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                                .addComponent(jButtonbell,
+                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                34,
+                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                                                .addPreferredGap(
+                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                Short.MAX_VALUE)))
+                                                                .addComponent(jLabelDescripcion)
+                                                                .addPreferredGap(
+                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(jTextFieldDescripcion,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                28,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(12, 12, 12)
+                                                                .addComponent(jLabelLugar)
+                                                                .addPreferredGap(
+                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(jTextFieldLugar,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                28,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(
+                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(jLabelEstado)
+                                                                .addPreferredGap(
+                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(listadeEstados,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                30,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(18, 18, 18)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                                javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                                .addComponent(jLabelFechainicio)
+                                                                                .addComponent(jLabelFechaFin))
+                                                                .addPreferredGap(
+                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                                javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                                .addComponent(jTextFieldFechainicio,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                28,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(jTextFieldFechaFin,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                28,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addGap(34, 34, 34)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                                javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                                .addComponent(jButtonCancelar)
+                                                                                .addComponent(jButtonPublicarEvento))
+                                                                .addGap(39, 39, 39)));
+        }
+
+        private void clearFields() {
+                jTextFieldTitulo.setText("");
+                jTextFieldDescripcion.setText("");
+                jTextFieldFechaFin.setText("");
+                jTextFieldFechainicio.setText("");
+                jTextFieldLugar.setText("");
+                listadeEstados.setSelectedIndex(0);
+        }
+
+        private boolean validateFields() {
+                if (jTextFieldTitulo.getText().isEmpty() || jTextFieldDescripcion.getText().isEmpty()
+                                || jTextFieldFechaFin.getText().isEmpty()
+                                || jTextFieldFechainicio.getText().isEmpty()
+                                || jTextFieldLugar.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Todos los campos son requeridos", "Campos requeridos",
+                                        JOptionPane.INFORMATION_MESSAGE);
+                        return false;
+                }
+                return true;
+        }
+
+        private boolean validateDates() {
+                return DateUtils.validateDate(jTextFieldFechainicio.getText())
+                                && DateUtils.validateDate(jTextFieldFechaFin.getText());
+        }
+
+        private void createEvent() {
+                Event newEvent = new Event(0, CurrentUser.getCurrentUser().getId(),
+                                jTextFieldTitulo.getText(),
+                                jTextFieldDescripcion.getText(), "in moderation", null, jTextFieldFechainicio.getText(),
+                                jTextFieldFechaFin.getText(),
+                                jTextFieldLugar.getText());
+                DatabaseConnection.getInstance().createEvent(newEvent);
+                JOptionPane.showMessageDialog(null, "Has creado un evento", "Evento creado",
+                                JOptionPane.INFORMATION_MESSAGE);
+        }
+}

@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
 
+import com.plataforma_digital.config.Colors;
 import com.plataforma_digital.database.DatabaseConnection;
 import com.plataforma_digital.entities.CurrentUser;
 import com.plataforma_digital.entities.User;
@@ -66,7 +67,7 @@ public class EditProfile extends JPanel {
 
                 jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-                configButton.setBackground(new Color(242, 242, 242));
+                configButton.setBackground(Colors.BACKGROUND_COLOR);
                 configButton.setFont(new java.awt.Font("Segoe UI", 1, 14));
                 configButton
                                 .setIcon(new javax.swing.ImageIcon(
@@ -74,7 +75,7 @@ public class EditProfile extends JPanel {
                 configButton.setText(" Configuración");
                 configButton.setBorderPainted(false);
 
-                editProfileButton.setBackground(new Color(242, 242, 242));
+                editProfileButton.setBackground(Colors.BACKGROUND_COLOR);
                 editProfileButton.setFont(new java.awt.Font("Segoe UI", 1, 14));
                 editProfileButton
                                 .setIcon(new javax.swing.ImageIcon(
@@ -82,7 +83,7 @@ public class EditProfile extends JPanel {
                 editProfileButton.setText(" Editar perfil");
                 editProfileButton.setBorderPainted(false);
 
-                notificationsButton.setBackground(new Color(242, 242, 242));
+                notificationsButton.setBackground(Colors.BACKGROUND_COLOR);
                 notificationsButton.setFont(new java.awt.Font("Segoe UI", 1, 14));
                 notificationsButton
                                 .setIcon(new javax.swing.ImageIcon(
@@ -90,7 +91,7 @@ public class EditProfile extends JPanel {
                 notificationsButton.setText("  Notificaciones");
                 notificationsButton.setBorderPainted(false);
 
-                securityButton.setBackground(new Color(242, 242, 242));
+                securityButton.setBackground(Colors.BACKGROUND_COLOR);
                 securityButton.setFont(new java.awt.Font("Segoe UI", 1, 14));
                 securityButton
                                 .setIcon(new javax.swing.ImageIcon(
@@ -166,7 +167,7 @@ public class EditProfile extends JPanel {
 
                 saveProfileButton.setBackground(Color.BLACK);
                 saveProfileButton.setFont(new java.awt.Font("Segoe UI", 1, 14));
-                saveProfileButton.setForeground(new Color(255, 255, 255));
+                saveProfileButton.setForeground(Color.WHITE);
                 saveProfileButton.setText("Guardar");
 
                 javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);

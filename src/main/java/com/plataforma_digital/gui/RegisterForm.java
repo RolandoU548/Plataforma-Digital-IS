@@ -1,5 +1,6 @@
 package com.plataforma_digital.gui;
 
+import com.plataforma_digital.config.Colors;
 import com.plataforma_digital.database.DatabaseConnection;
 import com.plataforma_digital.entities.User;
 
@@ -97,7 +98,7 @@ public class RegisterForm extends JPanel {
                         }
                 });
 
-                loginButton.setBackground(new Color(242, 242, 242));
+                loginButton.setBackground(Colors.BACKGROUND_COLOR);
                 loginButton.setFont(new java.awt.Font("Segoe UI", 2, 14));
                 loginButton.setText("¿Estás registrado? Iniciar sesión");
                 loginButton.setBorderPainted(false);

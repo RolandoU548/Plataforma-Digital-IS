@@ -11,6 +11,7 @@ public class Navigation extends JPanel {
         private javax.swing.JButton ButtonCalendar;
         private javax.swing.JButton ButtonEye;
         private javax.swing.JButton ButtonHome;
+        private javax.swing.JButton ButtonEvent;
         private javax.swing.JPanel jPanel1;
 
         public Navigation(Home home) {
@@ -24,6 +25,7 @@ public class Navigation extends JPanel {
                 ButtonBell = new javax.swing.JButton();
                 ButtonCalendar = new javax.swing.JButton();
                 ButtonEye = new javax.swing.JButton();
+                ButtonEvent = new javax.swing.JButton();
                 ButtonAdd = new javax.swing.JButton();
 
                 jPanel1.setBackground(Color.BLACK);
@@ -33,27 +35,22 @@ public class Navigation extends JPanel {
                                 getClass().getResource("/Home.png")));
                 ButtonHome.setBorderPainted(false);
                 ButtonHome.addActionListener(e -> {
-                        EditProfile editProfile = new EditProfile(home);
-                        home.editProfile = editProfile;
-                        home.addAndShowPanel(editProfile, "editProfile");
+                        ViewAllPublications viewAllPublications = new ViewAllPublications(home);
+                        home.viewAllPublications = viewAllPublications;
+                        home.addAndShowPanel(viewAllPublications, "viewAllPublications");
                 });
 
                 ButtonBell.setBackground(Color.BLACK);
                 ButtonBell.setIcon(new javax.swing.ImageIcon(
                                 getClass().getResource("/Bell1.png")));
                 ButtonBell.setBorderPainted(false);
-                ButtonBell.addActionListener(e -> {
-                        Moderation moderation = new Moderation(home);
-                        home.moderation = moderation;
-                        home.addAndShowPanel(moderation, "moderation");
-                });
 
                 ButtonCalendar.setBackground(Color.BLACK);
                 ButtonCalendar.setIcon(new javax.swing.ImageIcon(
                                 getClass().getResource("/Calendar.png")));
                 ButtonCalendar.setBorderPainted(false);
                 ButtonCalendar.addActionListener(e -> {
-                        PublicationsCalendar calendar = new PublicationsCalendar(home);
+                        EventsCalendar calendar = new EventsCalendar(home);
                         home.calendar = calendar;
                         home.addAndShowPanel(calendar, "calendar");
                 });
@@ -64,9 +61,20 @@ public class Navigation extends JPanel {
                                                 getClass().getResource("/Eye.png")));
                 ButtonEye.setBorderPainted(false);
                 ButtonEye.addActionListener(e -> {
-                        ViewAllPublications viewAllPublications = new ViewAllPublications(home);
-                        home.viewAllPublications = viewAllPublications;
-                        home.addAndShowPanel(viewAllPublications, "viewAllPublications");
+                        Moderation moderation = new Moderation(home);
+                        home.moderation = moderation;
+                        home.addAndShowPanel(moderation, "moderation");
+                });
+
+                ButtonEvent.setBackground(Color.BLACK);
+                ButtonEvent.setIcon(
+                                new javax.swing.ImageIcon(
+                                                getClass().getResource("/Eye.png")));
+                ButtonEvent.setBorderPainted(false);
+                ButtonEvent.addActionListener(e -> {
+                        CreateEvent createEvent = new CreateEvent(home);
+                        home.createEvent = createEvent;
+                        home.addAndShowPanel(createEvent, "createEvent");
                 });
 
                 ButtonAdd.setBackground(Color.BLACK);
@@ -104,6 +112,10 @@ public class Navigation extends JPanel {
                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                                 30,
                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(ButtonEvent,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                30,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                                 .addComponent(ButtonAdd,
                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                                 30,
@@ -129,6 +141,11 @@ public class Navigation extends JPanel {
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addGap(31, 31, 31)
                                                                 .addComponent(ButtonEye,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                30,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(31, 31, 31)
+                                                                .addComponent(ButtonEvent,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                 30,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
