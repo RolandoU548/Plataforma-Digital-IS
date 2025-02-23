@@ -101,3 +101,61 @@ El **Equipo de Trabajo** está conformado por:
     <img src="docs/physicalView/DiagramDeployment.png" alt="Diagrama-Clases" style="border-radius:5px">
   </div>
 </section>
+<section>
+  <h2 align="center" style="text-">Modelo de Implementación</h2>
+  <div align="center">
+    Este es un proyecto Java que utiliza Java Swing para la interfaz gráfica de usuario y SQLite para la base de datos. Está configurado utilizando Maven para la gestión de dependencias y la construcción del proyecto.
+
+<br>
+
+**Librerías Utilizadas:**
+
+- **JUnit**: Biblioteca para pruebas unitarias.
+
+  - Grupo: `junit`
+  - Artefacto: `junit`
+  - Versión: `3.8.1`
+
+- **SQLite JDBC**: Biblioteca para conectarse a la base de datos SQLite.
+
+  - Grupo: `org.xerial`
+  - Artefacto: `sqlite-jdbc`
+  - Versión: `3.36.0.3`
+
+<br>
+
+**Instrucciones para Ejecutar el Proyecto:**
+
+**Prerrequisitos**
+
+- Java 17 (JDK)
+- Apache Maven
+
+1. **Clona el repositorio:**
+
+   ```sh
+   git clone https://github.com/RolandoU548/Plataforma-Virtual.git
+   ```
+
+2. **Compila el proyecto con Maven:**
+
+   ```sh
+   mvn clean compile
+   ```
+
+3. **Ejecuta el proyecto con Maven:**
+
+   ```sh
+   mvn exec:java
+   ```
+
+Adicionalmente, se puede crear un archivo JAR con todas las dependencias. Para ello ejecuta el siguiente comando:
+
+```sh
+mvn package
+```
+
+El archivo JAR se encontrará en el directorio target con el nombre PlataformaDigital-1.0-SNAPSHOT-jar-with-dependencies.jar.
+
+  </div>
+</section>
