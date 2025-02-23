@@ -50,9 +50,9 @@ public class Navigation extends JPanel {
                                 getClass().getResource("/Calendar.png")));
                 ButtonCalendar.setBorderPainted(false);
                 ButtonCalendar.addActionListener(e -> {
-                        EventsCalendar calendar = new EventsCalendar(home);
-                        home.calendar = calendar;
-                        home.addAndShowPanel(calendar, "calendar");
+                        EventsCalendar eventsCalendar = new EventsCalendar(home);
+                        home.eventsCalendar = eventsCalendar;
+                        home.addAndShowPanel(eventsCalendar, "eventsCalendar");
                 });
 
                 ButtonEye.setBackground(Color.BLACK);

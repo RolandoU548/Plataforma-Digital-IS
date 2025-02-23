@@ -14,7 +14,8 @@ public class Home extends JPanel {
     public CreatePublication createPublication;
     public CreateEvent createEvent;
     public ViewAllPublications viewAllPublications;
-    public EventsCalendar calendar;
+    public ViewAllEvents viewAllEvents;
+    public EventsCalendar eventsCalendar;
     public Moderation moderation;
 
     public Home(AppUI appUI) {
@@ -28,7 +29,8 @@ public class Home extends JPanel {
         createPublication = new CreatePublication(this);
         createEvent = new CreateEvent(this);
         viewAllPublications = new ViewAllPublications(this);
-        calendar = new EventsCalendar(this);
+        viewAllEvents = new ViewAllEvents(this);
+        eventsCalendar = new EventsCalendar(this);
         moderation = new Moderation(this);
 
         cardLayout = new CardLayout();
@@ -36,12 +38,12 @@ public class Home extends JPanel {
         mainPanel.setLayout(cardLayout);
 
         addAndShowPanel(editProfile, "editProfile");
-        mainPanel.add(calendar, "calendar");
+        mainPanel.add(eventsCalendar, "eventsCalendar");
         mainPanel.add(createPublication, "createPublication");
         mainPanel.add(createEvent, "createEvent");
-        mainPanel.add(calendar, "calendar");
         mainPanel.add(moderation, "moderation");
         mainPanel.add(viewAllPublications, "viewAllPublications");
+        mainPanel.add(viewAllEvents, "viewAllEvents");
 
         setLayout(new BorderLayout());
         add(navigation, BorderLayout.WEST);

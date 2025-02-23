@@ -3,7 +3,6 @@ package com.plataforma_digital.gui;
 import java.awt.Color;
 
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import com.plataforma_digital.config.Colors;
 import com.plataforma_digital.database.DatabaseConnection;
@@ -11,8 +10,8 @@ import com.plataforma_digital.entities.CurrentUser;
 import com.plataforma_digital.entities.Event;
 import com.plataforma_digital.utils.DateUtils;
 
-public class CreateEvent extends JPanel {
-        Home home;
+public class CreateEvent extends javax.swing.JPanel {
+        private Home home;
         private javax.swing.JButton BottonFlechaeventos;
         private javax.swing.JButton jButtonAGGimg;
         private javax.swing.JButton jButtonCancelar;
@@ -42,6 +41,7 @@ public class CreateEvent extends JPanel {
         }
 
         private void initComponents() {
+
                 jPanel1 = new javax.swing.JPanel();
                 BottonFlechaeventos = new javax.swing.JButton();
                 jButtonCrearEvento = new javax.swing.JButton();
@@ -75,7 +75,11 @@ public class CreateEvent extends JPanel {
                 BottonFlechaeventos.setIcon(new javax.swing.ImageIcon(
                                 getClass().getResource("/Arrow.png")));
                 BottonFlechaeventos.setText("  Evento");
-                BottonFlechaeventos.setBorderPainted(false);
+                BottonFlechaeventos.addActionListener(e -> {
+                        EventsCalendar eventsCalendar = new EventsCalendar(home);
+                        home.eventsCalendar = eventsCalendar;
+                        home.addAndShowPanel(eventsCalendar, "eventsCalendar");
+                });
 
                 jButtonCrearEvento.setBackground(Colors.BACKGROUND_COLOR);
                 jButtonCrearEvento.setFont(new java.awt.Font("Segoe UI", 1, 14));
@@ -90,6 +94,11 @@ public class CreateEvent extends JPanel {
                                 getClass().getResource("/folder.png")));
                 jButtonMiseventos.setText("Mis Eventos");
                 jButtonMiseventos.setBorderPainted(false);
+                jButtonMiseventos.addActionListener(e -> {
+                        ViewAllEvents viewAllEvents = new ViewAllEvents(home);
+                        home.viewAllEvents = viewAllEvents;
+                        home.addAndShowPanel(viewAllEvents, "viewAllEvents");
+                });
 
                 javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
                 jPanel1.setLayout(jPanel1Layout);
@@ -121,7 +130,7 @@ public class CreateEvent extends JPanel {
                                                                 .addPreferredGap(
                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addComponent(jButtonMiseventos)
-                                                                .addGap(0, 0, Short.MAX_VALUE)));
+                                                                .addGap(0, 297, Short.MAX_VALUE)));
 
                 jLabelCrearevento.setFont(new java.awt.Font("Segoe UI", 1, 30));
                 jLabelCrearevento.setText("Crear Evento");
@@ -144,21 +153,21 @@ public class CreateEvent extends JPanel {
                 jLabelFechaFin.setFont(new java.awt.Font("Segoe UI", 1, 14));
                 jLabelFechaFin.setText("Fecha de Fin");
 
-                jTextFieldTitulo.setForeground(new Color(153, 153, 153));
+                jTextFieldTitulo.setForeground(new java.awt.Color(153, 153, 153));
                 jTextFieldTitulo.setText("Plecopteras");
 
-                jTextFieldDescripcion.setForeground(new Color(153, 153, 153));
+                jTextFieldDescripcion.setForeground(new java.awt.Color(153, 153, 153));
                 jTextFieldDescripcion.setText("Cuerpo Lotidos de Plecopteras ");
 
-                jTextFieldLugar.setForeground(new Color(153, 153, 153));
+                jTextFieldLugar.setForeground(new java.awt.Color(153, 153, 153));
                 jTextFieldLugar.setText("Plaza Langosta");
 
                 jButtonCancelar.setFont(new java.awt.Font("Segoe UI", 1, 14));
                 jButtonCancelar.setText("Cancelar");
 
-                jButtonPublicarEvento.setBackground(new Color(51, 51, 51));
+                jButtonPublicarEvento.setBackground(Color.BLACK);
                 jButtonPublicarEvento.setFont(new java.awt.Font("Segoe UI", 1, 14));
-                jButtonPublicarEvento.setForeground(new Color(255, 255, 255));
+                jButtonPublicarEvento.setForeground(new java.awt.Color(255, 255, 255));
                 jButtonPublicarEvento.setText("Publicar Evento");
                 jButtonPublicarEvento.addActionListener(e -> {
                         if (!validateFields()) {
@@ -178,14 +187,15 @@ public class CreateEvent extends JPanel {
                         clearFields();
                 });
 
-                listadeEstados.setForeground(new Color(153, 153, 153));
-                listadeEstados.setModel(new javax.swing.DefaultComboBoxModel<>(
-                                new String[] { "Proximamente", "Empezado", "Terminado." }));
+                listadeEstados.setForeground(new java.awt.Color(153, 153, 153));
+                listadeEstados.setModel(
+                                new javax.swing.DefaultComboBoxModel<>(
+                                                new String[] { "Proximamente", "Empezado", "Terminado." }));
 
-                jTextFieldFechainicio.setForeground(new Color(153, 153, 153));
+                jTextFieldFechainicio.setForeground(new java.awt.Color(153, 153, 153));
                 jTextFieldFechainicio.setText("DD/MM/AAAA");
 
-                jTextFieldFechaFin.setForeground(new Color(153, 153, 153));
+                jTextFieldFechaFin.setForeground(new java.awt.Color(153, 153, 153));
                 jTextFieldFechaFin.setText("DD/MM/AAAA");
 
                 jButtonbell.setBackground(Colors.BACKGROUND_COLOR);
@@ -199,8 +209,9 @@ public class CreateEvent extends JPanel {
                 jButtonseccion.setBorderPainted(false);
 
                 jButtonAGGimg.setBackground(Colors.BACKGROUND_COLOR);
-                jButtonAGGimg.setIcon(new javax.swing.ImageIcon(getClass()
-                                .getResource("/Agregarimagen (1).png")));
+                jButtonAGGimg.setFont(new java.awt.Font("Segoe UI", 0, 10));
+                jButtonAGGimg.setIcon(new javax.swing.ImageIcon(
+                                getClass().getResource("/Agregarimagen (1).png")));
                 jButtonAGGimg.setText("Agregar Imagen");
                 jButtonAGGimg.setBorderPainted(false);
 
@@ -216,133 +227,122 @@ public class CreateEvent extends JPanel {
                                                                 .addGroup(layout.createParallelGroup(
                                                                                 javax.swing.GroupLayout.Alignment.LEADING)
                                                                                 .addGroup(layout.createSequentialGroup()
-                                                                                                .addGap(8, 8, 8)
-                                                                                                .addGroup(layout.createParallelGroup(
-                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                                .addGroup(layout
+                                                                                                                .createParallelGroup(
+                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
                                                                                                                 .addGroup(layout.createSequentialGroup()
-                                                                                                                                .addGroup(layout.createParallelGroup(
-                                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
-                                                                                                                                                .addComponent(listadeEstados,
-                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                                                                403,
-                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                                                                                .addGroup(layout.createSequentialGroup()
-                                                                                                                                                                .addGroup(layout.createParallelGroup(
-                                                                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
-                                                                                                                                                                                .addComponent(jTextFieldFechainicio,
-                                                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                                                                                                135,
-                                                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                                                                                                                .addComponent(jLabelFechainicio))
-                                                                                                                                                                .addGap(80, 80, 80)
-                                                                                                                                                                .addGroup(layout.createParallelGroup(
-                                                                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
-                                                                                                                                                                                .addComponent(jLabelFechaFin)
-                                                                                                                                                                                .addComponent(jTextFieldFechaFin,
-                                                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                                                                                                135,
-                                                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                                                                                                                .addGap(0, 0, Short.MAX_VALUE))
+                                                                                                                                .addGap(8, 8, 8)
+                                                                                                                                .addComponent(jLabelTitulodelevento))
                                                                                                                 .addGroup(layout.createSequentialGroup()
-                                                                                                                                .addGroup(layout.createParallelGroup(
-                                                                                                                                                javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                                                                                                .addGroup(layout.createSequentialGroup()
-                                                                                                                                                                .addGroup(layout.createParallelGroup(
-                                                                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
-                                                                                                                                                                                .addComponent(jLabelCrearevento)
-                                                                                                                                                                                .addComponent(jLabelTitulodelevento))
-                                                                                                                                                                .addGap(29, 29, 29)
-                                                                                                                                                                .addComponent(jButtonAGGimg))
-                                                                                                                                                .addGroup(layout.createParallelGroup(
-                                                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
-                                                                                                                                                                .addComponent(jTextFieldTitulo,
-                                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                                                                                403,
-                                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                                                                                                .addComponent(jLabelDescripcion)
-                                                                                                                                                                .addComponent(jLabelLugar)
-                                                                                                                                                                .addComponent(jLabelEstado)
-                                                                                                                                                                .addGroup(layout.createParallelGroup(
-                                                                                                                                                                                javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                                                                                                                                false)
-                                                                                                                                                                                .addComponent(jTextFieldDescripcion,
-                                                                                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
-                                                                                                                                                                                .addComponent(jTextFieldLugar,
-                                                                                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING,
-                                                                                                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                                                                403,
-                                                                                                                                                                                                Short.MAX_VALUE))))
-                                                                                                                                .addPreferredGap(
-                                                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                                                                                                                                37,
-                                                                                                                                                Short.MAX_VALUE)
-                                                                                                                                .addComponent(jButtonbell)
                                                                                                                                 .addPreferredGap(
                                                                                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                                                                .addComponent(jButtonseccion)
-                                                                                                                                .addContainerGap())))
+                                                                                                                                .addComponent(jLabelCrearevento)))
+                                                                                                .addPreferredGap(
+                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                Short.MAX_VALUE)
+                                                                                                .addComponent(jButtonAGGimg)
+                                                                                                .addComponent(jButtonbell)
+                                                                                                .addComponent(jButtonseccion)
+                                                                                                .addContainerGap(
+                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                Short.MAX_VALUE))
                                                                                 .addGroup(layout.createSequentialGroup()
-                                                                                                .addGap(73, 73, 73)
-                                                                                                .addComponent(jButtonCancelar)
-                                                                                                .addGap(101, 101, 101)
-                                                                                                .addComponent(jButtonPublicarEvento)
+                                                                                                .addPreferredGap(
+                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                                                .addGroup(layout
+                                                                                                                .createParallelGroup(
+                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                                                .addComponent(jTextFieldTitulo,
+                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                403,
+                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                                .addComponent(jTextFieldDescripcion,
+                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                403,
+                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                                .addComponent(jLabelDescripcion)
+                                                                                                                .addComponent(jTextFieldLugar,
+                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                403,
+                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                                .addComponent(jLabelLugar)
+                                                                                                                .addComponent(jLabelEstado)
+                                                                                                                .addComponent(listadeEstados,
+                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                403,
+                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                                .addGroup(layout
+                                                                                                                                .createParallelGroup(
+                                                                                                                                                javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                                                                                .addComponent(jButtonCancelar)
+                                                                                                                                .addComponent(jTextFieldFechainicio,
+                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                                135,
+                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                                                                .addGroup(layout.createSequentialGroup()
+                                                                                                                                .addComponent(jLabelFechainicio)
+                                                                                                                                .addGap(120, 120,
+                                                                                                                                                120)
+                                                                                                                                .addGroup(layout.createParallelGroup(
+                                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                                                                                .addComponent(jLabelFechaFin)
+                                                                                                                                                .addComponent(jTextFieldFechaFin,
+                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                                                135,
+                                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                                                                .addGroup(layout.createSequentialGroup()
+                                                                                                                                                                .addGap(6, 6, 6)
+                                                                                                                                                                .addComponent(jButtonPublicarEvento)))))
                                                                                                 .addGap(0, 0, Short.MAX_VALUE)))));
                 layout.setVerticalGroup(
                                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addGroup(layout.createSequentialGroup()
+                                                                .addContainerGap(11, Short.MAX_VALUE)
                                                                 .addGroup(layout.createParallelGroup(
                                                                                 javax.swing.GroupLayout.Alignment.LEADING)
                                                                                 .addGroup(layout.createSequentialGroup()
-                                                                                                .addContainerGap(
+                                                                                                .addComponent(jLabelCrearevento)
+                                                                                                .addPreferredGap(
+                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED,
                                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                                                 Short.MAX_VALUE)
-                                                                                                .addGroup(layout.createParallelGroup(
-                                                                                                                javax.swing.GroupLayout.Alignment.LEADING,
-                                                                                                                false)
-                                                                                                                .addGroup(layout.createSequentialGroup()
-                                                                                                                                .addComponent(jButtonAGGimg)
-                                                                                                                                .addGap(12, 12, 12))
-                                                                                                                .addGroup(layout.createSequentialGroup()
-                                                                                                                                .addComponent(jLabelCrearevento)
-                                                                                                                                .addPreferredGap(
-                                                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                                                                                Short.MAX_VALUE)
-                                                                                                                                .addComponent(jLabelTitulodelevento)
-                                                                                                                                .addPreferredGap(
-                                                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                                                                                                .addComponent(jTextFieldTitulo,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                28,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                                .addPreferredGap(
-                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                                                                                .addComponent(jLabelTitulodelevento))
                                                                                 .addGroup(layout.createSequentialGroup()
-                                                                                                .addContainerGap()
-                                                                                                .addGroup(layout.createParallelGroup(
-                                                                                                                javax.swing.GroupLayout.Alignment.TRAILING)
-                                                                                                                .addComponent(jButtonseccion,
+                                                                                                .addGroup(layout
+                                                                                                                .createParallelGroup(
+                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                                                .addComponent(jButtonAGGimg,
                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                                32,
+                                                                                                                                77,
                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                                .addGroup(layout.createSequentialGroup()
+                                                                                                                                .addGap(2, 2, 2)
+                                                                                                                                .addComponent(jButtonseccion,
+                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                                                                32,
+                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
                                                                                                                 .addComponent(jButtonbell,
                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                                                                 34,
                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                                                .addPreferredGap(
-                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                                                Short.MAX_VALUE)))
-                                                                .addComponent(jLabelDescripcion)
+                                                                                                .addGap(0, 0, Short.MAX_VALUE)))
+                                                                .addPreferredGap(
+                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(jTextFieldTitulo,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                28,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addPreferredGap(
                                                                                 javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                .addComponent(jLabelDescripcion)
+                                                                .addGap(12, 12, 12)
                                                                 .addComponent(jTextFieldDescripcion,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                 28,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(12, 12, 12)
+                                                                .addPreferredGap(
+                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                                 .addComponent(jLabelLugar)
                                                                 .addPreferredGap(
                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -351,21 +351,22 @@ public class CreateEvent extends JPanel {
                                                                                 28,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addPreferredGap(
-                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addComponent(jLabelEstado)
                                                                 .addPreferredGap(
-                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                                 .addComponent(listadeEstados,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                 30,
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(18, 18, 18)
+                                                                .addPreferredGap(
+                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addGroup(layout.createParallelGroup(
                                                                                 javax.swing.GroupLayout.Alignment.BASELINE)
                                                                                 .addComponent(jLabelFechainicio)
                                                                                 .addComponent(jLabelFechaFin))
                                                                 .addPreferredGap(
-                                                                                javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                 .addGroup(layout.createParallelGroup(
                                                                                 javax.swing.GroupLayout.Alignment.BASELINE)
                                                                                 .addComponent(jTextFieldFechainicio,
@@ -376,12 +377,18 @@ public class CreateEvent extends JPanel {
                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                                 28,
                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                .addGap(34, 34, 34)
+                                                                .addGap(24, 24, 24)
                                                                 .addGroup(layout.createParallelGroup(
                                                                                 javax.swing.GroupLayout.Alignment.BASELINE)
-                                                                                .addComponent(jButtonCancelar)
-                                                                                .addComponent(jButtonPublicarEvento))
-                                                                .addGap(39, 39, 39)));
+                                                                                .addComponent(jButtonPublicarEvento)
+                                                                                .addComponent(jButtonCancelar))
+                                                                .addGap(61, 61, 61))
+                                                .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jPanel1,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(0, 0, Short.MAX_VALUE)));
         }
 
         private void clearFields() {
