@@ -3,6 +3,7 @@ package com.plataforma_digital.gui;
 import java.awt.Color;
 
 import javax.swing.JOptionPane;
+import com.plataforma_digital.gui.components.ProfileButton;
 
 import com.plataforma_digital.config.Colors;
 import com.plataforma_digital.database.DatabaseConnection;
@@ -19,7 +20,7 @@ public class CreateEvent extends javax.swing.JPanel {
         private javax.swing.JButton jButtonMiseventos;
         private javax.swing.JButton jButtonPublicarEvento;
         private javax.swing.JButton jButtonbell;
-        private javax.swing.JButton jButtonseccion;
+        private ProfileButton profileButton;
         private javax.swing.JLabel jLabelCrearevento;
         private javax.swing.JLabel jLabelDescripcion;
         private javax.swing.JLabel jLabelEstado;
@@ -41,7 +42,6 @@ public class CreateEvent extends javax.swing.JPanel {
         }
 
         private void initComponents() {
-
                 jPanel1 = new javax.swing.JPanel();
                 BottonFlechaeventos = new javax.swing.JButton();
                 jButtonCrearEvento = new javax.swing.JButton();
@@ -61,8 +61,8 @@ public class CreateEvent extends javax.swing.JPanel {
                 listadeEstados = new javax.swing.JComboBox<>();
                 jTextFieldFechainicio = new javax.swing.JTextField();
                 jTextFieldFechaFin = new javax.swing.JTextField();
+                profileButton = new ProfileButton(home);
                 jButtonbell = new javax.swing.JButton();
-                jButtonseccion = new javax.swing.JButton();
                 jButtonAGGimg = new javax.swing.JButton();
 
                 setFont(new java.awt.Font("Arial", 1, 18));
@@ -75,6 +75,7 @@ public class CreateEvent extends javax.swing.JPanel {
                 BottonFlechaeventos.setIcon(new javax.swing.ImageIcon(
                                 getClass().getResource("/Arrow.png")));
                 BottonFlechaeventos.setText("  Evento");
+                BottonFlechaeventos.setBorderPainted(false);
                 BottonFlechaeventos.addActionListener(e -> {
                         EventsCalendar eventsCalendar = new EventsCalendar(home);
                         home.eventsCalendar = eventsCalendar;
@@ -190,7 +191,7 @@ public class CreateEvent extends javax.swing.JPanel {
                 listadeEstados.setForeground(new java.awt.Color(153, 153, 153));
                 listadeEstados.setModel(
                                 new javax.swing.DefaultComboBoxModel<>(
-                                                new String[] { "Proximamente", "Empezado", "Terminado." }));
+                                                new String[] { "Próximamente", "Empezado", "Terminado." }));
 
                 jTextFieldFechainicio.setForeground(new java.awt.Color(153, 153, 153));
                 jTextFieldFechainicio.setText("DD/MM/AAAA");
@@ -202,11 +203,6 @@ public class CreateEvent extends javax.swing.JPanel {
                 jButtonbell.setIcon(new javax.swing.ImageIcon(
                                 getClass().getResource("/Bell3.png")));
                 jButtonbell.setBorderPainted(false);
-
-                jButtonseccion.setBackground(Colors.BACKGROUND_COLOR);
-                jButtonseccion.setIcon(new javax.swing.ImageIcon(
-                                getClass().getResource("/user2.png")));
-                jButtonseccion.setBorderPainted(false);
 
                 jButtonAGGimg.setBackground(Colors.BACKGROUND_COLOR);
                 jButtonAGGimg.setFont(new java.awt.Font("Segoe UI", 0, 10));
@@ -243,7 +239,7 @@ public class CreateEvent extends javax.swing.JPanel {
                                                                                                                 Short.MAX_VALUE)
                                                                                                 .addComponent(jButtonAGGimg)
                                                                                                 .addComponent(jButtonbell)
-                                                                                                .addComponent(jButtonseccion)
+                                                                                                .addComponent(profileButton)
                                                                                                 .addContainerGap(
                                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                                                 Short.MAX_VALUE))
@@ -318,7 +314,7 @@ public class CreateEvent extends javax.swing.JPanel {
                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                                                                 .addGroup(layout.createSequentialGroup()
                                                                                                                                 .addGap(2, 2, 2)
-                                                                                                                                .addComponent(jButtonseccion,
+                                                                                                                                .addComponent(profileButton,
                                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                                                                                 32,
                                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
