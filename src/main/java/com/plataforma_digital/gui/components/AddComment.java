@@ -1,4 +1,4 @@
-package com.plataforma_digital.gui;
+package com.plataforma_digital.gui.components;
 
 import javax.swing.JOptionPane;
 import java.awt.Dimension;
@@ -7,7 +7,6 @@ import com.plataforma_digital.database.DatabaseConnection;
 import com.plataforma_digital.entities.Comment;
 import com.plataforma_digital.entities.CurrentUser;
 import com.plataforma_digital.entities.Publication;
-import com.plataforma_digital.gui.components.CommentsContainer;
 import com.plataforma_digital.entities.Event;
 
 public class AddComment extends javax.swing.JPanel {

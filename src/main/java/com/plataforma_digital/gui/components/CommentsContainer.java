@@ -10,7 +10,6 @@ import com.plataforma_digital.database.DatabaseConnection;
 import com.plataforma_digital.entities.Comment;
 import com.plataforma_digital.entities.Publication;
 import com.plataforma_digital.entities.Event;
-import com.plataforma_digital.gui.UserComment;
 
 import java.awt.Dimension;
 

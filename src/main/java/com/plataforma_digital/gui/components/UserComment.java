@@ -1,6 +1,11 @@
-package com.plataforma_digital.gui;
+package com.plataforma_digital.gui.components;
 
 import com.plataforma_digital.entities.Comment;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.plataforma_digital.database.DatabaseConnection;
 
 public class UserComment extends javax.swing.JPanel {
@@ -25,8 +30,18 @@ public class UserComment extends javax.swing.JPanel {
                 commentText.setText(comment.getText());
                 commentText.setFont(new java.awt.Font("Segoe UI", 1, 11));
 
+                SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                SimpleDateFormat targetFormat = new SimpleDateFormat("dd/MM/yyyy");
+                String formattedDate = comment.getCreatedAt();
+                try {
+                        Date date = originalFormat.parse(formattedDate);
+                        formattedDate = targetFormat.format(date);
+                } catch (ParseException e) {
+                        e.printStackTrace();
+                }
+
                 commentDate.setFont(new java.awt.Font("Segoe UI", 0, 10));
-                commentDate.setText(comment.getCreatedAt());
+                commentDate.setText(formattedDate);
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
                 this.setLayout(layout);

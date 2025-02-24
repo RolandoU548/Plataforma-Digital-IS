@@ -4,6 +4,7 @@ import javax.swing.BoxLayout;
 
 import com.plataforma_digital.config.Colors;
 import com.plataforma_digital.entities.Event;
+import com.plataforma_digital.gui.components.AddComment;
 import com.plataforma_digital.gui.components.CommentsContainer;
 import com.plataforma_digital.gui.components.ProfileButton;
 import com.plataforma_digital.database.DatabaseConnection;

@@ -21,7 +21,6 @@ public class ViewPublication extends JPanel {
     JTextArea commentTextArea;
     JLabel commentLabel;
     JButton commentButton;
-    CommentsSection commentsSection;
 
     public ViewPublication(Home home, Publication publication) {
         this.home = home;
@@ -31,9 +30,6 @@ public class ViewPublication extends JPanel {
 
     private void initComponents(Publication publication) {
         initPublicationPanel(publication);
-        initCommentsSection(publication);
-
-        add(commentsSection);
     }
 
     private void initPublicationPanel(Publication publication) {
@@ -56,10 +52,4 @@ public class ViewPublication extends JPanel {
         publicationPanel.add(helperPanel);
         add(publicationPanel);
     }
-
-    private void initCommentsSection(Publication publication) {
-        commentsSection = new CommentsSection(publication);
-        commentsSection.updateComments();
-    }
-
 }

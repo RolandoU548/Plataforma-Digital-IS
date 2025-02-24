@@ -420,7 +420,9 @@ public class CreateEvent extends javax.swing.JPanel {
                                 jTextFieldFechaFin.getText(),
                                 jTextFieldLugar.getText());
                 DatabaseConnection.getInstance().createEvent(newEvent);
-                JOptionPane.showMessageDialog(null, "Has creado un evento", "Evento creado",
+                JOptionPane.showMessageDialog(null,
+                                "Tu evento está pendiente de moderación, será publicado en cuanto sea aprobado",
+                                "Evento creado",
                                 JOptionPane.INFORMATION_MESSAGE);
         }
 }
