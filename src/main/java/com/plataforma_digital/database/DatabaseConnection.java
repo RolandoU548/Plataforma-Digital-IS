@@ -55,7 +55,7 @@ public class DatabaseConnection {
         executeStatement(
                 "CREATE TABLE IF NOT EXISTS publications (id integer PRIMARY KEY AUTOINCREMENT, user_id integer NOT NULL references users (id), title text NOT NULL, description text, state text CHECK(state IN ('approved', 'rejected', 'in moderation')) NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);");
         executeStatement(
-                "CREATE TABLE IF NOT EXISTS comments (id integer PRIMARY KEY AUTOINCREMENT, user_id integer NOT NULL references users (id), publication_id integer NOT NULL references publications (id),text text NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);");
+                "CREATE TABLE IF NOT EXISTS comments (id integer PRIMARY KEY AUTOINCREMENT, user_id integer NOT NULL references users (id), publication_id integer references publications (id), event_id integer references events (id), text text NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);");
         executeStatement(
                 "CREATE TABLE IF NOT EXISTS events (id integer PRIMARY KEY AUTOINCREMENT, user_id integer NOT NULL references users (id), title text NOT NULL, description text, state text CHECK(state IN ('approved', 'rejected', 'in moderation')) NOT NULL, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, start_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, end_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, location text NOT NULL);");
     }
@@ -388,9 +388,9 @@ public class DatabaseConnection {
 
     // Métodos CRUD para la tabla comments
     public void createComment(Comment comment) {
-        String sql = "INSERT INTO comments (user_id, publication_id, text) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO comments (user_id, publication_id, event_id, text) VALUES (?, ?, ?, ?)";
         int generatedId = executePreparedStatementWithGeneratedKeys(sql, String.valueOf(comment.getUserId()),
-                String.valueOf(comment.getPublicationId()), comment.getText());
+                String.valueOf(comment.getPublicationId()), String.valueOf(comment.getEventId()), comment.getText());
         if (generatedId != -1) {
             comment.setId(generatedId);
         }
@@ -402,6 +402,7 @@ public class DatabaseConnection {
         try (ResultSet rs = executePreparedSelectStatement(sql, String.valueOf(id))) {
             if (rs != null && rs.next()) {
                 comment = new Comment(rs.getInt("id"), rs.getInt("user_id"), rs.getInt("publication_id"),
+                        rs.getInt("event_id"),
                         rs.getString("text"), rs.getString("created_at"));
             }
         } catch (SQLException e) {
@@ -416,6 +417,24 @@ public class DatabaseConnection {
         try (ResultSet rs = executePreparedSelectStatement(sql, String.valueOf(publicationId))) {
             while (rs != null && rs.next()) {
                 Comment comment = new Comment(rs.getInt("id"), rs.getInt("user_id"), rs.getInt("publication_id"),
+                        rs.getInt("event_id"),
+                        rs.getString("text"),
+                        rs.getString("created_at"));
+                comments.add(comment);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return comments;
+    }
+
+    public List<Comment> getAllCommentsByEventId(int eventId) {
+        String sql = "SELECT * FROM comments WHERE event_id = ?";
+        List<Comment> comments = new ArrayList<>();
+        try (ResultSet rs = executePreparedSelectStatement(sql, String.valueOf(eventId))) {
+            while (rs != null && rs.next()) {
+                Comment comment = new Comment(rs.getInt("id"), rs.getInt("user_id"), rs.getInt("publication_id"),
+                        rs.getInt("event_id"),
                         rs.getString("text"),
                         rs.getString("created_at"));
                 comments.add(comment);
