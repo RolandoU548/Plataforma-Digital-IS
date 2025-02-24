@@ -2,12 +2,15 @@ package com.plataforma_digital.gui;
 
 import java.util.List;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import java.awt.Dimension;
 
 import com.plataforma_digital.config.Colors;
 import com.plataforma_digital.database.DatabaseConnection;
 import com.plataforma_digital.entities.Event;
+import com.plataforma_digital.gui.components.EventListItem;
 import com.plataforma_digital.gui.components.ProfileButton;
 
 public class ViewAllEvents extends javax.swing.JPanel {
@@ -174,6 +177,7 @@ public class ViewAllEvents extends javax.swing.JPanel {
                 eventsContainer.setLayout(new BoxLayout(eventsContainer, BoxLayout.Y_AXIS));
                 for (Event event : events) {
                         eventsContainer.add(new EventListItem(home, this, event));
+                        eventsContainer.add(Box.createRigidArea(new Dimension(0, 10)));
                 }
                 eventsContainer.revalidate();
                 eventsContainer.repaint();

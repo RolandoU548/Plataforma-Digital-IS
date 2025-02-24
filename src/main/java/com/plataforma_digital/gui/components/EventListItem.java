@@ -1,6 +1,9 @@
-package com.plataforma_digital.gui;
+package com.plataforma_digital.gui.components;
 
 import com.plataforma_digital.config.Colors;
+import com.plataforma_digital.gui.Home;
+import com.plataforma_digital.gui.ViewAllEvents;
+import com.plataforma_digital.gui.ViewEvent;
 import com.plataforma_digital.database.DatabaseConnection;
 import com.plataforma_digital.entities.Event;
 
@@ -21,6 +24,9 @@ public class EventListItem extends javax.swing.JPanel {
                 this.home = home;
                 this.viewAllEvents = viewAllEvents;
                 this.event = event;
+                setBorder(javax.swing.BorderFactory.createCompoundBorder(
+                                javax.swing.BorderFactory.createLineBorder(java.awt.Color.BLACK, 1, true),
+                                javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0)));
                 initComponents();
         }
 
