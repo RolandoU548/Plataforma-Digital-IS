@@ -1,5 +1,7 @@
 package com.plataforma_digital.gui.components;
 
+import java.awt.Dimension;
+
 import com.plataforma_digital.config.Colors;
 import com.plataforma_digital.gui.Home;
 import com.plataforma_digital.gui.ViewAllPublications;
@@ -24,6 +26,7 @@ public class PublicationListItem extends javax.swing.JPanel {
                 setBorder(javax.swing.BorderFactory.createCompoundBorder(
                                 javax.swing.BorderFactory.createLineBorder(java.awt.Color.BLACK, 1, true),
                                 javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0)));
+                setMaximumSize(new Dimension(Integer.MAX_VALUE, 135));
                 initComponents();
         }
 
