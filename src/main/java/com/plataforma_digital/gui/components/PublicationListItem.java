@@ -11,7 +11,7 @@ import com.plataforma_digital.entities.Publication;
 
 public class PublicationListItem extends javax.swing.JPanel {
         private Home home;
-        private Publication event;
+        private Publication publication;
         private ViewAllPublications viewAllPublications;
         private javax.swing.JButton jButton_Delete;
         private javax.swing.JButton jButton_Edit;
@@ -19,10 +19,10 @@ public class PublicationListItem extends javax.swing.JPanel {
         private javax.swing.JLabel jLabel_Imagen;
         private javax.swing.JButton jLabel_Titulo;
 
-        public PublicationListItem(Home home, ViewAllPublications viewAllPublications, Publication event) {
+        public PublicationListItem(Home home, ViewAllPublications viewAllPublications, Publication publication) {
                 this.home = home;
                 this.viewAllPublications = viewAllPublications;
-                this.event = event;
+                this.publication = publication;
                 setBorder(javax.swing.BorderFactory.createCompoundBorder(
                                 javax.swing.BorderFactory.createLineBorder(java.awt.Color.BLACK, 1, true),
                                 javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0)));
@@ -51,18 +51,18 @@ public class PublicationListItem extends javax.swing.JPanel {
                 });
 
                 jLabelDescription.setFont(new java.awt.Font("Segoe UI", 1, 14));
-                jLabelDescription.setText(event.getDescription());
+                jLabelDescription.setText(publication.getDescription());
 
                 jLabel_Imagen.setIcon(new javax.swing.ImageIcon(
                                 getClass().getResource("/Leuctra.inermis.-.lindsey (1).jpg")));
                 jLabel_Imagen.setText("jLabel4");
 
                 jLabel_Titulo.setFont(new java.awt.Font("Segoe UI", 1, 18));
-                jLabel_Titulo.setText(event.getTitle());
+                jLabel_Titulo.setText(publication.getTitle());
                 jLabel_Titulo.setBackground(Colors.BACKGROUND_COLOR);
                 jLabel_Titulo.setBorderPainted(false);
                 jLabel_Titulo.addActionListener(e -> {
-                        ViewPublication viewPublication = new ViewPublication(home, event);
+                        ViewPublication viewPublication = new ViewPublication(home, publication);
                         home.addAndShowPanel(viewPublication, "viewPublication");
                 });
 
@@ -154,7 +154,7 @@ public class PublicationListItem extends javax.swing.JPanel {
         }
 
         private void deletePublication() {
-                DatabaseConnection.getInstance().deletePublicationById(event.getId());
+                DatabaseConnection.getInstance().deletePublicationById(publication.getId());
                 viewAllPublications.getPublications();
         }
 }

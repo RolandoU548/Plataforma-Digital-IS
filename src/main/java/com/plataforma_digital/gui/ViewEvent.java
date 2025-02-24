@@ -1,11 +1,8 @@
 package com.plataforma_digital.gui;
 
-import javax.swing.BoxLayout;
-
 import com.plataforma_digital.config.Colors;
 import com.plataforma_digital.entities.Event;
-import com.plataforma_digital.gui.components.AddComment;
-import com.plataforma_digital.gui.components.CommentsContainer;
+import com.plataforma_digital.gui.components.CommentsSection;
 import com.plataforma_digital.gui.components.ProfileButton;
 import com.plataforma_digital.database.DatabaseConnection;
 
@@ -26,9 +23,7 @@ public class ViewEvent extends javax.swing.JPanel {
         private javax.swing.JLabel place;
         private ProfileButton profile;
         private javax.swing.JLabel start;
-        private AddComment addComment;
-        private CommentsContainer commentsContainer;
-        private javax.swing.JPanel commentsSection;
+        private CommentsSection commentsSection;
 
         public ViewEvent(Home home, Event event) {
                 this.home = home;
@@ -51,18 +46,12 @@ public class ViewEvent extends javax.swing.JPanel {
                 place = new javax.swing.JLabel();
                 image = new javax.swing.JLabel();
 
-                commentsSection = new javax.swing.JPanel();
-                commentsSection.setLayout(new BoxLayout(commentsSection, BoxLayout.Y_AXIS));
-                commentsContainer = new CommentsContainer(event);
-                addComment = new AddComment(event, commentsContainer);
-                commentsSection.add(addComment);
-                commentsSection.add(commentsContainer);
-
+                commentsSection = new CommentsSection(event);
                 jScrollPane1 = new javax.swing.JScrollPane(commentsSection);
                 jScrollPane1.setBorder(null);
 
                 mainTitle.setFont(new java.awt.Font("Segoe UI", 1, 30));
-                mainTitle.setText("Charla sobre las Plecópteras");
+                mainTitle.setText(event.getTitle());
 
                 author.setFont(new java.awt.Font("Segoe UI", 1, 15));
                 author.setText("Autor: "
