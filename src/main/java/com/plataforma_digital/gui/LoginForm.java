@@ -179,9 +179,9 @@ public class LoginForm extends JPanel {
                                         JOptionPane.ERROR_MESSAGE);
                         return;
                 }
+
                 CurrentUser.setCurrentUser(user);
-                appUI.home.editProfile.updateCurrentUserInfo();
-                appUI.showPanel("home");
+                appUI.addAndShowPanel(new Home(appUI), "home");
                 System.out.println("User \"" + email + "\" logged in");
                 JOptionPane.showMessageDialog(null, "Bienvenido, " + email + "!", "Bienvenido",
                                 JOptionPane.INFORMATION_MESSAGE);

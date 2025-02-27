@@ -26,24 +26,12 @@ public class Home extends JPanel {
     private void initComponents() {
         navigation = new Navigation(this);
         editProfile = new EditProfile(this);
-        createPublication = new CreatePublication(this);
-        createEvent = new CreateEvent(this);
-        viewAllPublications = new ViewAllPublications(this);
-        viewAllEvents = new ViewAllEvents(this);
-        eventsCalendar = new EventsCalendar(this);
-        moderation = new Moderation(this);
 
         cardLayout = new CardLayout();
         mainPanel = new JPanel();
         mainPanel.setLayout(cardLayout);
 
         addAndShowPanel(editProfile, "editProfile");
-        mainPanel.add(eventsCalendar, "eventsCalendar");
-        mainPanel.add(createPublication, "createPublication");
-        mainPanel.add(createEvent, "createEvent");
-        mainPanel.add(moderation, "moderation");
-        mainPanel.add(viewAllPublications, "viewAllPublications");
-        mainPanel.add(viewAllEvents, "viewAllEvents");
 
         setLayout(new BorderLayout());
         add(navigation, BorderLayout.WEST);

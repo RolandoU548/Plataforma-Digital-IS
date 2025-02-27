@@ -34,19 +34,21 @@ public class AppUI extends JFrame {
 
         registerForm = new RegisterForm(this);
         loginForm = new LoginForm(this);
-        home = new Home(this);
 
-        mainPanel.add(loginForm, "loginForm");
         mainPanel.add(registerForm, "registerForm");
-        mainPanel.add(home, "home");
+        addAndShowPanel(loginForm, "loginForm");
 
         add(mainPanel);
-
-        cardLayout.show(mainPanel,
-                "loginForm");
     }
 
     public void showPanel(String name) {
+        cardLayout.show(mainPanel, name);
+    }
+
+    public void addAndShowPanel(JPanel panel, String name) {
+        mainPanel.remove(panel);
+        mainPanel.add(panel, name);
+        mainPanel.revalidate();
         cardLayout.show(mainPanel, name);
     }
 }
