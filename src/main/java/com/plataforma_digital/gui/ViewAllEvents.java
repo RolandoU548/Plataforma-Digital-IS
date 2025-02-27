@@ -8,7 +8,8 @@ import javax.swing.JPanel;
 import java.awt.Dimension;
 
 import com.plataforma_digital.config.Colors;
-import com.plataforma_digital.database.DatabaseConnection;
+import com.plataforma_digital.database.EventDao;
+import com.plataforma_digital.database.impl.EventDaoImpl;
 import com.plataforma_digital.entities.Event;
 import com.plataforma_digital.gui.components.EventListItem;
 import com.plataforma_digital.gui.components.ProfileButton;
@@ -172,7 +173,8 @@ public class ViewAllEvents extends javax.swing.JPanel {
         }
 
         public void getEvents() {
-                List<Event> events = DatabaseConnection.getInstance().getAllEventsByState("approved");
+                EventDao eventDao = new EventDaoImpl();
+                List<Event> events = eventDao.getAllEventsByState("approved");
                 eventsContainer.removeAll();
                 eventsContainer.setLayout(new BoxLayout(eventsContainer, BoxLayout.Y_AXIS));
                 for (Event event : events) {

@@ -6,7 +6,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import com.plataforma_digital.config.Colors;
-import com.plataforma_digital.database.DatabaseConnection;
+import com.plataforma_digital.database.PublicationDao;
+import com.plataforma_digital.database.impl.PublicationDaoImpl;
 import com.plataforma_digital.entities.Publication;
 import com.plataforma_digital.gui.components.PublicationListItem;
 import com.plataforma_digital.gui.components.ProfileButton;
@@ -167,7 +168,8 @@ public class ViewAllPublications extends javax.swing.JPanel {
         }
 
         public void getPublications() {
-                List<Publication> publications = DatabaseConnection.getInstance().getAllPublicationsByState("approved");
+                PublicationDao publicationDao = new PublicationDaoImpl();
+                List<Publication> publications = publicationDao.getAllPublicationsByState("approved");
                 publicationsContainer.removeAll();
                 publicationsContainer.setLayout(new BoxLayout(publicationsContainer, BoxLayout.Y_AXIS));
                 for (Publication publication : publications) {

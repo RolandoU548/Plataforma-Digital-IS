@@ -5,7 +5,10 @@ import java.awt.Dimension;
 import com.plataforma_digital.entities.Publication;
 import com.plataforma_digital.entities.Event;
 import com.plataforma_digital.config.Colors;
-import com.plataforma_digital.database.DatabaseConnection;
+import com.plataforma_digital.database.EventDao;
+import com.plataforma_digital.database.PublicationDao;
+import com.plataforma_digital.database.impl.EventDaoImpl;
+import com.plataforma_digital.database.impl.PublicationDaoImpl;
 import com.plataforma_digital.gui.Moderation;
 
 import javax.swing.JOptionPane;
@@ -108,12 +111,14 @@ public class ModerationItem extends javax.swing.JPanel {
                 publication.setState("approved");
                 if (publication instanceof Event) {
                         Event event = (Event) publication;
-                        DatabaseConnection.getInstance().updateEvent(event);
+                        EventDao eventDao = new EventDaoImpl();
+                        eventDao.updateEvent(event);
                         JOptionPane.showMessageDialog(null, "El evento ha sido aprobado", "Evento aprobado",
                                         JOptionPane.NO_OPTION);
                         moderation.getEvents();
                 } else {
-                        DatabaseConnection.getInstance().updatePublication(publication);
+                        PublicationDao publicationDao = new PublicationDaoImpl();
+                        publicationDao.updatePublication(publication);
                         JOptionPane.showMessageDialog(null, "La publicación ha sido aprobada", "Publicación aprobada",
                                         JOptionPane.NO_OPTION);
                         moderation.getPublications();
@@ -124,12 +129,14 @@ public class ModerationItem extends javax.swing.JPanel {
                 publication.setState("rejected");
                 if (publication instanceof Event) {
                         Event event = (Event) publication;
-                        DatabaseConnection.getInstance().updateEvent(event);
+                        EventDao eventDao = new EventDaoImpl();
+                        eventDao.updateEvent(event);
                         JOptionPane.showMessageDialog(null, "El evento ha sido rechazado", "Evento rechazado",
                                         JOptionPane.NO_OPTION);
                         moderation.getEvents();
                 } else {
-                        DatabaseConnection.getInstance().updatePublication(publication);
+                        PublicationDao publicationDao = new PublicationDaoImpl();
+                        publicationDao.updatePublication(publication);
                         JOptionPane.showMessageDialog(null, "La publicación ha sido rechazada", "Publicación rechazada",
                                         JOptionPane.NO_OPTION);
                         moderation.getPublications();

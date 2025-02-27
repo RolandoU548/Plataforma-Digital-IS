@@ -9,7 +9,10 @@ import javax.swing.JPanel;
 import java.awt.Dimension;
 
 import com.plataforma_digital.config.Colors;
-import com.plataforma_digital.database.DatabaseConnection;
+import com.plataforma_digital.database.EventDao;
+import com.plataforma_digital.database.PublicationDao;
+import com.plataforma_digital.database.impl.EventDaoImpl;
+import com.plataforma_digital.database.impl.PublicationDaoImpl;
 import com.plataforma_digital.entities.Event;
 import com.plataforma_digital.entities.Publication;
 import com.plataforma_digital.gui.components.ModerationItem;
@@ -163,7 +166,8 @@ public class Moderation extends javax.swing.JPanel {
         }
 
         public void getPublications() {
-                List<Publication> publications = DatabaseConnection.getInstance()
+                PublicationDao publicationDao = new PublicationDaoImpl();
+                List<Publication> publications = publicationDao
                                 .getAllPublicationsByState("in moderation");
                 publicationsContainer.removeAll();
                 publicationsContainer.setLayout(new BoxLayout(publicationsContainer, BoxLayout.Y_AXIS));
@@ -187,7 +191,8 @@ public class Moderation extends javax.swing.JPanel {
         }
 
         public void getEvents() {
-                List<Event> events = DatabaseConnection.getInstance()
+                EventDao eventDao = new EventDaoImpl();
+                List<Event> events = eventDao
                                 .getAllEventsByState("in moderation");
                 eventsContainer.removeAll();
                 eventsContainer.setLayout(new BoxLayout(eventsContainer, BoxLayout.Y_AXIS));

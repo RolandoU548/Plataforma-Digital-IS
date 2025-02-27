@@ -1,7 +1,8 @@
 package com.plataforma_digital.gui;
 
 import com.plataforma_digital.config.Colors;
-import com.plataforma_digital.database.DatabaseConnection;
+import com.plataforma_digital.database.UserDao;
+import com.plataforma_digital.database.impl.UserDaoImpl;
 import com.plataforma_digital.entities.User;
 
 import java.awt.Color;
@@ -224,6 +225,7 @@ public class RegisterForm extends JPanel {
                 String lastName = lastNameTextField.getText();
                 String password = new String(passwordTextField.getPassword());
                 String role = roleTextField.getSelectedItem().toString();
+                UserDao userDao = new UserDaoImpl();
                 switch (role) {
                         case "Estudiante":
                                 role = "Student";
@@ -237,7 +239,7 @@ public class RegisterForm extends JPanel {
                         default:
                                 System.out.println("Role wasn't recognized");
                 }
-                if (DatabaseConnection.getInstance().getUserByEmail(email) != null) {
+                if (userDao.getUserByEmail(email) != null) {
                         System.out.println("User was not registered because the email is already in use");
                         JOptionPane.showMessageDialog(null,
                                         "Utiliza otro correo electrónico",
@@ -246,7 +248,7 @@ public class RegisterForm extends JPanel {
                         return;
                 }
                 User user = new User(0, email, firstName, lastName, role, password);
-                DatabaseConnection.getInstance().createUser(user);
+                userDao.createUser(user);
                 System.out.println("User registered with ID: " + user.getId());
                 JOptionPane.showMessageDialog(null,
                                 "Usuario '" + email + "' registrado exitosamente. Por favor inicia sesión",

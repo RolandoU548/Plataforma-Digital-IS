@@ -3,7 +3,8 @@ package com.plataforma_digital.gui.components;
 import javax.swing.JOptionPane;
 import java.awt.Dimension;
 
-import com.plataforma_digital.database.DatabaseConnection;
+import com.plataforma_digital.database.CommentDao;
+import com.plataforma_digital.database.impl.CommentDaoImpl;
 import com.plataforma_digital.entities.Comment;
 import com.plataforma_digital.entities.CurrentUser;
 import com.plataforma_digital.entities.Publication;
@@ -99,15 +100,16 @@ public class AddComment extends javax.swing.JPanel {
         }
 
         private void addComment() {
+                CommentDao commentDao = new CommentDaoImpl();
                 if (publication instanceof Event) {
-                        DatabaseConnection.getInstance()
+                        commentDao
                                         .createComment(
                                                         new Comment(0, CurrentUser.getCurrentUser().getId(), 0,
                                                                         publication.getId(),
                                                                         commentTextField.getText(),
                                                                         null));
                 } else {
-                        DatabaseConnection.getInstance()
+                        commentDao
                                         .createComment(
                                                         new Comment(0, CurrentUser.getCurrentUser().getId(),
                                                                         publication.getId(), 0,

@@ -14,7 +14,8 @@ import java.awt.GridLayout;
 import java.awt.Color;
 import java.awt.BorderLayout;
 import java.util.Date;
-import com.plataforma_digital.database.DatabaseConnection;
+import com.plataforma_digital.database.EventDao;
+import com.plataforma_digital.database.impl.EventDaoImpl;
 import com.plataforma_digital.entities.Event;
 
 public class EventsCalendar extends JPanel {
@@ -32,7 +33,8 @@ public class EventsCalendar extends JPanel {
 
     public List<Date> getHighlightedDates() {
         highlightedDates = new ArrayList<>();
-        List<Event> events = DatabaseConnection.getInstance().getAllEventsByState("approved");
+        EventDao eventDao = new EventDaoImpl();
+        List<Event> events = eventDao.getAllEventsByState("approved");
         SimpleDateFormat originalFormat = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat targetFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {

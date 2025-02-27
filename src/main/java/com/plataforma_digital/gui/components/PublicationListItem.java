@@ -6,7 +6,8 @@ import com.plataforma_digital.config.Colors;
 import com.plataforma_digital.gui.Home;
 import com.plataforma_digital.gui.ViewAllPublications;
 import com.plataforma_digital.gui.ViewPublication;
-import com.plataforma_digital.database.DatabaseConnection;
+import com.plataforma_digital.database.PublicationDao;
+import com.plataforma_digital.database.impl.PublicationDaoImpl;
 import com.plataforma_digital.entities.Publication;
 
 public class PublicationListItem extends javax.swing.JPanel {
@@ -154,7 +155,8 @@ public class PublicationListItem extends javax.swing.JPanel {
         }
 
         private void deletePublication() {
-                DatabaseConnection.getInstance().deletePublicationById(publication.getId());
+                PublicationDao publicationDao = new PublicationDaoImpl();
+                publicationDao.deletePublicationById(publication.getId());
                 viewAllPublications.getPublications();
         }
 }

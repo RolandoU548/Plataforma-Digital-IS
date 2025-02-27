@@ -4,7 +4,8 @@ import com.plataforma_digital.config.Colors;
 import com.plataforma_digital.entities.Event;
 import com.plataforma_digital.gui.components.CommentsSection;
 import com.plataforma_digital.gui.components.ProfileButton;
-import com.plataforma_digital.database.DatabaseConnection;
+import com.plataforma_digital.database.UserDao;
+import com.plataforma_digital.database.impl.UserDaoImpl;
 
 public class ViewEvent extends javax.swing.JPanel {
         private Home home;
@@ -53,9 +54,10 @@ public class ViewEvent extends javax.swing.JPanel {
                 mainTitle.setFont(new java.awt.Font("Segoe UI", 1, 30));
                 mainTitle.setText(event.getTitle());
 
+                UserDao userDao = new UserDaoImpl();
                 author.setFont(new java.awt.Font("Segoe UI", 1, 15));
                 author.setText("Autor: "
-                                + DatabaseConnection.getInstance().getUserById(event.getUserId()).getEmail());
+                                + userDao.getUserById(event.getUserId()).getEmail());
 
                 start.setFont(new java.awt.Font("Segoe UI", 1, 15));
                 start.setText("Fecha Inicio: " + event.getStartDate());

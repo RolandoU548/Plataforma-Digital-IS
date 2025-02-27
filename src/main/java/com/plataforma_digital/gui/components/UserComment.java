@@ -6,7 +6,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.plataforma_digital.database.DatabaseConnection;
+import com.plataforma_digital.database.UserDao;
+import com.plataforma_digital.database.impl.UserDaoImpl;
 
 public class UserComment extends javax.swing.JPanel {
         private Comment comment;
@@ -24,8 +25,9 @@ public class UserComment extends javax.swing.JPanel {
                 commentText = new javax.swing.JLabel();
                 commentDate = new javax.swing.JLabel();
 
+                UserDao userDao = new UserDaoImpl();
                 commentName.setFont(new java.awt.Font("Segoe UI", 1, 13));
-                commentName.setText(DatabaseConnection.getInstance().getUserById(comment.getUserId()).getEmail());
+                commentName.setText(userDao.getUserById(comment.getUserId()).getEmail());
 
                 commentText.setText(comment.getText());
                 commentText.setFont(new java.awt.Font("Segoe UI", 1, 11));

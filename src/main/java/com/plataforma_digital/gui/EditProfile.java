@@ -9,7 +9,8 @@ import javax.swing.JTextField;
 import javax.swing.JPanel;
 
 import com.plataforma_digital.config.Colors;
-import com.plataforma_digital.database.DatabaseConnection;
+import com.plataforma_digital.database.UserDao;
+import com.plataforma_digital.database.impl.UserDaoImpl;
 import com.plataforma_digital.entities.CurrentUser;
 import com.plataforma_digital.entities.User;
 import com.plataforma_digital.utils.StringUtils;
@@ -362,8 +363,8 @@ public class EditProfile extends JPanel {
                                 firstNameTextField.getText(),
                                 lastNameTextField.getText(), CurrentUser.getCurrentUser().getRole(),
                                 passwordTextField.getText());
-                DatabaseConnection.getInstance()
-                                .updateUser(updatedUser);
+                UserDao userDao = new UserDaoImpl();
+                userDao.updateUser(updatedUser);
                 CurrentUser.setCurrentUser(updatedUser);
                 System.out.println("User info has been updated");
                 JOptionPane.showMessageDialog(null, "Los datos del usuario se han actualizado!", "Datos actualizados",

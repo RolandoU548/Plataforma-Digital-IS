@@ -6,10 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.plataforma_digital.entities.*;
 
 public class DatabaseConnection {
     private static DatabaseConnection instance;
@@ -61,7 +57,7 @@ public class DatabaseConnection {
     }
 
     // Ejecutar Consultas a la base de datos
-    private void executeStatement(String sql) {
+    public void executeStatement(String sql) {
         if (conn == null) {
             System.out.println("Connection to database is null");
             return;
@@ -74,7 +70,7 @@ public class DatabaseConnection {
         }
     }
 
-    private void executePreparedStatement(String sql, String... params) {
+    public void executePreparedStatement(String sql, String... params) {
         if (conn == null) {
             System.out.println("Connection to database is null");
             return;
@@ -106,7 +102,7 @@ public class DatabaseConnection {
         return rs;
     }
 
-    private ResultSet executePreparedSelectStatement(String sql, String... params) {
+    public ResultSet executePreparedSelectStatement(String sql, String... params) {
         ResultSet rs = null;
         if (conn != null) {
             try {
@@ -125,7 +121,7 @@ public class DatabaseConnection {
         return rs;
     }
 
-    private int executePreparedStatementWithGeneratedKeys(String sql, String... params) {
+    public int executePreparedStatementWithGeneratedKeys(String sql, String... params) {
         if (conn != null) {
             try (PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 for (int i = 0; i < params.length; i++) {
@@ -145,314 +141,5 @@ public class DatabaseConnection {
             System.out.println("Connection to database is null");
         }
         return -1;
-    }
-
-    // Métodos CRUD para la tabla users
-    public void createUser(User user) {
-        String sql = "INSERT INTO users (email, first_name, last_name, role, password) VALUES (?, ?, ?, ?, ?)";
-        int generatedId = executePreparedStatementWithGeneratedKeys(sql, user.getEmail(), user.getFirstName(),
-                user.getLastName(),
-                user.getRole(), user.getPassword());
-        if (generatedId != -1) {
-            user.setId(generatedId);
-        }
-    }
-
-    public User getUserById(int id) {
-        String sql = "SELECT * FROM users WHERE id = ?";
-        User user = null;
-        try (ResultSet rs = executePreparedSelectStatement(sql, String.valueOf(id))) {
-            if (rs != null && rs.next()) {
-                user = new User(rs.getInt("id"), rs.getString("email"), rs.getString("first_name"),
-                        rs.getString("last_name"),
-                        rs.getString("role"), rs.getString("password"));
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return user;
-    }
-
-    public User getUserByEmail(String email) {
-        String sql = "SELECT * FROM users WHERE email = ?";
-        User user = null;
-        try (ResultSet rs = executePreparedSelectStatement(sql, email)) {
-            if (rs != null && rs.next()) {
-                user = new User(rs.getInt("id"), rs.getString("email"), rs.getString("first_name"),
-                        rs.getString("last_name"),
-                        rs.getString("role"), rs.getString("password"));
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return user;
-    }
-
-    public void updateUser(User user) {
-        String sql = "UPDATE users SET email = ?, first_name = ?, last_name = ?, role = ?, password = ? WHERE id = ?";
-        executePreparedStatement(sql, user.getEmail(), user.getFirstName(), user.getLastName(), user.getRole(),
-                user.getPassword(), String.valueOf(user.getId()));
-    }
-
-    public void deleteUserById(int id) {
-        String sql = "DELETE FROM users WHERE id = ?";
-        executePreparedStatement(sql, String.valueOf(id));
-    }
-
-    public User authenticateUser(String email, String password) {
-        String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
-        User user = null;
-        try (ResultSet rs = executePreparedSelectStatement(sql, email, password)) {
-            if (rs != null && rs.next()) {
-                user = new User(rs.getInt("id"),
-                        rs.getString("email"), rs.getString("first_name"), rs.getString("last_name"),
-                        rs.getString("role"), rs.getString("password"));
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return user;
-    }
-
-    // Métodos CRUD para la tabla publications
-    public void createPublication(Publication publication) {
-        String sql = "INSERT INTO publications (user_id, title, description, state) VALUES (?, ?, ?, ?)";
-        int generatedId = executePreparedStatementWithGeneratedKeys(sql, String.valueOf(publication.getUserId()),
-                publication.getTitle(),
-                publication.getDescription(), publication.getState());
-        if (generatedId != -1) {
-            publication.setId(generatedId);
-        }
-    }
-
-    public Publication getPublicationById(int id) {
-        String sql = "SELECT * FROM publications WHERE id = ?";
-        Publication publication = null;
-        try (ResultSet rs = executePreparedSelectStatement(sql, String.valueOf(id))) {
-            if (rs != null && rs.next()) {
-                publication = new Publication(rs.getInt("id"), rs.getInt("user_id"), rs.getString("title"),
-                        rs.getString("description"), rs.getString("state"), rs.getString("created_at"));
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return publication;
-    }
-
-    public List<Publication> getAllPublications() {
-        String sql = "SELECT * FROM publications";
-        List<Publication> publications = new ArrayList<>();
-        try (ResultSet rs = executeSelectStatement(sql)) {
-            while (rs != null && rs.next()) {
-                Publication publication = new Publication(rs.getInt("id"), rs.getInt("user_id"), rs.getString("title"),
-                        rs.getString("description"), rs.getString("state"), rs.getString("created_at"));
-                publications.add(publication);
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return publications;
-    }
-
-    public List<Publication> getAllPublicationsByState(String state) {
-        String sql = "SELECT * FROM publications WHERE state = ?";
-        List<Publication> publications = new ArrayList<>();
-        try (ResultSet rs = executePreparedSelectStatement(sql, state)) {
-            while (rs != null && rs.next()) {
-                Publication publication = new Publication(rs.getInt("id"), rs.getInt("user_id"), rs.getString("title"),
-                        rs.getString("description"), rs.getString("state"), rs.getString("created_at"));
-                publications.add(publication);
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return publications;
-    }
-
-    public List<Publication> getAllPublicationsByUserId(int userId) {
-        String sql = "SELECT * FROM publications WHERE user_id = ?";
-        List<Publication> publications = new ArrayList<>();
-        try (ResultSet rs = executePreparedSelectStatement(sql, String.valueOf(userId))) {
-            while (rs != null && rs.next()) {
-                Publication publication = new Publication(rs.getInt("id"), rs.getInt("user_id"), rs.getString("title"),
-                        rs.getString("description"), rs.getString("state"), rs.getString("created_at"));
-                publications.add(publication);
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return publications;
-    }
-
-    public void updatePublication(Publication publication) {
-        String sql = "UPDATE publications SET title = ?, description = ?, state = ? WHERE id = ?";
-        executePreparedStatement(sql, publication.getTitle(), publication.getDescription(), publication.getState(),
-                String.valueOf(publication.getId()));
-    }
-
-    public void deletePublicationById(int id) {
-        String sql = "DELETE FROM publications WHERE id = ?";
-        executePreparedStatement(sql, String.valueOf(id));
-    }
-
-    // Métodos CRUD para la tabla events
-    public void createEvent(Event event) {
-        String sql = "INSERT INTO events (user_id, title, description, state, start_date, end_date, location) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        int generatedId = executePreparedStatementWithGeneratedKeys(sql, String.valueOf(event.getUserId()),
-                event.getTitle(),
-                event.getDescription(), event.getState(), event.getStartDate(), event.getEndDate(),
-                event.getLocation());
-        if (generatedId != -1) {
-            event.setId(generatedId);
-        }
-    }
-
-    public Event getEventById(int id) {
-        String sql = "SELECT * FROM events WHERE id = ?";
-        Event event = null;
-        try (ResultSet rs = executePreparedSelectStatement(sql, String.valueOf(id))) {
-            if (rs != null && rs.next()) {
-                event = new Event(rs.getInt("id"), rs.getInt("user_id"), rs.getString("title"),
-                        rs.getString("description"), rs.getString("state"), rs.getString("created_at"),
-                        rs.getString("start_date"),
-                        rs.getString("end_date"), rs.getString("location"));
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return event;
-    }
-
-    public List<Event> getAllEvents() {
-        String sql = "SELECT * FROM events";
-        List<Event> events = new ArrayList<>();
-        try (ResultSet rs = executeSelectStatement(sql)) {
-            while (rs != null && rs.next()) {
-                Event event = new Event(rs.getInt("id"), rs.getInt("user_id"), rs.getString("title"),
-                        rs.getString("description"), rs.getString("state"), rs.getString("created_at"),
-                        rs.getString("start_date"),
-                        rs.getString("end_date"), rs.getString("location"));
-                events.add(event);
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return events;
-    }
-
-    public List<Event> getAllEventsByState(String state) {
-        String sql = "SELECT * FROM events WHERE state = ?";
-        List<Event> events = new ArrayList<>();
-        try (ResultSet rs = executePreparedSelectStatement(sql, state)) {
-            while (rs != null && rs.next()) {
-                Event event = new Event(rs.getInt("id"), rs.getInt("user_id"), rs.getString("title"),
-                        rs.getString("description"), rs.getString("state"), rs.getString("created_at"),
-                        rs.getString("start_date"),
-                        rs.getString("end_date"), rs.getString("location"));
-                events.add(event);
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return events;
-    }
-
-    public List<Event> getAllEventsByUserId(int userId) {
-        String sql = "SELECT * FROM events WHERE user_id = ?";
-        List<Event> events = new ArrayList<>();
-        try (ResultSet rs = executePreparedSelectStatement(sql, String.valueOf(userId))) {
-            while (rs != null && rs.next()) {
-                Event event = new Event(rs.getInt("id"), rs.getInt("user_id"), rs.getString("title"),
-                        rs.getString("description"), rs.getString("state"), rs.getString("created_at"),
-                        rs.getString("start_date"),
-                        rs.getString("end_date"), rs.getString("location"));
-                events.add(event);
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return events;
-    }
-
-    public void updateEvent(Event event) {
-        String sql = "UPDATE events SET title = ?, description = ?, state = ?, start_date = ?, end_date = ?, location = ? WHERE id = ?";
-        executePreparedStatement(sql, event.getTitle(), event.getDescription(), event.getState(), event.getStartDate(),
-                event.getEndDate(), event.getLocation(),
-                String.valueOf(event.getId()));
-    }
-
-    public void deleteEventById(int id) {
-        String sql = "DELETE FROM events WHERE id = ?";
-        executePreparedStatement(sql, String.valueOf(id));
-    }
-
-    // Métodos CRUD para la tabla comments
-    public void createComment(Comment comment) {
-        String sql = "INSERT INTO comments (user_id, publication_id, event_id, text) VALUES (?, ?, ?, ?)";
-        int generatedId = executePreparedStatementWithGeneratedKeys(sql, String.valueOf(comment.getUserId()),
-                String.valueOf(comment.getPublicationId()), String.valueOf(comment.getEventId()), comment.getText());
-        if (generatedId != -1) {
-            comment.setId(generatedId);
-        }
-    }
-
-    public Comment getCommentById(int id) {
-        String sql = "SELECT * FROM comments WHERE id = ?";
-        Comment comment = null;
-        try (ResultSet rs = executePreparedSelectStatement(sql, String.valueOf(id))) {
-            if (rs != null && rs.next()) {
-                comment = new Comment(rs.getInt("id"), rs.getInt("user_id"), rs.getInt("publication_id"),
-                        rs.getInt("event_id"),
-                        rs.getString("text"), rs.getString("created_at"));
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return comment;
-    }
-
-    public List<Comment> getAllCommentsByPublicationId(int publicationId) {
-        String sql = "SELECT * FROM comments WHERE publication_id = ?";
-        List<Comment> comments = new ArrayList<>();
-        try (ResultSet rs = executePreparedSelectStatement(sql, String.valueOf(publicationId))) {
-            while (rs != null && rs.next()) {
-                Comment comment = new Comment(rs.getInt("id"), rs.getInt("user_id"), rs.getInt("publication_id"),
-                        rs.getInt("event_id"),
-                        rs.getString("text"),
-                        rs.getString("created_at"));
-                comments.add(comment);
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return comments;
-    }
-
-    public List<Comment> getAllCommentsByEventId(int eventId) {
-        String sql = "SELECT * FROM comments WHERE event_id = ?";
-        List<Comment> comments = new ArrayList<>();
-        try (ResultSet rs = executePreparedSelectStatement(sql, String.valueOf(eventId))) {
-            while (rs != null && rs.next()) {
-                Comment comment = new Comment(rs.getInt("id"), rs.getInt("user_id"), rs.getInt("publication_id"),
-                        rs.getInt("event_id"),
-                        rs.getString("text"),
-                        rs.getString("created_at"));
-                comments.add(comment);
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return comments;
-    }
-
-    public void updateComment(Comment comment) {
-        String sql = "UPDATE comments SET text = ? WHERE id = ?";
-        executePreparedStatement(sql, comment.getText(),
-                String.valueOf(comment.getId()));
-    }
-
-    public void deleteCommentById(int id) {
-        String sql = "DELETE FROM comments WHERE id = ?";
-        executePreparedStatement(sql, String.valueOf(id));
     }
 }

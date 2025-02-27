@@ -6,7 +6,8 @@ import javax.swing.JOptionPane;
 import com.plataforma_digital.gui.components.ProfileButton;
 
 import com.plataforma_digital.config.Colors;
-import com.plataforma_digital.database.DatabaseConnection;
+import com.plataforma_digital.database.EventDao;
+import com.plataforma_digital.database.impl.EventDaoImpl;
 import com.plataforma_digital.entities.CurrentUser;
 import com.plataforma_digital.entities.Event;
 import com.plataforma_digital.utils.DateUtils;
@@ -419,7 +420,8 @@ public class CreateEvent extends javax.swing.JPanel {
                                 jTextFieldDescripcion.getText(), "in moderation", null, jTextFieldFechainicio.getText(),
                                 jTextFieldFechaFin.getText(),
                                 jTextFieldLugar.getText());
-                DatabaseConnection.getInstance().createEvent(newEvent);
+                EventDao eventDao = new EventDaoImpl();
+                eventDao.createEvent(newEvent);
                 JOptionPane.showMessageDialog(null,
                                 "Tu evento está pendiente de moderación, será publicado en cuanto sea aprobado",
                                 "Evento creado",

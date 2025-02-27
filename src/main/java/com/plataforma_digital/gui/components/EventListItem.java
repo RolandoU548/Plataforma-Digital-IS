@@ -6,7 +6,8 @@ import com.plataforma_digital.config.Colors;
 import com.plataforma_digital.gui.Home;
 import com.plataforma_digital.gui.ViewAllEvents;
 import com.plataforma_digital.gui.ViewEvent;
-import com.plataforma_digital.database.DatabaseConnection;
+import com.plataforma_digital.database.EventDao;
+import com.plataforma_digital.database.impl.EventDaoImpl;
 import com.plataforma_digital.entities.Event;
 
 public class EventListItem extends javax.swing.JPanel {
@@ -173,7 +174,8 @@ public class EventListItem extends javax.swing.JPanel {
         }
 
         private void deleteEvent() {
-                DatabaseConnection.getInstance().deleteEventById(event.getId());
+                EventDao eventDao = new EventDaoImpl();
+                eventDao.deleteEventById(event.getId());
                 viewAllEvents.getEvents();
         }
 }

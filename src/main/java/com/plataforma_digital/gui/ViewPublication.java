@@ -4,7 +4,8 @@ import com.plataforma_digital.config.Colors;
 import com.plataforma_digital.entities.Publication;
 import com.plataforma_digital.gui.components.CommentsSection;
 import com.plataforma_digital.gui.components.ProfileButton;
-import com.plataforma_digital.database.DatabaseConnection;
+import com.plataforma_digital.database.UserDao;
+import com.plataforma_digital.database.impl.UserDaoImpl;
 
 public class ViewPublication extends javax.swing.JPanel {
         private Home home;
@@ -47,9 +48,10 @@ public class ViewPublication extends javax.swing.JPanel {
                 mainTitle.setFont(new java.awt.Font("Segoe UI", 1, 30));
                 mainTitle.setText(event.getTitle());
 
+                UserDao userDao = new UserDaoImpl();
                 author.setFont(new java.awt.Font("Segoe UI", 1, 15));
                 author.setText("Autor: "
-                                + DatabaseConnection.getInstance().getUserById(event.getUserId()).getEmail());
+                                + userDao.getUserById(event.getUserId()).getEmail());
 
                 description.setFont(new java.awt.Font("Segoe UI", 1, 15));
                 description.setText("Descripción: " + event.getDescription());

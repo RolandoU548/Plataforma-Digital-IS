@@ -6,7 +6,8 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import com.plataforma_digital.database.DatabaseConnection;
+import com.plataforma_digital.database.CommentDao;
+import com.plataforma_digital.database.impl.CommentDaoImpl;
 import com.plataforma_digital.entities.Comment;
 import com.plataforma_digital.entities.Publication;
 import com.plataforma_digital.entities.Event;
@@ -23,9 +24,10 @@ public class CommentsContainer extends JPanel {
     }
 
     public void getComments() {
+        CommentDao commentDao = new CommentDaoImpl();
         List<Comment> comments = (publication instanceof Event)
-                ? DatabaseConnection.getInstance().getAllCommentsByEventId(publication.getId())
-                : DatabaseConnection.getInstance().getAllCommentsByPublicationId(publication.getId());
+                ? commentDao.getAllCommentsByEventId(publication.getId())
+                : commentDao.getAllCommentsByPublicationId(publication.getId());
         removeAll();
         for (Comment comment : comments) {
             add(new UserComment(comment));

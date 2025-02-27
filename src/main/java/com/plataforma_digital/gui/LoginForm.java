@@ -10,7 +10,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import com.plataforma_digital.config.Colors;
-import com.plataforma_digital.database.DatabaseConnection;
+import com.plataforma_digital.database.UserDao;
+import com.plataforma_digital.database.impl.UserDaoImpl;
 import com.plataforma_digital.entities.User;
 import com.plataforma_digital.entities.CurrentUser;
 
@@ -170,7 +171,9 @@ public class LoginForm extends JPanel {
         private void login() {
                 String email = emailTextField.getText();
                 String password = new String(passwordTextField.getPassword());
-                User user = DatabaseConnection.getInstance().authenticateUser(email, password);
+                UserDao userDao = new UserDaoImpl();
+                User user = userDao.authenticateUser(email, password);
+
                 if (user == null) {
                         JOptionPane.showMessageDialog(null, "Contraseña o correo incorrectos", "Datos incorrectos",
                                         JOptionPane.ERROR_MESSAGE);

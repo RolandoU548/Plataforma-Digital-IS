@@ -3,7 +3,8 @@ package com.plataforma_digital.gui;
 import javax.swing.JOptionPane;
 
 import com.plataforma_digital.config.Colors;
-import com.plataforma_digital.database.DatabaseConnection;
+import com.plataforma_digital.database.PublicationDao;
+import com.plataforma_digital.database.impl.PublicationDaoImpl;
 import com.plataforma_digital.entities.CurrentUser;
 import com.plataforma_digital.entities.Publication;
 import com.plataforma_digital.gui.components.ProfileButton;;
@@ -281,7 +282,8 @@ public class CreatePublication extends javax.swing.JPanel {
                 Publication newPublication = new Publication(0, CurrentUser.getCurrentUser().getId(),
                                 titleTextField.getText(),
                                 descriptionTextField.getText(), "in moderation", null);
-                DatabaseConnection.getInstance().createPublication(newPublication);
+                PublicationDao publicationDao = new PublicationDaoImpl();
+                publicationDao.createPublication(newPublication);
                 JOptionPane.showMessageDialog(null,
                                 "Tu publicación está pendiente de moderación, será publicada en cuanto sea aprobada",
                                 "Publicación creada",
