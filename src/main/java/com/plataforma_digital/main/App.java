@@ -1,7 +1,7 @@
 package com.plataforma_digital.main;
 
-import com.plataforma_digital.database.DatabaseConnection;
-import com.plataforma_digital.gui.AppUI;
+import com.plataforma_digital.models.database.DatabaseConnection;
+import com.plataforma_digital.views.AppUI;
 
 public class App {
 
