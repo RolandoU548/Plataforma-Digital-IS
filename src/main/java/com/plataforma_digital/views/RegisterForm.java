@@ -1,9 +1,7 @@
 package com.plataforma_digital.views;
 
 import com.plataforma_digital.config.Colors;
-import com.plataforma_digital.models.database.UserDao;
-import com.plataforma_digital.models.database.impl.UserDaoImpl;
-import com.plataforma_digital.models.User;
+import com.plataforma_digital.controllers.RegisterController;
 
 import java.awt.Color;
 
@@ -18,6 +16,7 @@ import javax.swing.JOptionPane;
 
 public class RegisterForm extends JPanel {
         private AppUI appUI;
+        private RegisterController registerController;
         private JPanel jPanel1;
         private JLabel emailLabel;
         private JLabel firstNameLabel;
@@ -29,12 +28,13 @@ public class RegisterForm extends JPanel {
         private JTextField lastNameTextField;
         private JComboBox<String> roleTextField;
         private JPasswordField passwordTextField;
-        private javax.swing.JCheckBox CheckBoxAcceptTerms;
+        private JCheckBox CheckBoxAcceptTerms;
         private JButton registerButton;
         private JButton loginButton;
 
         public RegisterForm(AppUI appUI) {
                 this.appUI = appUI;
+                this.registerController = new RegisterController();
                 initComponents();
         }
 
@@ -94,8 +94,10 @@ public class RegisterForm extends JPanel {
                 registerButton.setBorderPainted(false);
                 registerButton.addActionListener(e -> {
                         if (validateFields()) {
-                                register();
-                                clearFields();
+                                if (register()) {
+                                        clearFields();
+                                        appUI.showPanel("loginForm");
+                                }
                         }
                 });
 
@@ -219,41 +221,12 @@ public class RegisterForm extends JPanel {
                 return true;
         }
 
-        private void register() {
+        private boolean register() {
                 String email = emailTextField.getText();
                 String firstName = firstNameTextField.getText();
                 String lastName = lastNameTextField.getText();
                 String password = new String(passwordTextField.getPassword());
                 String role = roleTextField.getSelectedItem().toString();
-                UserDao userDao = new UserDaoImpl();
-                switch (role) {
-                        case "Estudiante":
-                                role = "Student";
-                                break;
-                        case "Profesor":
-                                role = "Professor";
-                                break;
-                        case "Personal administrativo":
-                                role = "Administrative Staff";
-                                break;
-                        default:
-                                System.out.println("Role wasn't recognized");
-                }
-                if (userDao.getUserByEmail(email) != null) {
-                        System.out.println("User was not registered because the email is already in use");
-                        JOptionPane.showMessageDialog(null,
-                                        "Utiliza otro correo electrónico",
-                                        "Correo ya registrado",
-                                        JOptionPane.WARNING_MESSAGE);
-                        return;
-                }
-                User user = new User(0, email, firstName, lastName, role, password);
-                userDao.createUser(user);
-                System.out.println("User registered with ID: " + user.getId());
-                JOptionPane.showMessageDialog(null,
-                                "Usuario '" + email + "' registrado exitosamente. Por favor inicia sesión",
-                                "Usuario registrado",
-                                JOptionPane.INFORMATION_MESSAGE);
-                appUI.showPanel("loginForm");
+                return registerController.registerUser(email, firstName, lastName, password, role);
         }
 }

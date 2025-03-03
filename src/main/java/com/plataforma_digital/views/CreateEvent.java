@@ -6,11 +6,8 @@ import javax.swing.JOptionPane;
 import com.plataforma_digital.views.components.ProfileButton;
 
 import com.plataforma_digital.config.Colors;
-import com.plataforma_digital.models.database.EventDao;
-import com.plataforma_digital.models.database.impl.EventDaoImpl;
-import com.plataforma_digital.models.CurrentUser;
-import com.plataforma_digital.models.Event;
 import com.plataforma_digital.utils.DateUtils;
+import com.plataforma_digital.controllers.CreateEventController;
 
 public class CreateEvent extends javax.swing.JPanel {
         private Home home;
@@ -36,9 +33,11 @@ public class CreateEvent extends javax.swing.JPanel {
         private javax.swing.JTextField jTextFieldLugar;
         private javax.swing.JTextField jTextFieldTitulo;
         private javax.swing.JComboBox<String> listadeEstados;
+        private CreateEventController createEventController;
 
         public CreateEvent(Home home) {
                 this.home = home;
+                this.createEventController = new CreateEventController();
                 initComponents();
         }
 
@@ -415,16 +414,11 @@ public class CreateEvent extends javax.swing.JPanel {
         }
 
         private void createEvent() {
-                Event newEvent = new Event(0, CurrentUser.getCurrentUser().getId(),
+                createEventController.createEvent(
                                 jTextFieldTitulo.getText(),
-                                jTextFieldDescripcion.getText(), "in moderation", null, jTextFieldFechainicio.getText(),
+                                jTextFieldDescripcion.getText(),
+                                jTextFieldFechainicio.getText(),
                                 jTextFieldFechaFin.getText(),
                                 jTextFieldLugar.getText());
-                EventDao eventDao = new EventDaoImpl();
-                eventDao.createEvent(newEvent);
-                JOptionPane.showMessageDialog(null,
-                                "Tu evento está pendiente de moderación, será publicado en cuanto sea aprobado",
-                                "Evento creado",
-                                JOptionPane.INFORMATION_MESSAGE);
         }
 }

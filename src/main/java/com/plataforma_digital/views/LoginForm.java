@@ -10,13 +10,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import com.plataforma_digital.config.Colors;
-import com.plataforma_digital.models.database.UserDao;
-import com.plataforma_digital.models.database.impl.UserDaoImpl;
-import com.plataforma_digital.models.User;
-import com.plataforma_digital.models.CurrentUser;
+import com.plataforma_digital.controllers.LoginController;
 
 public class LoginForm extends JPanel {
         private AppUI appUI;
+        private LoginController loginController;
         private JPanel jPanel1;
         private JLabel emailLabel;
         private JLabel passwordLabel;
@@ -28,8 +26,8 @@ public class LoginForm extends JPanel {
 
         public LoginForm(AppUI appUI) {
                 this.appUI = appUI;
+                this.loginController = new LoginController();
                 initComponents();
-
         }
 
         private void initComponents() {
@@ -61,8 +59,10 @@ public class LoginForm extends JPanel {
                 loginButton.setBorderPainted(false);
                 loginButton.addActionListener(e -> {
                         if (validateFields()) {
-                                login();
-                                clearFields();
+                                if (login()) {
+                                        clearFields();
+                                        appUI.addAndShowPanel(new Home(appUI), "home");
+                                }
                         }
                 });
 
@@ -86,17 +86,15 @@ public class LoginForm extends JPanel {
                                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                                                 .addGap(18, 18, 18)
-                                                                .addGroup(jPanel1Layout
-                                                                                .createParallelGroup(
-                                                                                                javax.swing.GroupLayout.Alignment.LEADING,
-                                                                                                false)
+                                                                .addGroup(jPanel1Layout.createParallelGroup(
+                                                                                javax.swing.GroupLayout.Alignment.LEADING,
+                                                                                false)
                                                                                 .addComponent(passwordLabel)
                                                                                 .addComponent(emailLabel)
                                                                                 .addComponent(forgottenPasswordButton)
                                                                                 .addComponent(registerButton,
                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                                241,
-                                                                                                Short.MAX_VALUE)
+                                                                                                241, Short.MAX_VALUE)
                                                                                 .addComponent(loginButton,
                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
@@ -168,22 +166,9 @@ public class LoginForm extends JPanel {
                 return true;
         }
 
-        private void login() {
+        private boolean login() {
                 String email = emailTextField.getText();
                 String password = new String(passwordTextField.getPassword());
-                UserDao userDao = new UserDaoImpl();
-                User user = userDao.authenticateUser(email, password);
-
-                if (user == null) {
-                        JOptionPane.showMessageDialog(null, "Contraseña o correo incorrectos", "Datos incorrectos",
-                                        JOptionPane.ERROR_MESSAGE);
-                        return;
-                }
-
-                CurrentUser.setCurrentUser(user);
-                appUI.addAndShowPanel(new Home(appUI), "home");
-                System.out.println("User \"" + email + "\" logged in");
-                JOptionPane.showMessageDialog(null, "Bienvenido, " + email + "!", "Bienvenido",
-                                JOptionPane.INFORMATION_MESSAGE);
+                return loginController.authenticateUser(email, password);
         }
 }

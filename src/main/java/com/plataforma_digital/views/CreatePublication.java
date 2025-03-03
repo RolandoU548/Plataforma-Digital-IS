@@ -3,14 +3,12 @@ package com.plataforma_digital.views;
 import javax.swing.JOptionPane;
 
 import com.plataforma_digital.config.Colors;
-import com.plataforma_digital.models.database.PublicationDao;
-import com.plataforma_digital.models.database.impl.PublicationDaoImpl;
-import com.plataforma_digital.models.CurrentUser;
-import com.plataforma_digital.models.Publication;
-import com.plataforma_digital.views.components.ProfileButton;;
+import com.plataforma_digital.controllers.CreatePublicationController;
+import com.plataforma_digital.views.components.ProfileButton;
 
 public class CreatePublication extends javax.swing.JPanel {
         private Home home;
+        private CreatePublicationController publicationController;
         private javax.swing.JButton backButton;
         private javax.swing.JButton cancelButton;
         private javax.swing.JLabel description;
@@ -29,6 +27,7 @@ public class CreatePublication extends javax.swing.JPanel {
 
         public CreatePublication(Home home) {
                 this.home = home;
+                this.publicationController = new CreatePublicationController();
                 initComponents();
         }
 
@@ -136,8 +135,9 @@ public class CreatePublication extends javax.swing.JPanel {
                 postButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
                 postButton.addActionListener(e -> {
                         if (validateFields()) {
-                                createPublication();
-                                clearFields();
+                                if (createPublication()) {
+                                        clearFields();
+                                }
                         }
                 });
 
@@ -160,9 +160,8 @@ public class CreatePublication extends javax.swing.JPanel {
                                                                                 javax.swing.GroupLayout.Alignment.LEADING)
                                                                                 .addGroup(layout.createSequentialGroup()
                                                                                                 .addGap(28, 28, 28)
-                                                                                                .addGroup(layout
-                                                                                                                .createParallelGroup(
-                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                                .addGroup(layout.createParallelGroup(
+                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
                                                                                                                 .addComponent(title)
                                                                                                                 .addComponent(titleTextField,
                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
@@ -218,9 +217,8 @@ public class CreatePublication extends javax.swing.JPanel {
                                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                                                 Short.MAX_VALUE))
                                                                                 .addGroup(layout.createSequentialGroup()
-                                                                                                .addGroup(layout
-                                                                                                                .createParallelGroup(
-                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                                .addGroup(layout.createParallelGroup(
+                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
                                                                                                                 .addGroup(layout.createSequentialGroup()
                                                                                                                                 .addGap(1, 1, 1)
                                                                                                                                 .addComponent(mainTitle))
@@ -256,9 +254,8 @@ public class CreatePublication extends javax.swing.JPanel {
                                                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED,
                                                                                                                 59,
                                                                                                                 Short.MAX_VALUE)
-                                                                                                .addGroup(layout
-                                                                                                                .createParallelGroup(
-                                                                                                                                javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                                                .addGroup(layout.createParallelGroup(
+                                                                                                                javax.swing.GroupLayout.Alignment.BASELINE)
                                                                                                                 .addComponent(cancelButton)
                                                                                                                 .addComponent(postButton))
                                                                                                 .addGap(40, 40, 40)))));
@@ -278,15 +275,9 @@ public class CreatePublication extends javax.swing.JPanel {
                 return true;
         }
 
-        private void createPublication() {
-                Publication newPublication = new Publication(0, CurrentUser.getCurrentUser().getId(),
-                                titleTextField.getText(),
-                                descriptionTextField.getText(), "in moderation", null);
-                PublicationDao publicationDao = new PublicationDaoImpl();
-                publicationDao.createPublication(newPublication);
-                JOptionPane.showMessageDialog(null,
-                                "Tu publicación está pendiente de moderación, será publicada en cuanto sea aprobada",
-                                "Publicación creada",
-                                JOptionPane.INFORMATION_MESSAGE);
+        private boolean createPublication() {
+                String title = titleTextField.getText();
+                String description = descriptionTextField.getText();
+                return publicationController.createPublication(title, description);
         }
 }
