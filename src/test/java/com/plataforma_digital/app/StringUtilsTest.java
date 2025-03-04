@@ -26,7 +26,7 @@ public class StringUtilsTest {
 
     public void testSingleLowerCaseLetter() {
         String resultado = StringUtils.capitalize("a");
-        assertEquals("A", resultado, "Debería capitalizar una letra minúscula");
+        assertEquals("A", resultado, "Debería convertir una letra minúscula");
     }
 
     @Test
@@ -38,18 +38,21 @@ public class StringUtilsTest {
     @Test
     public void testMultipleLowerCaseLetters() {
         String resultado = StringUtils.capitalize("java");
-        assertEquals("Java", resultado, "Debería capitalizar solo la primera letra y poner las demás en minúscula");
+        assertEquals("Java", resultado,
+                "Debería convertir solo la primera letra a mayúscula y poner las demás en minúscula");
     }
 
     @Test
     public void testMultipleUpperCaseLetters() {
         String resultado = StringUtils.capitalize("JAVA");
-        assertEquals("Java", resultado, "Debería capitalizar solo la primera letra y poner las demás en minúscula");
+        assertEquals("Java", resultado,
+                "Debería convertir solo la primera letra a mayúscula y poner las demás en minúscula");
     }
 
     @Test
     public void testMultipleMixedCaseLetters() {
         String resultado = StringUtils.capitalize("jAvA");
-        assertEquals("Java", resultado, "Debería capitalizar solo la primera letra y poner las demás en minúscula");
+        assertEquals("Java", resultado,
+                "Debería convertir solo la primera letra a mayúscula y poner las demás en minúscula");
     }
 }
