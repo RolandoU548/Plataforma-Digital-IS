@@ -1,31 +1,33 @@
 package com.plataforma_digital.views;
 
 import com.plataforma_digital.config.Colors;
+import com.plataforma_digital.controllers.ViewPublicationController;
 import com.plataforma_digital.models.Publication;
+import com.plataforma_digital.models.User;
 import com.plataforma_digital.views.components.CommentsSection;
 import com.plataforma_digital.views.components.ProfileButton;
-import com.plataforma_digital.models.database.UserDao;
-import com.plataforma_digital.models.database.impl.UserDaoImpl;
 
 public class ViewPublication extends javax.swing.JPanel {
         private Home home;
-        private Publication event;
+        private Publication publication;
+        private ViewPublicationController viewPublicationController;
         private javax.swing.JLabel author;
         private javax.swing.JButton backButton;
-        private javax.swing.JButton createEventButton;
+        private javax.swing.JButton createPublicationButton;
         private javax.swing.JLabel description;
         private javax.swing.JLabel image;
         private javax.swing.JPanel jPanel1;
         private javax.swing.JScrollPane jScrollPane1;
         private javax.swing.JLabel mainTitle;
-        private javax.swing.JButton myEvents;
+        private javax.swing.JButton myPublications;
         private javax.swing.JButton notification;
         private ProfileButton profile;
         private CommentsSection commentsSection;
 
-        public ViewPublication(Home home, Publication event) {
+        public ViewPublication(Home home, Publication publication) {
                 this.home = home;
-                this.event = event;
+                this.publication = publication;
+                this.viewPublicationController = new ViewPublicationController();
                 initComponents();
         }
 
@@ -35,61 +37,60 @@ public class ViewPublication extends javax.swing.JPanel {
                 description = new javax.swing.JLabel();
                 jPanel1 = new javax.swing.JPanel();
                 backButton = new javax.swing.JButton();
-                createEventButton = new javax.swing.JButton();
-                myEvents = new javax.swing.JButton();
+                createPublicationButton = new javax.swing.JButton();
+                myPublications = new javax.swing.JButton();
                 notification = new javax.swing.JButton();
                 profile = new ProfileButton(home);
                 image = new javax.swing.JLabel();
 
-                commentsSection = new CommentsSection(event);
+                commentsSection = new CommentsSection(publication);
                 jScrollPane1 = new javax.swing.JScrollPane(commentsSection);
                 jScrollPane1.setBorder(null);
 
                 mainTitle.setFont(new java.awt.Font("Segoe UI", 1, 30));
-                mainTitle.setText(event.getTitle());
+                mainTitle.setText(publication.getTitle());
 
-                UserDao userDao = new UserDaoImpl();
+                User authorUser = viewPublicationController.getPublicationAuthor(publication.getUserId());
                 author.setFont(new java.awt.Font("Segoe UI", 1, 15));
-                author.setText("Autor: "
-                                + userDao.getUserById(event.getUserId()).getEmail());
+                author.setText("Autor: " + authorUser.getEmail());
 
                 description.setFont(new java.awt.Font("Segoe UI", 1, 15));
-                description.setText("Descripción: " + event.getDescription());
+                description.setText("Descripción: " + publication.getDescription());
 
                 jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
                 backButton.setBackground(Colors.BACKGROUND_COLOR);
                 backButton.setFont(new java.awt.Font("Segoe UI", 1, 18));
                 backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Arrow.png")));
-                backButton.setText("Eventos");
+                backButton.setText("Publicaciones");
                 backButton.setBorder(null);
                 backButton.setBorderPainted(false);
                 backButton.setIconTextGap(30);
 
-                createEventButton.setBackground(Colors.BACKGROUND_COLOR);
-                createEventButton.setFont(new java.awt.Font("Segoe UI", 1, 14));
-                createEventButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/plain.png")));
-                createEventButton.setText("Crear Evento");
-                createEventButton.setBorder(null);
-                createEventButton.setBorderPainted(false);
-                createEventButton.setIconTextGap(10);
-                createEventButton.addActionListener(e -> {
-                        CreateEvent createEvent = new CreateEvent(home);
-                        home.createEvent = createEvent;
-                        home.addAndShowPanel(createEvent, "createEvent");
+                createPublicationButton.setBackground(Colors.BACKGROUND_COLOR);
+                createPublicationButton.setFont(new java.awt.Font("Segoe UI", 1, 14));
+                createPublicationButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/plain.png")));
+                createPublicationButton.setText("Crear Publicación");
+                createPublicationButton.setBorder(null);
+                createPublicationButton.setBorderPainted(false);
+                createPublicationButton.setIconTextGap(10);
+                createPublicationButton.addActionListener(e -> {
+                        CreatePublication createPublication = new CreatePublication(home);
+                        home.createPublication = createPublication;
+                        home.addAndShowPanel(createPublication, "createPublication");
                 });
 
-                myEvents.setBackground(Colors.BACKGROUND_COLOR);
-                myEvents.setFont(new java.awt.Font("Segoe UI", 1, 14));
-                myEvents.setIcon(new javax.swing.ImageIcon(getClass().getResource("/folder.png")));
-                myEvents.setText("Mis Eventos");
-                myEvents.setBorder(null);
-                myEvents.setBorderPainted(false);
-                myEvents.setIconTextGap(10);
-                myEvents.addActionListener(e -> {
-                        ViewAllEvents viewAllEvents = new ViewAllEvents(home);
-                        home.viewAllEvents = viewAllEvents;
-                        home.addAndShowPanel(viewAllEvents, "viewAllEvents");
+                myPublications.setBackground(Colors.BACKGROUND_COLOR);
+                myPublications.setFont(new java.awt.Font("Segoe UI", 1, 14));
+                myPublications.setIcon(new javax.swing.ImageIcon(getClass().getResource("/folder.png")));
+                myPublications.setText("Mis Publicaciones");
+                myPublications.setBorder(null);
+                myPublications.setBorderPainted(false);
+                myPublications.setIconTextGap(10);
+                myPublications.addActionListener(e -> {
+                        ViewAllPublications viewAllPublications = new ViewAllPublications(home);
+                        home.viewAllPublications = viewAllPublications;
+                        home.addAndShowPanel(viewAllPublications, "viewAllPublications");
                 });
 
                 javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -97,10 +98,9 @@ public class ViewPublication extends javax.swing.JPanel {
                 jPanel1Layout.setHorizontalGroup(
                                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                                                .addGroup(jPanel1Layout
-                                                                                .createParallelGroup(
-                                                                                                javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                                                false)
+                                                                .addGroup(jPanel1Layout.createParallelGroup(
+                                                                                javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                                false)
                                                                                 .addComponent(backButton,
                                                                                                 javax.swing.GroupLayout.Alignment.LEADING,
                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
@@ -113,11 +113,11 @@ public class ViewPublication extends javax.swing.JPanel {
                                                                                                                 .createParallelGroup(
                                                                                                                                 javax.swing.GroupLayout.Alignment.LEADING,
                                                                                                                                 false)
-                                                                                                                .addComponent(createEventButton,
+                                                                                                                .addComponent(createPublicationButton,
                                                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                                                                 Short.MAX_VALUE)
-                                                                                                                .addComponent(myEvents,
+                                                                                                                .addComponent(myPublications,
                                                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                                                                 Short.MAX_VALUE))))
@@ -128,9 +128,9 @@ public class ViewPublication extends javax.swing.JPanel {
                                                                 .addGap(18, 18, 18)
                                                                 .addComponent(backButton)
                                                                 .addGap(40, 40, 40)
-                                                                .addComponent(createEventButton)
+                                                                .addComponent(createPublicationButton)
                                                                 .addGap(32, 32, 32)
-                                                                .addComponent(myEvents)
+                                                                .addComponent(myPublications)
                                                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                 Short.MAX_VALUE)));
 
@@ -155,9 +155,8 @@ public class ViewPublication extends javax.swing.JPanel {
                                                                                 javax.swing.GroupLayout.Alignment.LEADING)
                                                                                 .addGroup(layout.createSequentialGroup()
                                                                                                 .addGap(44, 44, 44)
-                                                                                                .addGroup(layout
-                                                                                                                .createParallelGroup(
-                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                                .addGroup(layout.createParallelGroup(
+                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
                                                                                                                 .addGroup(layout.createSequentialGroup()
                                                                                                                                 .addComponent(mainTitle)
                                                                                                                                 .addGap(12, 12, 12)
@@ -209,5 +208,4 @@ public class ViewPublication extends javax.swing.JPanel {
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addContainerGap(24, Short.MAX_VALUE)));
         }
-
 }

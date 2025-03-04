@@ -3,12 +3,8 @@ package com.plataforma_digital.views.components;
 import javax.swing.JOptionPane;
 import java.awt.Dimension;
 
-import com.plataforma_digital.models.database.CommentDao;
-import com.plataforma_digital.models.database.impl.CommentDaoImpl;
-import com.plataforma_digital.models.Comment;
-import com.plataforma_digital.models.CurrentUser;
+import com.plataforma_digital.controllers.components.AddCommentController;
 import com.plataforma_digital.models.Publication;
-import com.plataforma_digital.models.Event;
 
 public class AddComment extends javax.swing.JPanel {
         private javax.swing.JButton cancelButton;
@@ -17,10 +13,12 @@ public class AddComment extends javax.swing.JPanel {
         private javax.swing.JLabel file3;
         private Publication publication;
         private CommentsContainer commentsContainer;
+        private AddCommentController addCommentController;
 
         public AddComment(Publication publication, CommentsContainer commentsContainer) {
                 this.publication = publication;
                 this.commentsContainer = commentsContainer;
+                this.addCommentController = new AddCommentController();
                 setMaximumSize(new Dimension(Integer.MAX_VALUE, 100));
                 initComponents();
         }
@@ -42,7 +40,7 @@ public class AddComment extends javax.swing.JPanel {
 
                 commentButton.addActionListener(e -> {
                         if (validateFields()) {
-                                addComment();
+                                addCommentController.addComment(publication, commentTextField.getText());
                                 commentsContainer.getComments();
                                 clearFields();
                         }
@@ -59,8 +57,7 @@ public class AddComment extends javax.swing.JPanel {
                                                                                 javax.swing.GroupLayout.Alignment.TRAILING)
                                                                                 .addComponent(commentTextField)
                                                                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING,
-                                                                                                layout
-                                                                                                                .createSequentialGroup()
+                                                                                                layout.createSequentialGroup()
                                                                                                                 .addGap(0, 252, Short.MAX_VALUE)
                                                                                                                 .addComponent(cancelButton,
                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
@@ -99,30 +96,9 @@ public class AddComment extends javax.swing.JPanel {
                                                                 .addContainerGap()));
         }
 
-        private void addComment() {
-                CommentDao commentDao = new CommentDaoImpl();
-                if (publication instanceof Event) {
-                        commentDao
-                                        .createComment(
-                                                        new Comment(0, CurrentUser.getCurrentUser().getId(), 0,
-                                                                        publication.getId(),
-                                                                        commentTextField.getText(),
-                                                                        null));
-                } else {
-                        commentDao
-                                        .createComment(
-                                                        new Comment(0, CurrentUser.getCurrentUser().getId(),
-                                                                        publication.getId(), 0,
-                                                                        commentTextField.getText(),
-                                                                        null));
-                }
-
-        }
-
         private boolean validateFields() {
                 if (commentTextField.getText().isEmpty()) {
-                        JOptionPane.showMessageDialog(null, "Escribe un comentario",
-                                        "Comentario requerido",
+                        JOptionPane.showMessageDialog(null, "Escribe un comentario", "Comentario requerido",
                                         JOptionPane.INFORMATION_MESSAGE);
                         return false;
                 }

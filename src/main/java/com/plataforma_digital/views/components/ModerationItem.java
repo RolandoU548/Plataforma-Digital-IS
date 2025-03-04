@@ -2,13 +2,10 @@ package com.plataforma_digital.views.components;
 
 import java.awt.Dimension;
 
-import com.plataforma_digital.models.Publication;
-import com.plataforma_digital.models.Event;
 import com.plataforma_digital.config.Colors;
-import com.plataforma_digital.models.database.EventDao;
-import com.plataforma_digital.models.database.PublicationDao;
-import com.plataforma_digital.models.database.impl.EventDaoImpl;
-import com.plataforma_digital.models.database.impl.PublicationDaoImpl;
+import com.plataforma_digital.controllers.components.ModerationItemController;
+import com.plataforma_digital.models.Event;
+import com.plataforma_digital.models.Publication;
 import com.plataforma_digital.views.Moderation;
 
 import javax.swing.JOptionPane;
@@ -21,10 +18,12 @@ public class ModerationItem extends javax.swing.JPanel {
         private javax.swing.JLabel img;
         private javax.swing.JLabel postTitle;
         private javax.swing.JButton rejectButton;
+        private ModerationItemController moderationItemController;
 
         public ModerationItem(Moderation moderation, Publication publication) {
                 this.moderation = moderation;
                 this.publication = publication;
+                this.moderationItemController = new ModerationItemController();
                 setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.BLACK, 1, true));
                 setMaximumSize(new Dimension(Integer.MAX_VALUE, 135));
                 initComponents();
@@ -108,38 +107,28 @@ public class ModerationItem extends javax.swing.JPanel {
         }
 
         private void approvePublication() {
-                publication.setState("approved");
+                moderationItemController.approvePublication(publication);
                 if (publication instanceof Event) {
-                        Event event = (Event) publication;
-                        EventDao eventDao = new EventDaoImpl();
-                        eventDao.updateEvent(event);
                         JOptionPane.showMessageDialog(null, "El evento ha sido aprobado", "Evento aprobado",
                                         JOptionPane.NO_OPTION);
-                        moderation.getEvents();
+                        moderation.loadEvents();
                 } else {
-                        PublicationDao publicationDao = new PublicationDaoImpl();
-                        publicationDao.updatePublication(publication);
                         JOptionPane.showMessageDialog(null, "La publicación ha sido aprobada", "Publicación aprobada",
                                         JOptionPane.NO_OPTION);
-                        moderation.getPublications();
+                        moderation.loadPublications();
                 }
         }
 
         private void rejectPublication() {
-                publication.setState("rejected");
+                moderationItemController.rejectPublication(publication);
                 if (publication instanceof Event) {
-                        Event event = (Event) publication;
-                        EventDao eventDao = new EventDaoImpl();
-                        eventDao.updateEvent(event);
                         JOptionPane.showMessageDialog(null, "El evento ha sido rechazado", "Evento rechazado",
                                         JOptionPane.NO_OPTION);
-                        moderation.getEvents();
+                        moderation.loadEvents();
                 } else {
-                        PublicationDao publicationDao = new PublicationDaoImpl();
-                        publicationDao.updatePublication(publication);
                         JOptionPane.showMessageDialog(null, "La publicación ha sido rechazada", "Publicación rechazada",
                                         JOptionPane.NO_OPTION);
-                        moderation.getPublications();
+                        moderation.loadPublications();
                 }
         }
 }

@@ -1,9 +1,8 @@
 package com.plataforma_digital.views;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -13,10 +12,8 @@ import javax.swing.SwingConstants;
 import java.awt.GridLayout;
 import java.awt.Color;
 import java.awt.BorderLayout;
-import java.util.Date;
-import com.plataforma_digital.models.database.EventDao;
-import com.plataforma_digital.models.database.impl.EventDaoImpl;
-import com.plataforma_digital.models.Event;
+
+import com.plataforma_digital.controllers.EventsCalendarController;
 
 public class EventsCalendar extends JPanel {
     public Home home;
@@ -24,29 +21,13 @@ public class EventsCalendar extends JPanel {
     private JPanel daysPanel;
     private Calendar calendar;
     private List<Date> highlightedDates;
+    private EventsCalendarController eventsCalendarController;
 
     public EventsCalendar(Home home) {
         this.home = home;
-        highlightedDates = getHighlightedDates();
+        this.eventsCalendarController = new EventsCalendarController();
+        highlightedDates = eventsCalendarController.getHighlightedDates();
         initComponents();
-    }
-
-    public List<Date> getHighlightedDates() {
-        highlightedDates = new ArrayList<>();
-        EventDao eventDao = new EventDaoImpl();
-        List<Event> events = eventDao.getAllEventsByState("approved");
-        SimpleDateFormat originalFormat = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat targetFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            for (Event event : events) {
-                Date date = originalFormat.parse(event.getStartDate());
-                String formattedDate = targetFormat.format(date);
-                highlightedDates.add(targetFormat.parse(formattedDate));
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return highlightedDates;
     }
 
     private void updateCalendar() {

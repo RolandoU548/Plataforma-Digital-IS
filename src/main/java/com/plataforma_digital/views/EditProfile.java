@@ -9,14 +9,13 @@ import javax.swing.JTextField;
 import javax.swing.JPanel;
 
 import com.plataforma_digital.config.Colors;
-import com.plataforma_digital.models.database.UserDao;
-import com.plataforma_digital.models.database.impl.UserDaoImpl;
+import com.plataforma_digital.controllers.EditProfileController;
 import com.plataforma_digital.models.CurrentUser;
-import com.plataforma_digital.models.User;
 import com.plataforma_digital.utils.StringUtils;
 
 public class EditProfile extends JPanel {
         public Home home;
+        private EditProfileController editProfileController;
         JLabel editProfileLabel;
         private JTextField emailTextField;
         private JTextField firstNameTextField;
@@ -40,6 +39,7 @@ public class EditProfile extends JPanel {
 
         public EditProfile(Home home) {
                 this.home = home;
+                this.editProfileController = new EditProfileController();
                 initComponents();
                 updateCurrentUserInfo();
         }
@@ -70,33 +70,25 @@ public class EditProfile extends JPanel {
 
                 configButton.setBackground(Colors.BACKGROUND_COLOR);
                 configButton.setFont(new java.awt.Font("Segoe UI", 1, 14));
-                configButton
-                                .setIcon(new javax.swing.ImageIcon(
-                                                getClass().getResource("/Arrow.png")));
+                configButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Arrow.png")));
                 configButton.setText(" Configuración");
                 configButton.setBorderPainted(false);
 
                 editProfileButton.setBackground(Colors.BACKGROUND_COLOR);
                 editProfileButton.setFont(new java.awt.Font("Segoe UI", 1, 14));
-                editProfileButton
-                                .setIcon(new javax.swing.ImageIcon(
-                                                getClass().getResource("/Edit.png")));
+                editProfileButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Edit.png")));
                 editProfileButton.setText(" Editar perfil");
                 editProfileButton.setBorderPainted(false);
 
                 notificationsButton.setBackground(Colors.BACKGROUND_COLOR);
                 notificationsButton.setFont(new java.awt.Font("Segoe UI", 1, 14));
-                notificationsButton
-                                .setIcon(new javax.swing.ImageIcon(
-                                                getClass().getResource("/Bell2.png")));
+                notificationsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bell2.png")));
                 notificationsButton.setText("  Notificaciones");
                 notificationsButton.setBorderPainted(false);
 
                 securityButton.setBackground(Colors.BACKGROUND_COLOR);
                 securityButton.setFont(new java.awt.Font("Segoe UI", 1, 14));
-                securityButton
-                                .setIcon(new javax.swing.ImageIcon(
-                                                getClass().getResource("/Lock.png")));
+                securityButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Lock.png")));
                 securityButton.setText("  Seguridad");
                 securityButton.setBorderPainted(false);
 
@@ -130,17 +122,11 @@ public class EditProfile extends JPanel {
                 editProfileLabel.setFont(new java.awt.Font("Segoe UI", 1, 30));
                 editProfileLabel.setText("Editar Perfil");
 
-                LabelImgUser1
-                                .setIcon(new javax.swing.ImageIcon(
-                                                getClass().getResource("/user1.png")));
+                LabelImgUser1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user1.png")));
 
-                LabelImgBell
-                                .setIcon(new javax.swing.ImageIcon(
-                                                getClass().getResource("/Bell3.png")));
+                LabelImgBell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bell3.png")));
 
-                jLabelImgUser2
-                                .setIcon(new javax.swing.ImageIcon(
-                                                getClass().getResource("/user2.png")));
+                jLabelImgUser2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user2.png")));
 
                 firstNameLabel.setFont(new java.awt.Font("Segoe UI", 1, 14));
                 firstNameLabel.setText("Nombre");
@@ -248,8 +234,7 @@ public class EditProfile extends JPanel {
                                                                                                                 .addComponent(LabelImgUser1))))
                                                                 .addPreferredGap(
                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                                                                21,
-                                                                                Short.MAX_VALUE)
+                                                                                21, Short.MAX_VALUE)
                                                                 .addComponent(firstNameLabel)
                                                                 .addPreferredGap(
                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -309,12 +294,10 @@ public class EditProfile extends JPanel {
                                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING,
                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                Short.MAX_VALUE)
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING,
                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                Short.MAX_VALUE));
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
                 saveProfileButton.addActionListener(e -> {
                         if (validateFields()) {
                                 updateProfileInfo();
@@ -359,15 +342,10 @@ public class EditProfile extends JPanel {
         }
 
         private void updateProfileInfo() {
-                User updatedUser = new User(CurrentUser.getCurrentUser().getId(), emailTextField.getText(),
-                                firstNameTextField.getText(),
-                                lastNameTextField.getText(), CurrentUser.getCurrentUser().getRole(),
-                                passwordTextField.getText());
-                UserDao userDao = new UserDaoImpl();
-                userDao.updateUser(updatedUser);
-                CurrentUser.setCurrentUser(updatedUser);
-                System.out.println("User info has been updated");
-                JOptionPane.showMessageDialog(null, "Los datos del usuario se han actualizado!", "Datos actualizados",
-                                JOptionPane.INFORMATION_MESSAGE);
+                String email = emailTextField.getText();
+                String firstName = firstNameTextField.getText();
+                String lastName = lastNameTextField.getText();
+                String password = passwordTextField.getText();
+                editProfileController.updateProfileInfo(email, firstName, lastName, password);
         }
 }

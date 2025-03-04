@@ -1,18 +1,14 @@
 package com.plataforma_digital.views;
 
-import java.util.List;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.Dimension;
+import java.util.List;
 
 import com.plataforma_digital.config.Colors;
-import com.plataforma_digital.models.database.EventDao;
-import com.plataforma_digital.models.database.PublicationDao;
-import com.plataforma_digital.models.database.impl.EventDaoImpl;
-import com.plataforma_digital.models.database.impl.PublicationDaoImpl;
+import com.plataforma_digital.controllers.ModerationController;
 import com.plataforma_digital.models.Event;
 import com.plataforma_digital.models.Publication;
 import com.plataforma_digital.views.components.ModerationItem;
@@ -32,12 +28,14 @@ public class Moderation extends javax.swing.JPanel {
         private javax.swing.JPanel moderationContainer;
         private JPanel publicationsContainer = new JPanel();
         private JPanel eventsContainer = new JPanel();
+        private ModerationController moderationController;
 
         public Moderation(Home home) {
                 this.home = home;
-                getPublications();
-                getEvents();
+                this.moderationController = new ModerationController();
                 initComponents();
+                loadPublications();
+                loadEvents();
         }
 
         private void initComponents() {
@@ -144,7 +142,8 @@ public class Moderation extends javax.swing.JPanel {
                 layout.setVerticalGroup(
                                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                Short.MAX_VALUE)
                                                 .addGroup(layout.createSequentialGroup()
                                                                 .addGap(19, 19, 19)
                                                                 .addGroup(layout.createParallelGroup(
@@ -165,10 +164,8 @@ public class Moderation extends javax.swing.JPanel {
                                                                                 Short.MAX_VALUE)));
         }
 
-        public void getPublications() {
-                PublicationDao publicationDao = new PublicationDaoImpl();
-                List<Publication> publications = publicationDao
-                                .getAllPublicationsByState("in moderation");
+        public void loadPublications() {
+                List<Publication> publications = moderationController.getPublications();
                 publicationsContainer.removeAll();
                 publicationsContainer.setLayout(new BoxLayout(publicationsContainer, BoxLayout.Y_AXIS));
                 if (publications.size() == 0) {
@@ -190,10 +187,8 @@ public class Moderation extends javax.swing.JPanel {
                 publicationsContainer.repaint();
         }
 
-        public void getEvents() {
-                EventDao eventDao = new EventDaoImpl();
-                List<Event> events = eventDao
-                                .getAllEventsByState("in moderation");
+        public void loadEvents() {
+                List<Event> events = moderationController.getEvents();
                 eventsContainer.removeAll();
                 eventsContainer.setLayout(new BoxLayout(eventsContainer, BoxLayout.Y_AXIS));
                 if (events.size() == 0) {
@@ -206,8 +201,8 @@ public class Moderation extends javax.swing.JPanel {
                         eventsLabel.setFont(new java.awt.Font("Segoe UI", 1, 15));
                         eventsLabel.setAlignmentX(CENTER_ALIGNMENT);
                         eventsContainer.add(eventsLabel);
-                        for (Event publication : events) {
-                                eventsContainer.add(new ModerationItem(this, publication));
+                        for (Event event : events) {
+                                eventsContainer.add(new ModerationItem(this, event));
                                 eventsContainer.add(Box.createRigidArea(new Dimension(0, 10)));
                         }
                 }

@@ -1,7 +1,6 @@
 package com.plataforma_digital.views;
 
 import javax.swing.JPanel;
-
 import java.awt.CardLayout;
 import java.awt.BorderLayout;
 

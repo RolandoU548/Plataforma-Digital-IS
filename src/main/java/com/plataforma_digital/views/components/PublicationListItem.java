@@ -3,11 +3,10 @@ package com.plataforma_digital.views.components;
 import java.awt.Dimension;
 
 import com.plataforma_digital.config.Colors;
+import com.plataforma_digital.controllers.components.PublicationListItemController;
 import com.plataforma_digital.views.Home;
 import com.plataforma_digital.views.ViewAllPublications;
 import com.plataforma_digital.views.ViewPublication;
-import com.plataforma_digital.models.database.PublicationDao;
-import com.plataforma_digital.models.database.impl.PublicationDaoImpl;
 import com.plataforma_digital.models.Publication;
 
 public class PublicationListItem extends javax.swing.JPanel {
@@ -19,11 +18,13 @@ public class PublicationListItem extends javax.swing.JPanel {
         private javax.swing.JLabel jLabelDescription;
         private javax.swing.JLabel jLabel_Imagen;
         private javax.swing.JButton jLabel_Titulo;
+        private PublicationListItemController publicationListItemController;
 
         public PublicationListItem(Home home, ViewAllPublications viewAllPublications, Publication publication) {
                 this.home = home;
                 this.viewAllPublications = viewAllPublications;
                 this.publication = publication;
+                this.publicationListItemController = new PublicationListItemController();
                 setBorder(javax.swing.BorderFactory.createCompoundBorder(
                                 javax.swing.BorderFactory.createLineBorder(java.awt.Color.BLACK, 1, true),
                                 javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0)));
@@ -155,8 +156,7 @@ public class PublicationListItem extends javax.swing.JPanel {
         }
 
         private void deletePublication() {
-                PublicationDao publicationDao = new PublicationDaoImpl();
-                publicationDao.deletePublicationById(publication.getId());
-                viewAllPublications.getPublications();
+                publicationListItemController.deletePublication(publication);
+                viewAllPublications.loadPublications();
         }
 }

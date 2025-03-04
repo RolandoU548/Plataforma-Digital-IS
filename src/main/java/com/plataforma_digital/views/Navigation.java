@@ -1,174 +1,149 @@
 package com.plataforma_digital.views;
 
 import java.awt.Color;
-
-import javax.swing.JPanel;
+import javax.swing.*;
+import com.plataforma_digital.controllers.NavigationController;
 
 public class Navigation extends JPanel {
         public Home home;
-        private javax.swing.JButton ButtonAdd;
-        private javax.swing.JButton ButtonBell;
-        private javax.swing.JButton ButtonCalendar;
-        private javax.swing.JButton ButtonEye;
-        private javax.swing.JButton ButtonHome;
-        private javax.swing.JButton ButtonEvent;
-        private javax.swing.JPanel jPanel1;
+        private NavigationController navigationController;
+        private JButton ButtonAdd;
+        private JButton ButtonBell;
+        private JButton ButtonCalendar;
+        private JButton ButtonEye;
+        private JButton ButtonHome;
+        private JButton ButtonEvent;
+        private JPanel jPanel1;
 
         public Navigation(Home home) {
                 this.home = home;
+                this.navigationController = new NavigationController(home);
                 initComponents();
         }
 
         private void initComponents() {
-                jPanel1 = new javax.swing.JPanel();
-                ButtonHome = new javax.swing.JButton();
-                ButtonBell = new javax.swing.JButton();
-                ButtonCalendar = new javax.swing.JButton();
-                ButtonEye = new javax.swing.JButton();
-                ButtonEvent = new javax.swing.JButton();
-                ButtonAdd = new javax.swing.JButton();
+                jPanel1 = new JPanel();
+                ButtonHome = new JButton();
+                ButtonBell = new JButton();
+                ButtonCalendar = new JButton();
+                ButtonEye = new JButton();
+                ButtonEvent = new JButton();
+                ButtonAdd = new JButton();
 
                 jPanel1.setBackground(Color.BLACK);
 
                 ButtonHome.setBackground(Color.BLACK);
-                ButtonHome.setIcon(new javax.swing.ImageIcon(
-                                getClass().getResource("/Home.png")));
+                ButtonHome.setIcon(new ImageIcon(getClass().getResource("/Home.png")));
                 ButtonHome.setBorderPainted(false);
-                ButtonHome.addActionListener(e -> {
-                        ViewAllPublications viewAllPublications = new ViewAllPublications(home);
-                        home.viewAllPublications = viewAllPublications;
-                        home.addAndShowPanel(viewAllPublications, "viewAllPublications");
-                });
+                ButtonHome.addActionListener(e -> navigationController.showViewAllPublications());
 
                 ButtonBell.setBackground(Color.BLACK);
-                ButtonBell.setIcon(new javax.swing.ImageIcon(
-                                getClass().getResource("/Bell1.png")));
+                ButtonBell.setIcon(new ImageIcon(getClass().getResource("/Bell1.png")));
                 ButtonBell.setBorderPainted(false);
 
                 ButtonCalendar.setBackground(Color.BLACK);
-                ButtonCalendar.setIcon(new javax.swing.ImageIcon(
-                                getClass().getResource("/Calendar.png")));
+                ButtonCalendar.setIcon(new ImageIcon(getClass().getResource("/Calendar.png")));
                 ButtonCalendar.setBorderPainted(false);
-                ButtonCalendar.addActionListener(e -> {
-                        EventsCalendar eventsCalendar = new EventsCalendar(home);
-                        home.eventsCalendar = eventsCalendar;
-                        home.addAndShowPanel(eventsCalendar, "eventsCalendar");
-                });
+                ButtonCalendar.addActionListener(e -> navigationController.showEventsCalendar());
 
                 ButtonEye.setBackground(Color.BLACK);
-                ButtonEye.setIcon(
-                                new javax.swing.ImageIcon(
-                                                getClass().getResource("/Eye.png")));
+                ButtonEye.setIcon(new ImageIcon(getClass().getResource("/Eye.png")));
                 ButtonEye.setBorderPainted(false);
-                ButtonEye.addActionListener(e -> {
-                        Moderation moderation = new Moderation(home);
-                        home.moderation = moderation;
-                        home.addAndShowPanel(moderation, "moderation");
-                });
+                ButtonEye.addActionListener(e -> navigationController.showModeration());
 
                 ButtonEvent.setBackground(Color.BLACK);
-                ButtonEvent.setIcon(
-                                new javax.swing.ImageIcon(
-                                                getClass().getResource("/Eye.png")));
+                ButtonEvent.setIcon(new ImageIcon(getClass().getResource("/Eye.png")));
                 ButtonEvent.setBorderPainted(false);
-                ButtonEvent.addActionListener(e -> {
-                        CreateEvent createEvent = new CreateEvent(home);
-                        home.createEvent = createEvent;
-                        home.addAndShowPanel(createEvent, "createEvent");
-                });
+                ButtonEvent.addActionListener(e -> navigationController.showCreateEvent());
 
                 ButtonAdd.setBackground(Color.BLACK);
-                ButtonAdd.setIcon(
-                                new javax.swing.ImageIcon(
-                                                getClass().getResource("/Add.png")));
+                ButtonAdd.setIcon(new ImageIcon(getClass().getResource("/Add.png")));
                 ButtonAdd.setBorderPainted(false);
-                ButtonAdd.addActionListener(e -> {
-                        CreatePublication createPublication = new CreatePublication(home);
-                        home.createPublication = createPublication;
-                        home.addAndShowPanel(createPublication, "createPublication");
-                });
+                ButtonAdd.addActionListener(e -> navigationController.showCreatePublication());
 
-                javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+                GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
                 jPanel1.setLayout(jPanel1Layout);
                 jPanel1Layout.setHorizontalGroup(
-                                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                                                 .addGap(15, 15, 15)
                                                                 .addGroup(jPanel1Layout.createParallelGroup(
-                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                GroupLayout.Alignment.LEADING)
                                                                                 .addComponent(ButtonHome,
-                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                GroupLayout.PREFERRED_SIZE,
                                                                                                 30,
-                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                GroupLayout.PREFERRED_SIZE)
                                                                                 .addComponent(ButtonBell,
-                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                GroupLayout.PREFERRED_SIZE,
                                                                                                 30,
-                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                GroupLayout.PREFERRED_SIZE)
                                                                                 .addComponent(ButtonCalendar,
-                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                GroupLayout.PREFERRED_SIZE,
                                                                                                 30,
-                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                GroupLayout.PREFERRED_SIZE)
                                                                                 .addComponent(ButtonEye,
-                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                GroupLayout.PREFERRED_SIZE,
                                                                                                 30,
-                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                GroupLayout.PREFERRED_SIZE)
                                                                                 .addComponent(ButtonEvent,
-                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                GroupLayout.PREFERRED_SIZE,
                                                                                                 30,
-                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                                GroupLayout.PREFERRED_SIZE)
                                                                                 .addComponent(ButtonAdd,
-                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                GroupLayout.PREFERRED_SIZE,
                                                                                                 30,
-                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                                                GroupLayout.PREFERRED_SIZE))
                                                                 .addContainerGap(15, Short.MAX_VALUE)));
                 jPanel1Layout.setVerticalGroup(
-                                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                                                 .addGap(49, 49, 49)
                                                                 .addComponent(ButtonHome,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                GroupLayout.PREFERRED_SIZE,
                                                                                 30,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                GroupLayout.PREFERRED_SIZE)
                                                                 .addGap(31, 31, 31)
                                                                 .addComponent(ButtonBell,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                GroupLayout.PREFERRED_SIZE,
                                                                                 30,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                GroupLayout.PREFERRED_SIZE)
                                                                 .addGap(31, 31, 31)
                                                                 .addComponent(ButtonCalendar,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                GroupLayout.PREFERRED_SIZE,
                                                                                 30,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                GroupLayout.PREFERRED_SIZE)
                                                                 .addGap(31, 31, 31)
                                                                 .addComponent(ButtonEye,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                GroupLayout.PREFERRED_SIZE,
                                                                                 30,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                GroupLayout.PREFERRED_SIZE)
                                                                 .addGap(31, 31, 31)
                                                                 .addComponent(ButtonEvent,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                GroupLayout.PREFERRED_SIZE,
                                                                                 30,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                GroupLayout.PREFERRED_SIZE)
                                                                 .addPreferredGap(
-                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                                                                172, Short.MAX_VALUE)
+                                                                                LayoutStyle.ComponentPlacement.RELATED,
+                                                                                172,
+                                                                                Short.MAX_VALUE)
                                                                 .addComponent(ButtonAdd,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                GroupLayout.PREFERRED_SIZE,
                                                                                 30,
-                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                GroupLayout.PREFERRED_SIZE)
                                                                 .addGap(36, 36, 36)));
 
-                javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+                GroupLayout layout = new GroupLayout(this);
                 this.setLayout(layout);
                 layout.setHorizontalGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE));
+                                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE,
+                                                                GroupLayout.DEFAULT_SIZE,
+                                                                GroupLayout.PREFERRED_SIZE));
                 layout.setVerticalGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+                                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                .addComponent(jPanel1, GroupLayout.Alignment.TRAILING,
+                                                                GroupLayout.DEFAULT_SIZE,
+                                                                GroupLayout.DEFAULT_SIZE,
+                                                                Short.MAX_VALUE));
         }
 }

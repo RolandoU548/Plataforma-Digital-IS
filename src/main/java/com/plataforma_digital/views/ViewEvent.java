@@ -1,15 +1,16 @@
 package com.plataforma_digital.views;
 
 import com.plataforma_digital.config.Colors;
+import com.plataforma_digital.controllers.ViewEventController;
 import com.plataforma_digital.models.Event;
+import com.plataforma_digital.models.User;
 import com.plataforma_digital.views.components.CommentsSection;
 import com.plataforma_digital.views.components.ProfileButton;
-import com.plataforma_digital.models.database.UserDao;
-import com.plataforma_digital.models.database.impl.UserDaoImpl;
 
 public class ViewEvent extends javax.swing.JPanel {
         private Home home;
         private Event event;
+        private ViewEventController viewEventController;
         private javax.swing.JLabel author;
         private javax.swing.JButton backButton;
         private javax.swing.JButton createEventButton;
@@ -29,6 +30,7 @@ public class ViewEvent extends javax.swing.JPanel {
         public ViewEvent(Home home, Event event) {
                 this.home = home;
                 this.event = event;
+                this.viewEventController = new ViewEventController();
                 initComponents();
         }
 
@@ -54,10 +56,9 @@ public class ViewEvent extends javax.swing.JPanel {
                 mainTitle.setFont(new java.awt.Font("Segoe UI", 1, 30));
                 mainTitle.setText(event.getTitle());
 
-                UserDao userDao = new UserDaoImpl();
+                User authorUser = viewEventController.getEventAuthor(event.getUserId());
                 author.setFont(new java.awt.Font("Segoe UI", 1, 15));
-                author.setText("Autor: "
-                                + userDao.getUserById(event.getUserId()).getEmail());
+                author.setText("Autor: " + authorUser.getEmail());
 
                 start.setFont(new java.awt.Font("Segoe UI", 1, 15));
                 start.setText("Fecha Inicio: " + event.getStartDate());
@@ -106,10 +107,9 @@ public class ViewEvent extends javax.swing.JPanel {
                 jPanel1Layout.setHorizontalGroup(
                                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                                                .addGroup(jPanel1Layout
-                                                                                .createParallelGroup(
-                                                                                                javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                                                false)
+                                                                .addGroup(jPanel1Layout.createParallelGroup(
+                                                                                javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                                false)
                                                                                 .addComponent(backButton,
                                                                                                 javax.swing.GroupLayout.Alignment.LEADING,
                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
@@ -170,9 +170,8 @@ public class ViewEvent extends javax.swing.JPanel {
                                                                                 javax.swing.GroupLayout.Alignment.LEADING)
                                                                                 .addGroup(layout.createSequentialGroup()
                                                                                                 .addGap(44, 44, 44)
-                                                                                                .addGroup(layout
-                                                                                                                .createParallelGroup(
-                                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                                .addGroup(layout.createParallelGroup(
+                                                                                                                javax.swing.GroupLayout.Alignment.LEADING)
                                                                                                                 .addGroup(layout.createSequentialGroup()
                                                                                                                                 .addComponent(mainTitle)
                                                                                                                                 .addGap(12, 12, 12)
@@ -236,5 +235,4 @@ public class ViewEvent extends javax.swing.JPanel {
                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                 .addContainerGap(24, Short.MAX_VALUE)));
         }
-
 }

@@ -8,8 +8,7 @@ import javax.swing.JPanel;
 import java.awt.Dimension;
 
 import com.plataforma_digital.config.Colors;
-import com.plataforma_digital.models.database.EventDao;
-import com.plataforma_digital.models.database.impl.EventDaoImpl;
+import com.plataforma_digital.controllers.ViewAllEventsController;
 import com.plataforma_digital.models.Event;
 import com.plataforma_digital.views.components.EventListItem;
 import com.plataforma_digital.views.components.ProfileButton;
@@ -25,11 +24,13 @@ public class ViewAllEvents extends javax.swing.JPanel {
         private javax.swing.JScrollPane jScrollPane_MisEventos;
         private ProfileButton profileButton;
         private JPanel eventsContainer = new JPanel();
+        private ViewAllEventsController viewAllEventsController;
 
         public ViewAllEvents(Home home) {
                 this.home = home;
-                getEvents();
+                this.viewAllEventsController = new ViewAllEventsController();
                 initComponents();
+                loadEvents();
         }
 
         private void initComponents() {
@@ -172,9 +173,8 @@ public class ViewAllEvents extends javax.swing.JPanel {
                                                                 .addComponent(jScrollPane_MisEventos)));
         }
 
-        public void getEvents() {
-                EventDao eventDao = new EventDaoImpl();
-                List<Event> events = eventDao.getAllEventsByState("approved");
+        public void loadEvents() {
+                List<Event> events = viewAllEventsController.getApprovedEvents();
                 eventsContainer.removeAll();
                 eventsContainer.setLayout(new BoxLayout(eventsContainer, BoxLayout.Y_AXIS));
                 for (Event event : events) {

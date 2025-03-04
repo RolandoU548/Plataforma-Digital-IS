@@ -2,17 +2,16 @@ package com.plataforma_digital.views;
 
 import java.util.List;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import java.awt.Dimension;
 
 import com.plataforma_digital.config.Colors;
-import com.plataforma_digital.models.database.PublicationDao;
-import com.plataforma_digital.models.database.impl.PublicationDaoImpl;
+import com.plataforma_digital.controllers.ViewAllPublicationsController;
 import com.plataforma_digital.models.Publication;
 import com.plataforma_digital.views.components.PublicationListItem;
 import com.plataforma_digital.views.components.ProfileButton;
-import java.awt.Dimension;
-import javax.swing.Box;
 
 public class ViewAllPublications extends javax.swing.JPanel {
         private Home home;
@@ -25,11 +24,13 @@ public class ViewAllPublications extends javax.swing.JPanel {
         private javax.swing.JScrollPane jScrollPane_MisPublicaciones;
         private ProfileButton profileButton;
         private JPanel publicationsContainer = new JPanel();
+        private ViewAllPublicationsController viewAllPublicationsController;
 
         public ViewAllPublications(Home home) {
                 this.home = home;
-                getPublications();
+                this.viewAllPublicationsController = new ViewAllPublicationsController();
                 initComponents();
+                loadPublications();
         }
 
         private void initComponents() {
@@ -167,9 +168,8 @@ public class ViewAllPublications extends javax.swing.JPanel {
                                                                 .addComponent(jScrollPane_MisPublicaciones)));
         }
 
-        public void getPublications() {
-                PublicationDao publicationDao = new PublicationDaoImpl();
-                List<Publication> publications = publicationDao.getAllPublicationsByState("approved");
+        public void loadPublications() {
+                List<Publication> publications = viewAllPublicationsController.getApprovedPublications();
                 publicationsContainer.removeAll();
                 publicationsContainer.setLayout(new BoxLayout(publicationsContainer, BoxLayout.Y_AXIS));
                 for (Publication publication : publications) {

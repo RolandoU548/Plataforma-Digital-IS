@@ -3,11 +3,10 @@ package com.plataforma_digital.views.components;
 import java.awt.Dimension;
 
 import com.plataforma_digital.config.Colors;
+import com.plataforma_digital.controllers.components.EventListItemController;
 import com.plataforma_digital.views.Home;
 import com.plataforma_digital.views.ViewAllEvents;
 import com.plataforma_digital.views.ViewEvent;
-import com.plataforma_digital.models.database.EventDao;
-import com.plataforma_digital.models.database.impl.EventDaoImpl;
 import com.plataforma_digital.models.Event;
 
 public class EventListItem extends javax.swing.JPanel {
@@ -22,11 +21,13 @@ public class EventListItem extends javax.swing.JPanel {
         private javax.swing.JLabel jLabel_Feinicio;
         private javax.swing.JLabel jLabel_Imagen;
         private javax.swing.JButton jLabel_Titulo;
+        private EventListItemController eventListItemController;
 
         public EventListItem(Home home, ViewAllEvents viewAllEvents, Event event) {
                 this.home = home;
                 this.viewAllEvents = viewAllEvents;
                 this.event = event;
+                this.eventListItemController = new EventListItemController();
                 setBorder(javax.swing.BorderFactory.createCompoundBorder(
                                 javax.swing.BorderFactory.createLineBorder(java.awt.Color.BLACK, 1, true),
                                 javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0)));
@@ -174,8 +175,7 @@ public class EventListItem extends javax.swing.JPanel {
         }
 
         private void deleteEvent() {
-                EventDao eventDao = new EventDaoImpl();
-                eventDao.deleteEventById(event.getId());
-                viewAllEvents.getEvents();
+                eventListItemController.deleteEvent(event);
+                viewAllEvents.loadEvents();
         }
 }

@@ -1,22 +1,22 @@
 package com.plataforma_digital.views.components;
 
 import com.plataforma_digital.models.Comment;
+import com.plataforma_digital.controllers.components.UserCommentController;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import com.plataforma_digital.models.database.UserDao;
-import com.plataforma_digital.models.database.impl.UserDaoImpl;
 
 public class UserComment extends javax.swing.JPanel {
         private Comment comment;
         private javax.swing.JLabel commentText;
         private javax.swing.JLabel commentDate;
         private javax.swing.JLabel commentName;
+        private UserCommentController userCommentController;
 
         public UserComment(Comment comment) {
                 this.comment = comment;
+                this.userCommentController = new UserCommentController();
                 initComponents();
         }
 
@@ -25,9 +25,8 @@ public class UserComment extends javax.swing.JPanel {
                 commentText = new javax.swing.JLabel();
                 commentDate = new javax.swing.JLabel();
 
-                UserDao userDao = new UserDaoImpl();
                 commentName.setFont(new java.awt.Font("Segoe UI", 1, 13));
-                commentName.setText(userDao.getUserById(comment.getUserId()).getEmail());
+                commentName.setText(userCommentController.getUserById(comment.getUserId()).getEmail());
 
                 commentText.setText(comment.getText());
                 commentText.setFont(new java.awt.Font("Segoe UI", 1, 11));
