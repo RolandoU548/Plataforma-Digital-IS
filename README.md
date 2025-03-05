@@ -164,6 +164,7 @@ El archivo JAR se encontrará en el directorio target con el nombre PlataformaDi
   <h2 align="center" style="text-">Modelo de Pruebas</h2>
 
 - StringUtils
+
   - testNullInput()
   - testEmptyString()
   - testSpecialCharacters()
@@ -172,4 +173,16 @@ El archivo JAR se encontrará en el directorio target con el nombre PlataformaDi
   - testMultipleLowerCaseLetters()
   - testMultipleUpperCaseLetters()
   - testMultipleMixedCaseLetters()
+
+- DateUtils
+  - testValidateDate_ValidDate()
+  - testValidateDate_InvalidDate()
+  - testValidateDate_EmptyDate()
+  - testValidateDate_NullDate()
+  - testValidateDate_InvalidFormat()
+  - testValidateDate_InvalidDay00()
+  - testValidateDate_InvalidDay31()
+  - testValidateDate_InvalidDay32()
+  - testValidateDate_InvalidMonth()
+  - testValidateDate_February29()
   </section>
