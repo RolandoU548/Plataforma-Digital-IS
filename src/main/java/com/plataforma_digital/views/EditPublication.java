@@ -243,7 +243,7 @@ public class EditPublication extends javax.swing.JPanel {
                         return false;
                 }
                 return true;
-        }
+    }
                 
                  
 }

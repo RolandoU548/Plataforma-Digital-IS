@@ -4,6 +4,7 @@ import java.awt.Dimension;
 
 import com.plataforma_digital.config.Colors;
 import com.plataforma_digital.controllers.components.EventListItemController;
+import com.plataforma_digital.views.EditEvent;
 import com.plataforma_digital.views.Home;
 import com.plataforma_digital.views.ViewAllEvents;
 import com.plataforma_digital.views.ViewEvent;
@@ -48,6 +49,10 @@ public class EventListItem extends javax.swing.JPanel {
                 jButton_Edit.setBackground(Colors.BACKGROUND_COLOR);
                 jButton_Edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Edit.png")));
                 jButton_Edit.setBorderPainted(false);
+                jButton_Edit.addActionListener(e ->{
+                        EditEvent EditEvent = new EditEvent(home, event);
+                        home.addAndShowPanel(EditEvent, "EditEvent");
+                });
 
                 jButton_Delete.setBackground(Colors.BACKGROUND_COLOR);
                 jButton_Delete.setIcon(new javax.swing.ImageIcon(getClass()
