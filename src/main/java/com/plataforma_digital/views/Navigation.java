@@ -8,13 +8,11 @@ public class Navigation extends JPanel {
         public Home home;
         private NavigationController navigationController;
         private JButton ButtonAdd;
-        private JButton ButtonBell;
+        private JButton ButtonEvent;
         private JButton ButtonCalendar;
         private JButton ButtonEye;
         private JButton ButtonHome;
-        private JButton ButtonEvent;
         private JPanel jPanel1;
-
         public Navigation(Home home) {
                 this.home = home;
                 this.navigationController = new NavigationController(home);
@@ -24,10 +22,9 @@ public class Navigation extends JPanel {
         private void initComponents() {
                 jPanel1 = new JPanel();
                 ButtonHome = new JButton();
-                ButtonBell = new JButton();
+                ButtonEvent = new JButton();
                 ButtonCalendar = new JButton();
                 ButtonEye = new JButton();
-                ButtonEvent = new JButton();
                 ButtonAdd = new JButton();
 
                 jPanel1.setBackground(Color.BLACK);
@@ -37,9 +34,10 @@ public class Navigation extends JPanel {
                 ButtonHome.setBorderPainted(false);
                 ButtonHome.addActionListener(e -> navigationController.showViewAllPublications());
 
-                ButtonBell.setBackground(Color.BLACK);
-                ButtonBell.setIcon(new ImageIcon(getClass().getResource("/Bell1.png")));
-                ButtonBell.setBorderPainted(false);
+                ButtonEvent.setBackground(Color.BLACK);
+                ButtonEvent.setIcon(new ImageIcon(getClass().getResource("/AddEvent.png")));
+                ButtonEvent.setBorderPainted(false);
+                ButtonEvent.addActionListener(e -> navigationController.showCreateEvent());
 
                 ButtonCalendar.setBackground(Color.BLACK);
                 ButtonCalendar.setIcon(new ImageIcon(getClass().getResource("/Calendar.png")));
@@ -50,11 +48,6 @@ public class Navigation extends JPanel {
                 ButtonEye.setIcon(new ImageIcon(getClass().getResource("/Eye.png")));
                 ButtonEye.setBorderPainted(false);
                 ButtonEye.addActionListener(e -> navigationController.showModeration());
-
-                ButtonEvent.setBackground(Color.BLACK);
-                ButtonEvent.setIcon(new ImageIcon(getClass().getResource("/Eye.png")));
-                ButtonEvent.setBorderPainted(false);
-                ButtonEvent.addActionListener(e -> navigationController.showCreateEvent());
 
                 ButtonAdd.setBackground(Color.BLACK);
                 ButtonAdd.setIcon(new ImageIcon(getClass().getResource("/Add.png")));
@@ -73,7 +66,7 @@ public class Navigation extends JPanel {
                                                                                                 GroupLayout.PREFERRED_SIZE,
                                                                                                 30,
                                                                                                 GroupLayout.PREFERRED_SIZE)
-                                                                                .addComponent(ButtonBell,
+                                                                                .addComponent(ButtonEvent,
                                                                                                 GroupLayout.PREFERRED_SIZE,
                                                                                                 30,
                                                                                                 GroupLayout.PREFERRED_SIZE)
@@ -82,10 +75,6 @@ public class Navigation extends JPanel {
                                                                                                 30,
                                                                                                 GroupLayout.PREFERRED_SIZE)
                                                                                 .addComponent(ButtonEye,
-                                                                                                GroupLayout.PREFERRED_SIZE,
-                                                                                                30,
-                                                                                                GroupLayout.PREFERRED_SIZE)
-                                                                                .addComponent(ButtonEvent,
                                                                                                 GroupLayout.PREFERRED_SIZE,
                                                                                                 30,
                                                                                                 GroupLayout.PREFERRED_SIZE)
@@ -103,7 +92,7 @@ public class Navigation extends JPanel {
                                                                                 30,
                                                                                 GroupLayout.PREFERRED_SIZE)
                                                                 .addGap(31, 31, 31)
-                                                                .addComponent(ButtonBell,
+                                                                .addComponent(ButtonEvent,
                                                                                 GroupLayout.PREFERRED_SIZE,
                                                                                 30,
                                                                                 GroupLayout.PREFERRED_SIZE)
@@ -114,11 +103,6 @@ public class Navigation extends JPanel {
                                                                                 GroupLayout.PREFERRED_SIZE)
                                                                 .addGap(31, 31, 31)
                                                                 .addComponent(ButtonEye,
-                                                                                GroupLayout.PREFERRED_SIZE,
-                                                                                30,
-                                                                                GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(31, 31, 31)
-                                                                .addComponent(ButtonEvent,
                                                                                 GroupLayout.PREFERRED_SIZE,
                                                                                 30,
                                                                                 GroupLayout.PREFERRED_SIZE)
