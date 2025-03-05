@@ -1,11 +1,9 @@
-package com.plataforma_digital.app;
+package com.plataforma_digital.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
-import com.plataforma_digital.utils.StringUtils;
 
 public class StringUtilsTest {
-
     @Test
     public void testNullInput() {
         String result = StringUtils.capitalize(null);
