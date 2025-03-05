@@ -159,3 +159,17 @@ El archivo JAR se encontrará en el directorio target con el nombre PlataformaDi
 
   </div>
 </section>
+
+<section>
+  <h2 align="center" style="text-">Modelo de Pruebas</h2>
+
+- StringUtils
+  - testNullInput()
+  - testEmptyString()
+  - testSpecialCharacters()
+  - testSingleLowerCaseLetter()
+  - testSingleUpperCaseLetter()
+  - testMultipleLowerCaseLetters()
+  - testMultipleUpperCaseLetters()
+  - testMultipleMixedCaseLetters()
+  </section>
