@@ -400,11 +400,8 @@ public class CreateEvent extends javax.swing.JPanel {
                 if (jTextFieldTitulo.getText().isEmpty() || jTextFieldDescripcion.getText().isEmpty()
                                 || jTextFieldFechaFin.getText().isEmpty()
                                 || jTextFieldFechainicio.getText().isEmpty()
-                                || jTextFieldLugar.getText().isEmpty()) {
-                        JOptionPane.showMessageDialog(null, "Todos los campos son requeridos", "Campos requeridos",
-                                        JOptionPane.INFORMATION_MESSAGE);
+                                || jTextFieldLugar.getText().isEmpty())
                         return false;
-                }
                 return true;
         }
 
