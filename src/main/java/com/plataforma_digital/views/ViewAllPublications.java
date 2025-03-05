@@ -15,10 +15,8 @@ import com.plataforma_digital.views.components.ProfileButton;
 
 public class ViewAllPublications extends javax.swing.JPanel {
         private Home home;
-        private javax.swing.JButton BottonFlechapublicaciones;
         private javax.swing.JButton jButtonCrearPublicacion;
         private javax.swing.JButton jButtonMispublicaciones;
-        private javax.swing.JButton jButton_bell;
         private javax.swing.JLabel jLabelCrearpublicacion;
         private javax.swing.JPanel jPanel1;
         private javax.swing.JScrollPane jScrollPane_MisPublicaciones;
@@ -35,12 +33,10 @@ public class ViewAllPublications extends javax.swing.JPanel {
 
         private void initComponents() {
                 jPanel1 = new javax.swing.JPanel();
-                BottonFlechapublicaciones = new javax.swing.JButton();
                 jButtonCrearPublicacion = new javax.swing.JButton();
                 jButtonMispublicaciones = new javax.swing.JButton();
                 jLabelCrearpublicacion = new javax.swing.JLabel();
                 profileButton = new ProfileButton(home);
-                jButton_bell = new javax.swing.JButton();
 
                 publicationsContainer.setLayout(new BoxLayout(publicationsContainer, BoxLayout.Y_AXIS));
                 publicationsContainer.setAlignmentY(TOP_ALIGNMENT);
@@ -48,13 +44,6 @@ public class ViewAllPublications extends javax.swing.JPanel {
                 jScrollPane_MisPublicaciones.setBorder(null);
 
                 jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-                BottonFlechapublicaciones.setBackground(Colors.BACKGROUND_COLOR);
-                BottonFlechapublicaciones.setFont(new java.awt.Font("Segoe UI", 1, 14));
-                BottonFlechapublicaciones.setIcon(new javax.swing.ImageIcon(
-                                getClass().getResource("/Arrow.png")));
-                BottonFlechapublicaciones.setText("  Publicacion");
-                BottonFlechapublicaciones.setBorderPainted(false);
 
                 jButtonCrearPublicacion.setBackground(Colors.BACKGROUND_COLOR);
                 jButtonCrearPublicacion.setFont(new java.awt.Font("Segoe UI", 1, 14));
@@ -80,7 +69,6 @@ public class ViewAllPublications extends javax.swing.JPanel {
                 jPanel1Layout.setHorizontalGroup(
                                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                                                .addComponent(BottonFlechapublicaciones)
                                                                 .addGap(0, 0, Short.MAX_VALUE))
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                                                 .addContainerGap()
@@ -95,7 +83,6 @@ public class ViewAllPublications extends javax.swing.JPanel {
                 jPanel1Layout.setVerticalGroup(
                                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                                                .addComponent(BottonFlechapublicaciones)
                                                                 .addPreferredGap(
                                                                                 javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                                 .addComponent(jButtonCrearPublicacion,
@@ -109,11 +96,6 @@ public class ViewAllPublications extends javax.swing.JPanel {
 
                 jLabelCrearpublicacion.setFont(new java.awt.Font("Segoe UI", 1, 30));
                 jLabelCrearpublicacion.setText("Mis Publicaciones");
-
-                jButton_bell.setBackground(Colors.BACKGROUND_COLOR);
-                jButton_bell.setIcon(new javax.swing.ImageIcon(
-                                getClass().getResource("/Bell3.png")));
-                jButton_bell.setBorderPainted(false);
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
                 this.setLayout(layout);
@@ -134,7 +116,6 @@ public class ViewAllPublications extends javax.swing.JPanel {
                                                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED,
                                                                                                                 224,
                                                                                                                 Short.MAX_VALUE)
-                                                                                                .addComponent(jButton_bell)
                                                                                                 .addPreferredGap(
                                                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                                                 .addComponent(profileButton))
@@ -158,10 +139,6 @@ public class ViewAllPublications extends javax.swing.JPanel {
                                                                                                                 .addComponent(profileButton,
                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                                                                 32,
-                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                                                .addComponent(jButton_bell,
-                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                                34,
                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))))
                                                                 .addPreferredGap(
                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED)

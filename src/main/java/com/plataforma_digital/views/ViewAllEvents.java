@@ -18,7 +18,6 @@ public class ViewAllEvents extends javax.swing.JPanel {
         private javax.swing.JButton BottonFlechaeventos;
         private javax.swing.JButton jButtonCrearEvento;
         private javax.swing.JButton jButtonMiseventos;
-        private javax.swing.JButton jButton_bell;
         private javax.swing.JLabel jLabelCrearevento;
         private javax.swing.JPanel jPanel1;
         private javax.swing.JScrollPane jScrollPane_MisEventos;
@@ -40,7 +39,6 @@ public class ViewAllEvents extends javax.swing.JPanel {
                 jButtonMiseventos = new javax.swing.JButton();
                 jLabelCrearevento = new javax.swing.JLabel();
                 profileButton = new ProfileButton(home);
-                jButton_bell = new javax.swing.JButton();
 
                 eventsContainer.setLayout(new BoxLayout(eventsContainer, BoxLayout.Y_AXIS));
                 eventsContainer.setAlignmentY(TOP_ALIGNMENT);
@@ -115,11 +113,6 @@ public class ViewAllEvents extends javax.swing.JPanel {
                 jLabelCrearevento.setFont(new java.awt.Font("Segoe UI", 1, 30));
                 jLabelCrearevento.setText("Mis Eventos");
 
-                jButton_bell.setBackground(Colors.BACKGROUND_COLOR);
-                jButton_bell.setIcon(new javax.swing.ImageIcon(
-                                getClass().getResource("/Bell3.png")));
-                jButton_bell.setBorderPainted(false);
-
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
                 this.setLayout(layout);
                 layout.setHorizontalGroup(
@@ -139,7 +132,6 @@ public class ViewAllEvents extends javax.swing.JPanel {
                                                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED,
                                                                                                                 224,
                                                                                                                 Short.MAX_VALUE)
-                                                                                                .addComponent(jButton_bell)
                                                                                                 .addPreferredGap(
                                                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                                                                 .addComponent(profileButton))
@@ -163,10 +155,6 @@ public class ViewAllEvents extends javax.swing.JPanel {
                                                                                                                 .addComponent(profileButton,
                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                                                                 32,
-                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                                                                .addComponent(jButton_bell,
-                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                                34,
                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))))
                                                                 .addPreferredGap(
                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED)

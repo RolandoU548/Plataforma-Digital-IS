@@ -22,7 +22,6 @@ public class Moderation extends javax.swing.JPanel {
         private javax.swing.JToggleButton jToggleButton1;
         private javax.swing.JLabel mainTitle;
         private javax.swing.JButton mod;
-        private javax.swing.JButton notification;
         private javax.swing.JLabel pendingPosts;
         private ProfileButton profile;
         private javax.swing.JPanel moderationContainer;
@@ -45,7 +44,6 @@ public class Moderation extends javax.swing.JPanel {
                 jPanel1 = new javax.swing.JPanel();
                 backButton = new javax.swing.JButton();
                 mod = new javax.swing.JButton();
-                notification = new javax.swing.JButton();
                 profile = new ProfileButton(home);
                 moderationContainer = new javax.swing.JPanel();
                 moderationContainer.setLayout(new BoxLayout(moderationContainer, BoxLayout.Y_AXIS));
@@ -103,12 +101,6 @@ public class Moderation extends javax.swing.JPanel {
                                                                 .addComponent(mod)
                                                                 .addContainerGap(359, Short.MAX_VALUE)));
 
-                notification.setBackground(Colors.BACKGROUND_COLOR);
-                notification.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bell3.png")));
-                notification.setBorder(null);
-                notification.setBorderPainted(false);
-                notification.setIconTextGap(0);
-
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
                 this.setLayout(layout);
                 layout.setHorizontalGroup(
@@ -130,10 +122,6 @@ public class Moderation extends javax.swing.JPanel {
                                                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED,
                                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                                                 Short.MAX_VALUE)
-                                                                                                .addComponent(notification,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                42,
-                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                                                 .addPreferredGap(
                                                                                                                 javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                                                                 .addComponent(profile))
@@ -149,8 +137,7 @@ public class Moderation extends javax.swing.JPanel {
                                                                 .addGroup(layout.createParallelGroup(
                                                                                 javax.swing.GroupLayout.Alignment.TRAILING)
                                                                                 .addComponent(mainTitle)
-                                                                                .addComponent(profile)
-                                                                                .addComponent(notification))
+                                                                                .addComponent(profile))
                                                                 .addPreferredGap(
                                                                                 javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                                 .addComponent(pendingPosts)

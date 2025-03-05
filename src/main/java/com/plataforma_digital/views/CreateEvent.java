@@ -17,7 +17,6 @@ public class CreateEvent extends javax.swing.JPanel {
         private javax.swing.JButton jButtonCrearEvento;
         private javax.swing.JButton jButtonMiseventos;
         private javax.swing.JButton jButtonPublicarEvento;
-        private javax.swing.JButton jButtonbell;
         private ProfileButton profileButton;
         private javax.swing.JLabel jLabelCrearevento;
         private javax.swing.JLabel jLabelDescripcion;
@@ -62,7 +61,6 @@ public class CreateEvent extends javax.swing.JPanel {
                 jTextFieldFechainicio = new javax.swing.JTextField();
                 jTextFieldFechaFin = new javax.swing.JTextField();
                 profileButton = new ProfileButton(home);
-                jButtonbell = new javax.swing.JButton();
                 jButtonAGGimg = new javax.swing.JButton();
 
                 setFont(new java.awt.Font("Arial", 1, 18));
@@ -199,11 +197,6 @@ public class CreateEvent extends javax.swing.JPanel {
                 jTextFieldFechaFin.setForeground(new java.awt.Color(153, 153, 153));
                 jTextFieldFechaFin.setText("DD/MM/AAAA");
 
-                jButtonbell.setBackground(Colors.BACKGROUND_COLOR);
-                jButtonbell.setIcon(new javax.swing.ImageIcon(
-                                getClass().getResource("/Bell3.png")));
-                jButtonbell.setBorderPainted(false);
-
                 jButtonAGGimg.setBackground(Colors.BACKGROUND_COLOR);
                 jButtonAGGimg.setFont(new java.awt.Font("Segoe UI", 0, 10));
                 jButtonAGGimg.setIcon(new javax.swing.ImageIcon(
@@ -238,7 +231,6 @@ public class CreateEvent extends javax.swing.JPanel {
                                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                                                                 Short.MAX_VALUE)
                                                                                                 .addComponent(jButtonAGGimg)
-                                                                                                .addComponent(jButtonbell)
                                                                                                 .addComponent(profileButton)
                                                                                                 .addContainerGap(
                                                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
@@ -317,11 +309,7 @@ public class CreateEvent extends javax.swing.JPanel {
                                                                                                                                 .addComponent(profileButton,
                                                                                                                                                 javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                                                                                                 32,
-                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                                                                                .addComponent(jButtonbell,
-                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                                34,
-                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
                                                                                                 .addGap(0, 0, Short.MAX_VALUE)))
                                                                 .addPreferredGap(
                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED)

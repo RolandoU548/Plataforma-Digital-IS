@@ -31,7 +31,6 @@ public class EditProfile extends JPanel {
         private javax.swing.JButton editProfileButton;
         private javax.swing.JButton notificationsButton;
         private javax.swing.JButton securityButton;
-        private javax.swing.JLabel LabelImgBell;
         private javax.swing.JLabel LabelImgUser1;
         private javax.swing.JLabel jLabelImgUser2;
         private javax.swing.JPanel jPanel2;
@@ -53,7 +52,6 @@ public class EditProfile extends JPanel {
                 jPanel3 = new javax.swing.JPanel();
                 editProfileLabel = new javax.swing.JLabel();
                 LabelImgUser1 = new javax.swing.JLabel();
-                LabelImgBell = new javax.swing.JLabel();
                 jLabelImgUser2 = new javax.swing.JLabel();
                 firstNameLabel = new javax.swing.JLabel();
                 lastNameLabel = new javax.swing.JLabel();
@@ -124,8 +122,6 @@ public class EditProfile extends JPanel {
 
                 LabelImgUser1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user1.png")));
 
-                LabelImgBell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bell3.png")));
-
                 jLabelImgUser2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user2.png")));
 
                 firstNameLabel.setFont(new java.awt.Font("Segoe UI", 1, 14));
@@ -179,7 +175,6 @@ public class EditProfile extends JPanel {
                                                                                                                 .addComponent(LabelImgUser1)
                                                                                                                 .addGap(112, 112,
                                                                                                                                 112)
-                                                                                                                .addComponent(LabelImgBell)
                                                                                                                 .addPreferredGap(
                                                                                                                                 javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                                                                                 .addComponent(jLabelImgUser2))
@@ -230,7 +225,6 @@ public class EditProfile extends JPanel {
                                                                                                                 .createParallelGroup(
                                                                                                                                 javax.swing.GroupLayout.Alignment.LEADING)
                                                                                                                 .addComponent(jLabelImgUser2)
-                                                                                                                .addComponent(LabelImgBell)
                                                                                                                 .addComponent(LabelImgUser1))))
                                                                 .addPreferredGap(
                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED,

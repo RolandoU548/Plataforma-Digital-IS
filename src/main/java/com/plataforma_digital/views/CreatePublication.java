@@ -20,7 +20,6 @@ public class CreatePublication extends javax.swing.JPanel {
         private javax.swing.JTextField titleTextField;
         private javax.swing.JTextField descriptionTextField;
         private javax.swing.JLabel mainTitle;
-        private javax.swing.JButton notification;
         private javax.swing.JButton postButton;
         private ProfileButton profileButton;
         private javax.swing.JLabel title;
@@ -45,7 +44,6 @@ public class CreatePublication extends javax.swing.JPanel {
                 fileChooser = new javax.swing.JFileChooser();
                 cancelButton = new javax.swing.JButton();
                 postButton = new javax.swing.JButton();
-                notification = new javax.swing.JButton();
                 profileButton = new ProfileButton(home);
 
                 mainTitle.setFont(new java.awt.Font("Segoe UI", 1, 30));
@@ -141,12 +139,6 @@ public class CreatePublication extends javax.swing.JPanel {
                         }
                 });
 
-                notification.setBackground(Colors.BACKGROUND_COLOR);
-                notification.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Bell3.png")));
-                notification.setBorder(null);
-                notification.setBorderPainted(false);
-                notification.setIconTextGap(0);
-
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
                 this.setLayout(layout);
                 layout.setHorizontalGroup(
@@ -183,10 +175,6 @@ public class CreatePublication extends javax.swing.JPanel {
                                                                                                                                                 javax.swing.LayoutStyle.ComponentPlacement.RELATED,
                                                                                                                                                 112,
                                                                                                                                                 Short.MAX_VALUE)
-                                                                                                                                .addComponent(notification,
-                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                                                                42,
-                                                                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                                                                                 .addGap(18, 18, 18)
                                                                                                                                 .addComponent(profileButton)
                                                                                                                                 .addGap(33, 33, 33))))
@@ -221,8 +209,7 @@ public class CreatePublication extends javax.swing.JPanel {
                                                                                                                 javax.swing.GroupLayout.Alignment.LEADING)
                                                                                                                 .addGroup(layout.createSequentialGroup()
                                                                                                                                 .addGap(1, 1, 1)
-                                                                                                                                .addComponent(mainTitle))
-                                                                                                                .addComponent(notification))
+                                                                                                                                .addComponent(mainTitle)))
                                                                                                 .addPreferredGap(
                                                                                                                 javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                                                                 .addComponent(title)
