@@ -8,6 +8,7 @@ import com.plataforma_digital.views.Home;
 import com.plataforma_digital.views.ViewAllPublications;
 import com.plataforma_digital.views.ViewPublication;
 import com.plataforma_digital.models.Publication;
+import com.plataforma_digital.views.EditPublication;
 
 public class PublicationListItem extends javax.swing.JPanel {
         private Home home;
@@ -42,6 +43,10 @@ public class PublicationListItem extends javax.swing.JPanel {
                 jButton_Edit.setBackground(Colors.BACKGROUND_COLOR);
                 jButton_Edit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Edit.png")));
                 jButton_Edit.setBorderPainted(false);
+                jButton_Edit.addActionListener(e -> {
+                        EditPublication EditPublication = new EditPublication(home, publication);
+                        home.addAndShowPanel(EditPublication, "EditPublication");
+                });
 
                 jButton_Delete.setBackground(Colors.BACKGROUND_COLOR);
                 jButton_Delete.setIcon(new javax.swing.ImageIcon(getClass()
